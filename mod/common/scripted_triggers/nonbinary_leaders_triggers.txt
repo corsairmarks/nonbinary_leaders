@@ -1,0 +1,66 @@
+# limitation: custom species classes will always return no for both uses_gender_species and not_uses_gender_species
+
+# these are the species classes which explicitly use gender in the base game
+uses_gender_species = {
+	species = {
+		OR = {
+			is_species_class = HUM
+			is_species_class = MAM
+			is_species_class = PRE_MAM
+			is_species_class = REP
+			is_species_class = PRE_REP
+			is_species_class = AVI
+			is_species_class = PRE_AVI
+			is_species_class = ART
+			is_species_class = PRE_ART
+			is_species_class = MOL
+			is_species_class = PRE_MOL
+			is_species_class = NECROID
+		}
+	}
+}
+
+# not a direct opposite of uses_gender_species - these are the species classes which explicitly don't use gender in the base game
+not_uses_gender_species = {
+	species = {
+		OR = {
+			is_species_class = LITHOID
+			is_species_class = FUN
+			is_species_class = PRE_FUN
+			is_species_class = PLANT
+			is_species_class = MACHINE
+			is_species_class = ROBOT
+			is_species_class = AI # contingency
+			is_species_class = SWARM # praethoryn
+			is_species_class = EXD # extradimensionals: unbidden/aberrant/vehement
+		}
+	}
+}
+
+is_custom_species_class = {
+	species = {
+		NOR = {
+			is_species_class = HUM
+			is_species_class = MAM
+			is_species_class = PRE_MAM
+			is_species_class = REP
+			is_species_class = PRE_REP
+			is_species_class = AVI
+			is_species_class = PRE_AVI
+			is_species_class = ART
+			is_species_class = PRE_ART
+			is_species_class = FUN
+			is_species_class = PRE_FUN
+			is_species_class = MOL
+			is_species_class = PRE_MOL
+			is_species_class = NECROID
+			is_species_class = LITHOID
+			is_species_class = PLANT
+			is_species_class = MACHINE
+			is_species_class = ROBOT
+			is_species_class = AI # contingency
+			is_species_class = SWARM # praethoryn
+			is_species_class = EXD # extradimensionals: unbidden/aberrant/vehement
+		}
+	}
+}

@@ -1,0 +1,12 @@
+#Ex: "he/she identif[ies] / they identif[y]"
+defined_text = {
+	name = GetIesY
+	text = {
+		trigger = { loc_leader_genders = yes }
+		localization_key = ENGLOC_ies
+	}
+	text = {
+		trigger = { loc_leader_nogenders = yes }
+		localization_key = ENGLOC_y
+	}
+}

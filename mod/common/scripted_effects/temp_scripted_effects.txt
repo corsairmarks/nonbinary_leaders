@@ -1,0 +1,25 @@
+print_leader_info = {
+	log = "Name: [This.GetName]: Pronoun: [This.GetSheHe]"
+	switch = {
+		trigger = leader_class
+		ruler = {
+			log = "...is a ruler"
+			switch = {
+				trigger = pre_ruler_leader_class
+				ruler = { log = "...was a ruler - how the heck did that happen?" }
+				governor = { log = "...was a governor" }
+				scientist = { log = "...was a scientist" }
+				admiral = { log = "...was an admiral" }
+				general = { log = "...was a general" }
+				envoy = { log = "...was an envoy" }
+				default = { log = "...was an unknown class" }
+			}
+		}
+		governor = { log = "...is a governor" }
+		scientist = { log = "...is a scientist" }
+		admiral = { log = "...is an admiral" }
+		general = { log = "...is a general" }
+		envoy = { log = "...is an envoy" }
+		default = { log = "...is an unknown class" }
+	}
+}

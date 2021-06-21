@@ -1,0 +1,137 @@
+namespace = nonbinary_leaders
+
+# THIS = country
+# FROM = leader
+# triggered by on_leader_spawned
+country_event = {
+	id = nonbinary_leaders.1
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		# this flag prevents recursing - it's a per-country block on randomizing gender identity,
+		# but given how infrequently leaders are generated it shouldn't block them from individually getting 
+		# NOT = { has_country_flag = already_randomizing_gender_identity }
+		# only triggers in presence of the flag or after at least 1 day has passed in order to avoid changing the gender identity of starting rulers
+		OR = {
+			has_country_flag = nonbinary_leaders_game_begun
+			days_passed > 0
+		}
+		# it doesn't seem possible to check whether a species class uses gender, just what gender a leader is
+		exists = FROM
+		FROM = {
+			OR = {
+				uses_gender_species = yes
+				is_custom_species_class = yes # custom species classes probably don't explicitly define "gender = no" and yes is the default
+			}
+		}
+	}
+	immediate = {
+		# set_country_flag = already_randomizing_gender_identity
+		FROM = { save_event_target_as = original_spawned_leader }
+		log = "nonbinary_leaders.1 detected spawned leader [original_spawned_leader.GetName] for a gendered species class [original_spawned_leader.GetSpeciesClassOrCustom]..."
+		FROM = { print_leader_info = yes }
+		
+		# create_leader = {
+		# 	class = scientist
+		# 	set_age = 5
+		# 	effect = {
+		# 		save_event_target_as = test_this_thing_leader
+		# 	}
+		# }
+
+		event_target:original_spawned_leader = {
+			set_name = "new name [This.GetName]"
+			# change_leader_portrait = event_target:original_spawned_leader
+			# save_event_target_as = FROM
+		}
+		# random_list = {
+		# 	0 = { # TODO change to 85
+		# 		log = "...and [original_spawned_leader.GetSheHe] did not roll a change in gender identity from ([original_spawned_leader.GetSheHe]/[original_spawned_leader.GetHerHim]/[original_spawned_leader.GetHerHis])."
+		# 	}
+		# 	5 = {
+		# 		if = {
+		# 			limit = { event_target:original_spawned_leader = { NOT = { gender = indeterminable } } }
+		# 			log = "original name [original_spawned_leader.GetName]"
+		# 			# clone_leader = {
+		# 			# 	target = event_target:original_spawned_leader
+		# 			# 	gender = indeterminable
+		# 			# 	effect = {
+		# 			# 		save_event_target_as = cloned_spawned_leader
+		# 			# 	}
+		# 			# }
+		# 			# log = "cloned name [cloned_spawned_leader.GetName]"
+		# 			# event_target:cloned_spawned_leader = {
+		# 			# 	set_name = event_target:original_spawned_leader
+		# 			# 	change_leader_portrait = event_target:original_spawned_leader
+		# 			# 	save_event_target_as = FROM
+		# 			# }
+		# 			# event_target:original_spawned_leader = { kill_leader = { show_notification = no } }
+		# 			# log = "...[cloned_spawned_leader.GetSheHe] now identif[cloned_spawned_leader.GetIesY] as neither female nor male."
+		# 		}
+		# 		else = {
+		# 			log = "...[original_spawned_leader.GetSheHe] already identified as neither female nor male and was not changed."
+		# 		}
+		# 		remove_country_flag = already_randomizing_gender_identity
+		# 	}
+		# 	5 = {
+		# 		if = {
+		# 			limit = { event_target:original_spawned_leader = { NOT = { gender = female } } }
+		# 			log = "original name [original_spawned_leader.GetName]"
+		# 			clone_leader = {
+		# 				target = event_target:original_spawned_leader
+		# 				gender = female
+		# 				effect = {
+		# 					save_event_target_as = cloned_spawned_leader
+		# 				}
+		# 			}
+		# 			log = "cloned name [cloned_spawned_leader.GetName]"
+		# 			# event_target:cloned_spawned_leader = {
+		# 			# 	set_name = event_target:original_spawned_leader
+		# 			# 	change_leader_portrait = event_target:original_spawned_leader
+		# 			# 	save_event_target_as = FROM
+		# 			# }
+		# 			event_target:original_spawned_leader = { kill_leader = { show_notification = no } }
+		# 			log = "...[cloned_spawned_leader.GetSheHe] now identif[cloned_spawned_leader.GetIesY] as female."
+		# 		}
+		# 		else = {
+		# 			log = "...[original_spawned_leader.GetSheHe] already identified as female and was not changed."
+		# 		}
+		# 	}
+		# 	5 = {
+		# 		if = {
+		# 			limit = { event_target:original_spawned_leader = { NOT = { gender = male } } }
+		# 			log = "originally name [original_spawned_leader.GetName]"
+		# 			clone_leader = {
+		# 				target = event_target:original_spawned_leader
+		# 				gender = male
+		# 				effect = {
+		# 					save_event_target_as = cloned_spawned_leader
+		# 				}
+		# 			}
+		# 			log = "cloned name [cloned_spawned_leader.GetName]"
+		# 			# event_target:cloned_spawned_leader = {
+		# 			# 	set_name = event_target:original_spawned_leader
+		# 			# 	change_leader_portrait = event_target:original_spawned_leader
+		# 			# 	save_event_target_as = FROM
+		# 			# }
+		# 			event_target:original_spawned_leader = { kill_leader = { show_notification = no } }
+		# 			log = "...[cloned_spawned_leader.GetSheHe] now identif[cloned_spawned_leader.GetIesY] as male."
+		# 		}
+		# 		else = {
+		# 			log = "...[original_spawned_leader.GetSheHe] already identified as male and was not changed."
+		# 		}
+		# 	}
+		# }
+	}
+}
+
+country_event = {
+	id = nonbinary_leaders.2
+	is_triggered_only = yes
+	hide_window = yes
+	fire_only_once = yes
+	trigger = { NOT = { has_country_flag = nonbinary_leaders_game_begun } }
+	immediate = {
+		set_country_flag = nonbinary_leaders_game_begun
+	}
+}

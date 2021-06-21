@@ -1,0 +1,16 @@
+# when pressing begin in the intro window
+# THIS = country to press begin
+on_press_begin = {
+	events = {
+		nonbinary_leaders.2
+	}
+}
+
+# a new leader is generated for an empire, to be available for recruitment
+# THIS = country
+# FROM = leader
+on_leader_spawned = {
+	events = {
+		nonbinary_leaders.1
+	}
+}

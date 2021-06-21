@@ -1,0 +1,112 @@
+# supports: pop, leader, species
+defined_text = {
+	name = GetSpeciesClassOrCustom
+	text = {
+		trigger = { species = { is_species_class = HUM } }
+		localization_key = HUM
+	}
+	text = {
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = MAM
+					is_species_class = PRE_MAM
+				}
+			}
+		}
+		localization_key = MAM
+	}
+	text = {
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = REP
+					is_species_class = PRE_REP
+				}
+			}
+		}
+		localization_key = REP
+	}
+	text = {
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = AVI
+					is_species_class = PRE_AVI
+				}
+			}
+		}
+		localization_key = AVI
+	}
+	text = {
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = ART
+					is_species_class = PRE_ART
+				}
+			}
+		}
+		localization_key = ART
+	}
+	text = {
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = MOL
+					is_species_class = PRE_MOL
+				}
+			}
+		}
+		localization_key = MOL
+	}
+	
+	text = {
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = FUN
+					is_species_class = PRE_FUN
+				}
+			}
+		}
+		localization_key = FUN
+	}
+	text = {
+		trigger = { species = { is_species_class = NECROID } }
+		localization_key = NECROID
+	}
+	text = {
+		trigger = { species = { is_species_class = LITHOID } }
+		localization_key = LITHOID
+	}
+	text = {
+		trigger = { species = { is_species_class = PLANT } }
+		localization_key = PLANT
+	}
+	text = {
+		trigger = { species = { is_species_class = MACHINE } }
+		localization_key = MACHINE
+	}
+	text = {
+		trigger = { species = { is_species_class = ROBOT } }
+		localization_key = ROBOT
+	}
+	# The Contingency doesn't seem to have localisation defined for their class
+	# text = {
+	# 	trigger = { species = { is_species_class = AI } }
+	# 	localization_key = AI
+	# }
+	text = {
+		trigger = { species = { is_species_class = SWARM } }
+		localization_key = SWARM
+	}
+	text = {
+		trigger = { species = { is_species_class = EXD } }
+		localization_key = EXD
+	}
+	text = {
+		trigger = { species = { is_custom_species_class = yes } }
+		localization_key = SPECIES_CLASS_CUSTOM
+	}
+}
