@@ -119,7 +119,6 @@ country_event = {
 						event_target:leader_to_pseudo_clone = { fire_leader_via_class = yes }
 					}
 					else = {
-						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetSubjectPronoun] decided to continue identifing as nonbinary.\"" }
 						handle_unchanged_gender_identity = yes
 					}
 				}
