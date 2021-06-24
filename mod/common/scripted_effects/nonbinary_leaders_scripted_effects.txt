@@ -709,13 +709,13 @@ set_randomized_gender_presentation = {
 			}
 		}
 		1 = {
+			set_leader_flag = presents_masc
 			modifier = {
 				factor = 9
 				gender = male
 			}
 			if = {
 				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-				set_leader_flag = presents_masc
 				log = "...\\[This.GetSubjectPronoun] already present\\[This.GetSXX] as masculine."
 			}
 		}
