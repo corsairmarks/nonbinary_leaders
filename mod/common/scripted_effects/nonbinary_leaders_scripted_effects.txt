@@ -384,7 +384,10 @@ activate_pseudo_clone_leader = {
 
 # requires event_target:leader_to_pseudo_clone, which is the leaders that _wasn't_ cloned but still needs post-processing
 handle_unchanged_gender_identity = {
-	log_if_enabled = { MESSAGE = "\"...\\[leader_to_pseudo_clone.GetSubjectPronoun] decided to continue identifing as \\[leader_to_pseudo_clone.GetGender].\"" }
+	if = {
+		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+		log = "...\\[leader_to_pseudo_clone.GetSubjectPronoun] decided to continue identifying as \\[leader_to_pseudo_clone.GetGender]."
+	}
 	event_target:leader_to_pseudo_clone = {
 		if = {
 			limit = { has_gender_presentation_flag = no }
@@ -700,15 +703,21 @@ set_randomized_gender_presentation = {
 				factor = 9
 				gender = female
 			}
-			log_if_enabled = { MESSAGE = "\"...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as feminine.\"" }
+			if = {
+				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+				log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as feminine."
+			}
 		}
 		1 = {
 			modifier = {
 				factor = 9
 				gender = male
 			}
-			set_leader_flag = presents_masc
-			log_if_enabled = { MESSAGE = "\"...\\[This.GetSubjectPronoun] already present\\[This.GetSXX] as masculine.\"" }
+			if = {
+				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+				set_leader_flag = presents_masc
+				log = "...\\[This.GetSubjectPronoun] already present\\[This.GetSXX] as masculine."
+			}
 		}
 	}
 }
