@@ -1,0 +1,53 @@
+#Ex: "[Nonbinary/Female/Male] is how the leader identifies..."
+defined_text = {
+	name = GetGenderCap
+	text = {
+		trigger = { gender = indeterminable }
+		localization_key = indeterminable
+	}
+	text = {
+		trigger = { gender = female }
+		localization_key = female
+	}
+	text = {
+		trigger = { gender = male }
+		localization_key = male
+	}
+	text = {
+		trigger = {
+			NOR = {
+				gender = indeterminable
+				gender = female
+				gender = male
+			}
+		}
+		localization_key = gender_unknown
+	}
+}
+
+#Ex: "the leader's gender is [nonbinary/female/male]"
+defined_text = {
+	name = GetGender
+	text = {
+		trigger = { gender = indeterminable }
+		localization_key = indeterminable_lowercase
+	}
+	text = {
+		trigger = { gender = female }
+		localization_key = female_lowercase
+	}
+	text = {
+		trigger = { gender = male }
+		localization_key = male_lowercase
+	}
+	text = {
+		trigger = {
+			NOR = {
+				gender = indeterminable
+				gender = female
+				gender = male
+			}
+		}
+		localization_key = gender_unknown_lowercase
+	}
+}

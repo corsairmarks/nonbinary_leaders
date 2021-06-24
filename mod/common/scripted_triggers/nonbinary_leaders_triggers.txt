@@ -64,3 +64,31 @@ is_custom_species_class = {
 		}
 	}
 }
+
+# leader
+allows_fem_portraits = {
+	OR = {
+		AND = {
+			gender = female
+			NOT = { has_leader_flag = presents_masc }
+		}
+		AND = {
+			NOT = { gender = female }
+			has_leader_flag = presents_fem
+		}
+	}
+}
+
+# leader
+allows_masc_portraits = {
+	OR = {
+		AND = {
+			gender = male
+			NOT = { has_leader_flag = presents_fem }
+		}
+		AND = {
+			NOT = { gender = male }
+			has_leader_flag = presents_masc
+		}
+	}
+}

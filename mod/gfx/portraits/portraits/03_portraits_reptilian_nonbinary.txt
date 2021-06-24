@@ -1,0 +1,151 @@
+portrait_groups = {
+	rep3 = {
+		default = rep3_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits = yes } }
+				portraits = {
+					rep3_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits = yes } }
+				portraits = {
+					rep3_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}		
+		
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				portraits = {
+					rep3_f
+				}
+			}
+		}		
+		
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				portraits = {
+					rep3_m
+					rep3_f
+				}
+			}
+		}
+		
+		#leader scope
+		leader = { #scientists, generals, admirals, governor
+			add = {
+				trigger = { allows_fem_portraits = yes }
+				portraits = {
+					rep3_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits = yes }
+				portraits = {
+					rep3_m
+				}
+			}
+		}
+		
+		#leader scope 
+		ruler = {
+			add = {
+				trigger = { allows_fem_portraits = yes }
+				portraits = {
+					rep3_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits = yes }
+				portraits = {
+					rep3_m
+				}
+			}
+		}
+	}		
+	
+	rep16 = {
+		default = rep16_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits = yes } }
+				portraits = {
+					rep16_m
+				}
+			}
+			add = {
+				trigger = {
+					ruler = { allows_fem_portraits = yes }
+				}
+				portraits = {
+					rep16_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}		
+		
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				portraits = {
+					rep16_f
+				}
+			}
+		}		
+		
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				portraits = {
+					rep16_m
+					rep16_f
+				}
+			}
+		}
+		
+		#leader scope
+		leader = { #scientists, generals, admirals, governor
+			add = {
+				trigger = { allows_fem_portraits = yes }
+				portraits = {
+					rep16_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits = yes }
+				portraits = {
+					rep16_m
+				}
+			}
+		}
+		
+		#leader scope 
+		ruler = {
+			add = {
+				trigger = { allows_fem_portraits = yes }
+				portraits = {
+					rep16_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits = yes }
+				portraits = {
+					rep16_m
+				}
+			}
+		}
+	}
+}

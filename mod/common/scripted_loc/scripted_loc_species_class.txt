@@ -106,7 +106,7 @@ defined_text = {
 		localization_key = EXD
 	}
 	text = {
-		trigger = { species = { is_custom_species_class = yes } }
+		trigger = { is_custom_species_class = yes }
 		localization_key = SPECIES_CLASS_CUSTOM
 	}
 }

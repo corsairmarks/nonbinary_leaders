@@ -1,3 +1,10 @@
+# fires when the game starts
+on_game_start = {
+	events = {
+		nonbinary_leaders.13 # flag mod as installed
+	}
+}
+
 # when pressing begin in the intro window
 # THIS = country to press begin
 on_press_begin = {

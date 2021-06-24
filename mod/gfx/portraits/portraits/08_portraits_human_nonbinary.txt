@@ -1,0 +1,117 @@
+portrait_groups = {
+	human = {
+		default = human_male_01
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits = yes } }
+				portraits = {
+					human_male_01
+					human_male_02
+					human_male_03
+					human_male_04
+					human_male_05
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits = yes  } }
+				portraits = {
+					human_female_01
+					human_female_02
+					human_female_03
+					human_female_04
+					human_female_05
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}		
+		
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				portraits = {
+					human_female_01
+					human_female_02
+					human_female_03					
+					human_female_04
+					human_female_05
+					human_male_01
+					human_male_02
+					human_male_03					
+					human_male_04
+					human_male_05
+				}
+			}
+		}		
+		
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				portraits = {
+					human_female_01
+					human_female_02
+					human_female_03				
+					human_female_04
+					human_female_05
+					human_male_01
+					human_male_02
+					human_male_03					
+					human_male_04
+					human_male_05
+				}
+			}
+		}
+		
+		#leader scope
+		leader = { #scientists, generals, admirals, governor
+			add = {
+				trigger = { allows_fem_portraits = yes }
+				portraits = {
+					human_female_01
+					human_female_02
+					human_female_03					
+					human_female_04
+					human_female_05
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits = yes }
+				portraits = {
+					human_male_01
+					human_male_02
+					human_male_03					
+					human_male_04
+					human_male_05
+				}
+			}
+		}
+
+			
+		#leader scope 
+		ruler = {
+			add = {
+				trigger = { allows_fem_portraits = yes }
+				portraits = {
+					human_female_01
+					human_female_02
+					human_female_03					
+					human_female_04
+					human_female_05
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits = yes }
+				portraits = {
+					human_male_01
+					human_male_02
+					human_male_03					
+					human_male_04
+					human_male_05
+				}
+			}
+		}
+	}
+}

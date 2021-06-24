@@ -1,0 +1,8 @@
+﻿l_english:
+ indeterminable: "Nonbinary"
+ indeterminable_lowercase: "nonbinary"
+ female_lowercase: "female"
+ male_lowercase: "male"
+ gender_unknown: "Unknown gender"
+ gender_unknown_lowercase: "unknown gender"
+ SPECIES_CLASS_CUSTOM: "Custom"
