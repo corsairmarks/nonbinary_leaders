@@ -740,11 +740,3 @@ clear_pseudo_clone_variables = {
 		clear_variable = owned_leader_class_accumulator
 	}
 }
-
-# requires leader scope
-has_gender_presentation_flag = {
-	OR = {
-		has_leader_flag = presents_fem
-		has_leader_flag = presents_masc
-	}
-}

@@ -92,3 +92,11 @@ allows_masc_portraits = {
 		}
 	}
 }
+
+# requires leader scope
+has_gender_presentation_flag = {
+	OR = {
+		has_leader_flag = presents_fem
+		has_leader_flag = presents_masc
+	}
+}
