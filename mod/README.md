@@ -38,13 +38,15 @@ This mod can be added to or removed from your savegame safely without issue.  If
 
 ### Unresolvable Issues
 
-If you recruit a leader while paused, and the newly-created replacement in the leader pool has changed their gender identity, you may see two leaders by the same name in the leader pool.  Unpause the game and the duplicate will be removed.  If you have the "Recruit Leader" window open when the duplicate is removed, you will see the leader's portrait change clothes (to the defaults) and their level become -1.  This is purely a display issue - that leader has been removed.  If you never hire leaders while paused, or if you close the "Recruit Leader" window before resuming the game, you will not experience this graphical glitch.  This graphical glitch also leads to lots of leader-related logs in error.log - most of which are because the removed duplicate leader has no owner, and thus some triggers related to clothing selection break until the game finishes removing them.
+If you recruit a leader while paused, and the newly-created replacement in the leader pool has changed their gender identity, you may see two leaders by the same name in the leader pool.  Unpause the game and the duplicate will be removed.  If you have the "Recruit Leader" window open when the duplicate is removed, you will see the leader's portrait change clothes (to the defaults) and their level become -1.  This is purely a display issue - that leader has been removed.  If you never hire leaders while paused, or if you close the "Recruit Leader" window before resuming the game, you will not experience this graphical glitch.  This graphical glitch also leads to lots of leader-related logs in error.log - most of which are because the removed duplicate leader has no owner, and thus some triggers related to their portrait's clothing break until the game finishes removing the leader.
 
 ### Limitations
 
 Only leaders that are spawned into the leader pool (whether the pool is for a player or an AI) will have a chance to randomize their gender identity and presentation.  Leaders created through other means (for example, the `create_leader` and `clone_leader` effects) are unaffected.  Generally those are special event leaders and are intended to have a particular gender.
 
-Leaders which select to identify as nonbinary (`indeterminable`) will not show a gender in their tooltip.  This is as-designed by Paradox, becasue the original purpose of the third gender is for non-gendered species.
+Leaders which select to identify as nonbinary (`indeterminable`) will not show a gender in their tooltip.  This is as-designed by Paradox, because the original purpose of the third gender is for non-gendered species (i.e. has no concept of gender at all).  Showing the line "Gender: Indeterminable" for every one of their leaders would be redundant.
+
+Finally, it is not possible to allow for selecting gender-nonbinary rulers during species creation.  The logic for the species customization screens is part of the core Stellaris game and is not alterable by modders.
 
 ## Changelog
 
