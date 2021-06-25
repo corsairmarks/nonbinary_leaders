@@ -534,6 +534,7 @@ set_properties_from_original = {
 		indeterminable = { set_leader_flag = gender_indeterminable }
 		female = { set_leader_flag = gender_female }
 		male = { set_leader_flag = gender_male }
+		default = { set_leader_flag = gender_unknown }
 	}
 	set_randomized_gender_presentation = yes
 	set_name = event_target:leader_to_pseudo_clone
@@ -697,7 +698,7 @@ set_skill_from_original = {
 # requires leader scope
 set_randomized_gender_presentation = {
 	random_list = {
-		1 = {
+		10 = {
 			set_leader_flag = presents_fem
 			modifier = {
 				factor = 9
@@ -708,7 +709,7 @@ set_randomized_gender_presentation = {
 				log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as feminine."
 			}
 		}
-		1 = {
+		10 = {
 			set_leader_flag = presents_masc
 			modifier = {
 				factor = 9

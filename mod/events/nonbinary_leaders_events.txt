@@ -94,7 +94,7 @@ country_event = {
 				set_owned_leader_count_class = yes
 			}
 			random_list = {
-				# 85 = {
+				# 76 = {
 				# 	log_if_enabled = { MESSAGE = "\"...and [leader_to_pseudo_clone.GetSubjectPronoun] did not consider changing [leader_to_pseudo_clone.GetPossPronoun] gender identity from [leader_to_pseudo_clone.GetSubjectPronoun]/[leader_to_pseudo_clone.GetObjectPronoun]/[leader_to_pseudo_clone.GetPossPronoun].\"" }
 				# 	event_target:leader_to_pseudo_clone = {
 				# 		set_leader_flag = gender_and_presentation_not_changed
@@ -105,7 +105,7 @@ country_event = {
 				#		}
 				# 	}
 				# }
-				5 = {
+				8 = {
 					if = {
 						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = indeterminable } } }
 						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as nonbinary.\"" }
@@ -122,7 +122,7 @@ country_event = {
 						handle_unchanged_gender_identity = yes
 					}
 				}
-				5 = {
+				8 = {
 					if = {
 						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = female } } }
 						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as female.\"" }
@@ -139,7 +139,7 @@ country_event = {
 						handle_unchanged_gender_identity = yes
 					}
 				}
-				5 = {
+				8 = {
 					if = {
 						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = male } } }
 						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as male.\"" }
