@@ -24,7 +24,7 @@ Lastly, you can log detailed information about all of your leaders (owned and po
 
 This mod is implemented via an event attached to `on_leader_spawned` to add the % chance to reroll a leader's gender identity.  That part should be widely compatible with other mods, including my other mods that also affect leader spawning ([Enable All Eligible Species Traits for Leaders](https://steamcommunity.com/sharedfiles/filedetails/?id=2499031295), [Scientist AI Assistant Upgrader](https://steamcommunity.com/sharedfiles/filedetails/?id=2498166286), [Full Military Service for Battle Thralls](https://steamcommunity.com/sharedfiles/filedetails/?id=2496357447)).
 
-As discussed above, a compatibility patch is necessary to fully support varying gender presentation for other mods that add species portraits.  By default, this mod supports all the gendered species classes and any sexually dimorphic species in each class.
+As discussed above, a compatibility patch is necessary to fully support varying gender presentation for other mods that add species portraits.  By default, this mod supports all the built-in, gendered species classes and any sexually dimorphic species in each class.
 
 If you would like me to implement a compatibility patch (to support feminine/masculine presentation from sexual dimorphism and/or to respect a custom species class as non-gendered), please leave a comment asking nicely, what you want, and with a link to the mod you want to be compatible.
 
