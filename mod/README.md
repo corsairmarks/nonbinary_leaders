@@ -2,7 +2,7 @@
 
 Would you like your leaders to have a chance to have gender identities that vary from the gender presentation of their portraits?  Do you want your leaders to be able to use "they" pronouns?  Then this mod is for you!
 
-The effects are more noticable for species portraits that have sexual dimorphism, but that is not a requirement.
+The effects are more noticeable for species portraits that have sexual dimorphism, but that is not a requirement.
 
 # Changes
 
@@ -18,7 +18,7 @@ What this means to you is that if you have a custom species class that is set to
 
 This mod optionally adds copious log entries to game.log file when running; use the in-game console to enable it with `effect set_global_flag = nonbinary_leaders_enable_tracing`.  Here's where you can find the game.log file: `%USERPROFILE%\Documents\Paradox Interactive\Stellaris\logs` (Windows), `~/Documents/Paradox Interactive/Stellaris/logs` (MacOS), or `~/.local/share/Paradox Interactive/Stellaris/logs` (*nix).  To turn tracing off again, issue this command on the in-game console: `effect remove_global_flag = nonbinary_leaders_enable_tracing`.
 
-Lastly, you can log detailed information about all of your leaders (owned and pool) to game.log by firing my debugging event from the in-game console: `event nonbinary_leaders.1000`.  I used this to help undestand the game state while developing and decided to leave it available for future use.
+Lastly, you can log detailed information about all of your leaders (owned and pool) to game.log by firing my debugging event from the in-game console: `event nonbinary_leaders.1000`.  I used this to help understand the game state while developing and decided to leave it available for future use.
 
 ## Compatibility
 
@@ -54,7 +54,7 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 
 ## Source Code
 
-[Hosted on Github](https://github.com/corsairmarks/nonbinary_leaders)
+[Hosted on GitHub](https://github.com/corsairmarks/nonbinary_leaders)
 
 ### Development Notes
 
@@ -62,7 +62,7 @@ It is best to clone this repository into `<Stellaris User's Directory>/Paradox I
 
 # Request for Collaboration
 
-I'm looking for one or more people knowledgable about modding portraits and models for Paradox games.  With my newly-discovered ability to unlink the in-game gender of a leader from their appearance, I want to create some additional options for the human portrait set.  Notably, I'd like to have more variability in gender presentation of the portraits.  The existing portraits only offer feminine and masculine presentation.
+I'm looking for one or more people knowledgeable about modding portraits and models for Paradox games.  With my newly-discovered ability to unlink the in-game gender of a leader from their appearance, I want to create some additional options for the human portrait set.  Notably, I'd like to have more variability in gender presentation of the portraits.  The existing portraits only offer feminine and masculine presentation.
 
 # Special Thanks
 
