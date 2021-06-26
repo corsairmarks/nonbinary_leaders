@@ -14,19 +14,6 @@ event = {
 	}
 }
 
-# flag mod as active (in case the mod is added after game start)
-country_event = {
-	id = nonbinary_leaders.14
-	hide_window = yes
-	fire_only_once = yes
-	trigger = {
-		NOT = { has_global_flag = nonbinary_leaders_installed }
-	}
-	immediate = {
-		set_global_flag = nonbinary_leaders_installed
-	}
-}
-
 # log info about every owned and pool leader
 country_event = {
 	id = nonbinary_leaders.1000
