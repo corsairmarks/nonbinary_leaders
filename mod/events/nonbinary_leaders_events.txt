@@ -79,6 +79,10 @@ country_event = {
 			}
 			random_list = {
 				76 = {
+					modifier = {
+						factor = 0
+						has_global_flag = nonbinary_leaders_force_all_spawned
+					}
 					log_if_enabled = { MESSAGE = "\"...and [leader_to_pseudo_clone.GetSubjectPronoun] did not consider changing [leader_to_pseudo_clone.GetPossPronoun] gender identity from [leader_to_pseudo_clone.GetSubjectPronoun]/[leader_to_pseudo_clone.GetObjectPronoun]/[leader_to_pseudo_clone.GetPossPronoun].\"" }
 					event_target:leader_to_pseudo_clone = {
 						set_leader_flag_gender = yes
