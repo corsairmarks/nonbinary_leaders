@@ -100,3 +100,11 @@ has_gender_presentation_flag = {
 		has_leader_flag = presents_masc
 	}
 }
+
+# requires leader scope
+should_roll_to_reconsider_gender_identity = {
+	OR = {
+		uses_gender_species = yes
+		is_custom_species_class = yes # custom species classes probably don't explicitly define "gender = no" and yes is the default, so assume yes
+	}
+}

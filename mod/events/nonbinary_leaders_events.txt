@@ -49,10 +49,7 @@ country_event = {
 		exists = FROM
 		FROM = {
 			NOT = { has_leader_flag = gender_reselected }
-			OR = {
-				uses_gender_species = yes
-				is_custom_species_class = yes # custom species classes probably don't explicitly define "gender = no" and yes is the default, so assume yes
-			}
+			should_roll_to_reconsider_gender_identity = yes
 		}
 	}
 	immediate = {
