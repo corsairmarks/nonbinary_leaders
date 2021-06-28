@@ -30,6 +30,10 @@ If you would like me to implement a compatibility patch (to support feminine/mas
 
 This mod is not compatible with achievements.
 
+### Sub-mods
+
+* [Nonbinary Leaders for All Species](https://steamcommunity.com/sharedfiles/filedetails/?id=2530828678) ([Source](https://github.com/corsairmarks/nonbinary_leaders_all_species)])
+
 ### Post-Game Start
 
 This mod can be added to or removed from your savegame safely without issue.  If you remove this mod, any leaders which already have had their gender identities set will remain as-is but new leaders will only spawn to match either binary genders or indeterminable genders depending on species class.  Leader portraits will revert to the default selection criteria.  Although leaders retain any custom flags set on them, this doesn't affect gameplay.
