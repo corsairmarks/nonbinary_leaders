@@ -713,7 +713,13 @@ set_randomized_gender_presentation = {
 			}
 			if = {
 				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-				log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as feminine."
+				if = {
+					limit = { gender = female }
+					log = "...\\[This.GetSubjectPronoun] already presented as feminine."
+				}
+				else = {
+					log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as feminine."
+				}
 			}
 		}
 		10 = {
@@ -724,7 +730,13 @@ set_randomized_gender_presentation = {
 			}
 			if = {
 				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-				log = "...\\[This.GetSubjectPronoun] already present\\[This.GetSXX] as masculine."
+				if = {
+					limit = { gender = male }
+					log = "...\\[This.GetSubjectPronoun] already presented as masculine."
+				}
+				else = {
+					log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as masculine."
+				}
 			}
 		}
 	}
