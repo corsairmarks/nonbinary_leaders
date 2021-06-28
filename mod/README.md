@@ -51,10 +51,14 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 ## Changelog
 
 * 1.0.0 Initial version
+* 1.1.0 Maintenance release
+	* More flags to help with understanding what randomization happened for a leader
+	* Prepare code for submod
+	* More legible font for thumbnail
 
 ## Source Code
 
-[Hosted on GitHub](https://github.com/corsairmarks/nonbinary_leaders)
+Hosted on [GitHub](https://github.com/corsairmarks/nonbinary_leaders)
 
 ### Development Notes
 
