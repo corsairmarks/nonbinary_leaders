@@ -389,6 +389,8 @@ handle_unchanged_gender_identity = {
 		log = "...\\[leader_to_pseudo_clone.GetSubjectPronoun] decided to continue identifying as \\[leader_to_pseudo_clone.GetGender]."
 	}
 	event_target:leader_to_pseudo_clone = {
+		set_leader_flag = gender_retained
+		set_leader_flag_gender = yes
 		if = {
 			limit = { has_gender_presentation_flag = no }
 			set_randomized_gender_presentation = yes
@@ -529,13 +531,7 @@ kill_leader_via_class = {
 # requires event_target:leader_to_pseudo_clone as the original
 set_properties_from_original = {
 	set_leader_flag = gender_reselected
-	switch = {
-		trigger = gender
-		indeterminable = { set_leader_flag = gender_indeterminable }
-		female = { set_leader_flag = gender_female }
-		male = { set_leader_flag = gender_male }
-		default = { set_leader_flag = gender_unknown }
-	}
+	set_leader_flag_gender = yes
 	set_randomized_gender_presentation = yes
 	set_name = event_target:leader_to_pseudo_clone
 	change_leader_portrait = event_target:leader_to_pseudo_clone
@@ -546,6 +542,17 @@ set_properties_from_original = {
 	# that the cloned leader's trait(s) are rerolled.  That will ultimately be
 	# more compatible with mods that add leader traits.
 	recruitable = no
+}
+
+# requires leader scope
+set_leader_flag_gender = {
+	switch = {
+		trigger = gender
+		indeterminable = { set_leader_flag = gender_indeterminable }
+		female = { set_leader_flag = gender_female }
+		male = { set_leader_flag = gender_male }
+		default = { set_leader_flag = gender_unknown }
+	}
 }
 
 # requires leader scope, where PREV is also a leader

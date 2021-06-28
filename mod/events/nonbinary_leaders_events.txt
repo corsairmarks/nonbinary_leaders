@@ -84,6 +84,7 @@ country_event = {
 				76 = {
 					log_if_enabled = { MESSAGE = "\"...and [leader_to_pseudo_clone.GetSubjectPronoun] did not consider changing [leader_to_pseudo_clone.GetPossPronoun] gender identity from [leader_to_pseudo_clone.GetSubjectPronoun]/[leader_to_pseudo_clone.GetObjectPronoun]/[leader_to_pseudo_clone.GetPossPronoun].\"" }
 					event_target:leader_to_pseudo_clone = {
+						set_leader_flag_gender = yes
 						set_leader_flag = gender_and_presentation_not_changed
 						clear_pseudo_clone_variables = yes
 						if = {
