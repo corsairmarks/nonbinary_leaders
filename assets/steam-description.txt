@@ -50,15 +50,7 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 
 [h2]Changelog[/h2]
 
-[list]
-[*]1.0.0 Initial version
-[*]1.1.0 Maintenance release
-	[list]
-	[*]More flags to help with understanding what randomization happened for a leader
-	[*]Prepare code for submod
-	[*]More legible font for thumbnail
-	[/list]
-[/list]
+See [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2528614880]Change Notes[/url]
 
 [h2]Source Code[/h2]
 
