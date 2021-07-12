@@ -55,6 +55,7 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* More flags to help with understanding what randomization happened for a leader
 	* Prepare code for submod
 	* More legible font for thumbnail
+* 1.2.0 Add `on_action` to flag mod as installed when loading a single-player game
 
 ## Source Code
 
