@@ -14,6 +14,7 @@ event = {
 }
 
 # log info about every owned and pool leader
+# ROOT = country
 country_event = {
 	id = nonbinary_leaders.1000
 	hide_window = yes
@@ -31,9 +32,9 @@ country_event = {
 	}
 }
 
-# THIS = country
-# FROM = leader
 # triggered by on_leader_spawned
+# ROOT = country
+# FROM = leader
 country_event = {
 	id = nonbinary_leaders.1
 	hide_window = yes
@@ -149,6 +150,8 @@ country_event = {
 	}
 }
 
+# triggered by on_press_begin
+# ROOT = country
 country_event = {
 	id = nonbinary_leaders.2
 	is_triggered_only = yes
@@ -157,5 +160,21 @@ country_event = {
 	trigger = { NOT = { has_country_flag = nonbinary_leaders_game_begun } }
 	immediate = {
 		set_country_flag = nonbinary_leaders_game_begun
+	}
+}
+
+# toggle tracing
+event = {
+	id = nonbinary_leaders.3
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+			remove_global_flag = nonbinary_leaders_enable_tracing
+		}
+		else = {
+			set_global_flag = nonbinary_leaders_enable_tracing
+		}
 	}
 }
