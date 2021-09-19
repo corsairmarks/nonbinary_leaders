@@ -189,8 +189,8 @@ set_leader_class_code = {
 # sets the variable "leader_gender_code" on the leader to represent its gender
 #     0 unknown
 #     1 indeterminable
-#     2 governor
-#     3 scientist
+#     2 female
+#     3 male
 set_leader_gender_code = {
 	set_variable = {
 		which = leader_gender_code
