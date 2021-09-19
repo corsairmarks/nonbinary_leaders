@@ -40,7 +40,7 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
-		is_country_type = default # only default countries seem to have leader pools
+		any_playable_country = { is_country = PREV } # only for playable country types
 		# only triggers in presence of the flag or after at least 1 day has passed in order to avoid changing the gender identity of starting rulers
 		OR = {
 			has_country_flag = nonbinary_leaders_game_begun
@@ -54,7 +54,6 @@ country_event = {
 	}
 	immediate = {
 		FROM = { save_event_target_as = leader_to_pseudo_clone }
-		# 
 		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_pseudo_clone.GetTitle] \\[leader_to_pseudo_clone.GetName] of gendered species class \\[leader_to_pseudo_clone.GetSpeciesClassOrCustom]...\"" }
 		# for now, only change leaders of known leader_classes when they spawn into the leader pool
 		if = {
