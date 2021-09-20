@@ -4,6 +4,8 @@ Would you like your leaders to have a chance to have gender identities that vary
 
 The effects are more noticeable for species portraits that have sexual dimorphism, but that is not a requirement.
 
+New for 3.1: now features several events allowing you to choose the gender identity and gender presentation of your initial ruler.  It is highly recommended to customize your leader during game setup and assign them the gender they should present, and then selecting the same gender presentation after the game starts (it will be marked). Otherwise, changing gender presentation overwrites the customized ruler appearance.
+
 # Changes
 
 Stellaris supports 3 gender states in code (`male`, `female`, `indeterminable`), which correspond to the pronouns he, she, and they.  Whether a species uses binary male/female genders or the indeterminable gender is determined by its species class (e.g. molluscoid or fungoid).  This mod adds a chance for binary-gendered species classes to have leaders adopt a new gender identity when they are spawned by the game (20% chance to change from their assigned gender identity - 10% for each of the other two genders).
@@ -63,11 +65,12 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* More legible font for thumbnail
 * 1.2.0 Add `on_action` to flag mod as installed when loading a single-player game
 * 2.0.0 Update for Stellaris version 3.1.* "Lem"
-	* Simplify leader re-creation code with new features from 3.1.1
-	* Simplify leader re-creation code to use `clone_leader` instead, eliminating redundant checks
-	* Origin: Clone Army species that are infertile will not randomize their gender presentation
+    * Simplify leader re-creation code with new features from 3.1.1
+    * Simplify leader re-creation code to use `clone_leader` instead, eliminating redundant checks
+    * Origin: Clone Army species that are infertile will not randomize their gender presentation
 	* Unfortunately, currently not able to offer an event to choose your starting ruler's pronouns without the portrait changing
 * 2.1.0 Improve gender presentation swaps to also use cloned leaders - leaders who alter their gender presentation now reliably have the correct portrait
+	* Present a dialog at game start which will allows each player to choose whether their initial ruler identifies as nonbinary
 
 ## Source Code
 

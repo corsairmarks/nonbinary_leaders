@@ -102,6 +102,15 @@ has_gender_presentation_flag = {
 }
 
 # requires leader scope
+has_gender_identity_flag = {
+	OR = {
+		has_leader_flag = gender_indeterminable
+		has_leader_flag = gender_female
+		has_leader_flag = gender_male
+	}
+}
+
+# requires leader scope
 should_roll_to_reconsider_gender_identity = {
 	OR = {
 		uses_gender_species = yes

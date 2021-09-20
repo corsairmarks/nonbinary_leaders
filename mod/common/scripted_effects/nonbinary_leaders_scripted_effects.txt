@@ -132,8 +132,9 @@ print_leader_info = {
 
 # requires country scope
 # requires event_target:leader_to_clone, which is the source for the clone's properties
-# requires 1 parameter:
-#	$GENDER$ as a gender
+# requires 2 parameters:
+#	GENDER as a gender
+# 	RECRUITABLE as a bool (default no)
 clone_leader_with_gender = {
 	event_target:leader_to_clone = { 
 		if = {
@@ -164,7 +165,7 @@ clone_leader_with_gender = {
 							else = {
 								set_leader_flag = presents_masc
 							}
-							clone_leader_with_gender_post_process = yes
+							clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE$ }
 						}
 					}
 				}
@@ -188,7 +189,7 @@ clone_leader_with_gender = {
 					effect = {
 						set_leader_flag = gender_reselected
 						set_randomized_gender_presentation = yes
-						clone_leader_with_gender_post_process = yes
+						clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE$ }
 					}
 				}
 			}
@@ -199,14 +200,18 @@ clone_leader_with_gender = {
 
 # requires leader scope
 # requires event_target:leader_to_clone, which is the source for the clone's properties
+# requires 1 parameter:
+# 	RECRUITABLE as a bool (default no)
 clone_leader_with_gender_post_process = {
 	set_name = event_target:leader_to_clone
 	set_leader_flag_gender = yes
 	set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
 	set_age = event_target:leader_to_clone.trigger:leader_age
-	recruitable = no
-	recruitable = yes
+	[[RECRUITABLE]
+		recruitable = no
+		recruitable = yes
+	]
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 		print_leader_info = yes
@@ -393,5 +398,40 @@ log_if_enabled = {
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 		log = $MESSAGE$
+	}
+}
+
+# requires leader scope
+clear_mandate = {
+	if = {
+		limit = { has_mandate = yes }
+		if = {
+			limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+			log = "\\[This.GetName] has a mandate, attempting to end the event chain..."
+		}
+		switch = {
+			trigger = has_mandate
+			# from common/mandates/00_mandates.txt
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_orbresearch_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_miner_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_peacemaker_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_shipwright_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_monthly_energy_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_monthly_minerals_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_monthly_food_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_monthly_alloys_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_monthly_consumer_goods_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_district_city_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_district_generator_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_district_mining_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_district_farming_chain } }
+			# from common/event_chains/00_mandate_chains.txt (seem to be old but unused, still checked in events/mandate_events.txt)
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_separatist_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_emancipation_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_emancipation2_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_slaver_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_xenopurge_chain } }
+			mandate_orbital_researcher = { owner = { end_event_chain = mandate_nationalist_chain } }
+		}
 	}
 }

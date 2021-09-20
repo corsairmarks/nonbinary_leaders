@@ -21,11 +21,11 @@ defined_text = {
 				gender = male
 			}
 		}
-		localization_key = gender_unknown
+		localization_key = gender_identity_unknown
 	}
 }
 
-#Ex: "the leader's gender is [nonbinary/female/male]"
+#Ex: "the leader's gender identity is [nonbinary/female/male]"
 defined_text = {
 	name = GetGender
 	text = {
@@ -48,6 +48,148 @@ defined_text = {
 				gender = male
 			}
 		}
-		localization_key = gender_unknown_lowercase
+		localization_key = gender_identity_unknown_lowercase
+	}
+}
+
+#Ex: "[Nonbinary/Female/Male] is how the leader identifies..."
+defined_text = {
+	name = GetGenderFromFlagCap
+	text = {
+		trigger = { has_leader_flag = gender_indeterminable }
+		localization_key = indeterminable
+	}
+	text = {
+		trigger = { has_leader_flag = gender_female }
+		localization_key = female
+	}
+	text = {
+		trigger = { has_leader_flag = gender_male }
+		localization_key = male
+	}
+	text = {
+		trigger = { has_gender_identity_flag = no }
+		localization_key = gender_identity_unknown
+	}
+}
+
+#Ex: "the leader's gender identity is [nonbinary/female/male]"
+defined_text = {
+	name = GetGenderFromFlag
+	text = {
+		trigger = { has_leader_flag = gender_indeterminable }
+		localization_key = indeterminable_lowercase
+	}
+	text = {
+		trigger = { has_leader_flag = gender_female }
+		localization_key = female_lowercase
+	}
+	text = {
+		trigger = { has_leader_flag = gender_male }
+		localization_key = male_lowercase
+	}
+	text = {
+		trigger = { has_gender_identity_flag = no }
+		localization_key = gender_identity_unknown_lowercase
+	}
+}
+
+#Ex: "[Feminine/Masculine] is how the leader presents..."
+defined_text = {
+	name = GetGenderPresentationCap
+	text = {
+		trigger = { allows_fem_portraits = yes }
+		localization_key = feminine
+	}
+	text = {
+		trigger = { allows_masc_portraits = yes }
+		localization_key = masculine
+	}
+	text = {
+		trigger = {
+			allows_fem_portraits = no
+			allows_masc_portraits = no
+		}
+		localization_key = gender_presentation_unknown
+	}
+}
+
+#Ex: "the leader's gender presentation is [feminine/masculine]"
+defined_text = {
+	name = GetGenderPresentation
+	text = {
+		trigger = { allows_fem_portraits = yes }
+		localization_key = feminine_lowercase
+	}
+	text = {
+		trigger = { allows_masc_portraits = yes }
+		localization_key = masculine_lowercase
+	}
+	text = {
+		trigger = {
+			allows_fem_portraits = no
+			allows_masc_portraits = no
+		}
+		localization_key = gender_presentation_unknown_lowercase
+	}
+}
+
+defined_text = {
+	name = GetIndeterminableGenderActiveSuffix
+	text = {
+		trigger = { gender = indeterminable }
+		localization_key = nonbinary_leaders.option.suffix
+	}
+	text = {
+		trigger = { NOT = { gender = indeterminable } }
+		localization_key = BLANK_STRING
+	}
+}
+
+defined_text = {
+	name = GetFemaleGenderActiveSuffix
+	text = {
+		trigger = { gender = female }
+		localization_key = nonbinary_leaders.option.suffix
+	}
+	text = {
+		trigger = { NOT = { gender = female } }
+		localization_key = BLANK_STRING
+	}
+}
+
+defined_text = {
+	name = GetMaleGenderActiveSuffix
+	text = {
+		trigger = { gender = male }
+		localization_key = nonbinary_leaders.option.suffix
+	}
+	text = {
+		trigger = { NOT = { gender = male } }
+		localization_key = BLANK_STRING
+	}
+}
+
+defined_text = {
+	name = GetFemPresentationActiveSuffix
+	text = {
+		trigger = { allows_fem_portraits = yes }
+		localization_key = nonbinary_leaders.option.suffix
+	}
+	text = {
+		trigger = { allows_fem_portraits = no }
+		localization_key = BLANK_STRING
+	}
+}
+
+defined_text = {
+	name = GetMascGenderPresentationSuffix
+	text = {
+		trigger = { allows_masc_portraits = yes }
+		localization_key = nonbinary_leaders.option.suffix
+	}
+	text = {
+		trigger = { allows_masc_portraits = no }
+		localization_key = BLANK_STRING
 	}
 }

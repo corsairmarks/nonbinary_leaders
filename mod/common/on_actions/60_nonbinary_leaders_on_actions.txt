@@ -5,6 +5,14 @@ on_game_start = {
 	}
 }
 
+# fired when the game starts
+# THIS = country
+on_game_start_country = {
+	events = {
+		nonbinary_leaders.10
+	}
+}
+
 # fired when loading a single-player game
 on_single_player_save_game_load = {
 	events = {

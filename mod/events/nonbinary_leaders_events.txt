@@ -56,45 +56,45 @@ country_event = {
 	immediate = {
 		FROM = { save_event_target_as = leader_to_clone }
 		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_clone.GetTitle] \\[leader_to_clone.GetName] of gendered species class \\[leader_to_clone.GetSpeciesClassOrCustom]...\"" }
-		random_list = {
-			80 = {
-				modifier = {
-					factor = 0
-					has_global_flag = nonbinary_leaders_force_all_spawned
-				}
-				log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] did not consider changing [leader_to_clone.GetPossPronoun] gender identity from [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
-				event_target:leader_to_clone = {
-					switch = {
-						trigger = gender
-						indeterminable = { PREV = { clone_leader_with_gender = { GENDER = indeterminable } } }
-						female = { PREV = { clone_leader_with_gender = { GENDER = female } } }
-						male = { PREV = { clone_leader_with_gender = { GENDER = male } } }
+			random_list = {
+				80 = {
+					modifier = {
+						factor = 0
+						has_global_flag = nonbinary_leaders_force_all_spawned
+					}
+					log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] did not consider changing [leader_to_clone.GetPossPronoun] gender identity from [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
+					event_target:leader_to_clone = {
+						switch = {
+							trigger = gender
+							indeterminable = { PREV = { clone_leader_with_gender = { GENDER = indeterminable } } }
+							female = { PREV = { clone_leader_with_gender = { GENDER = female } } }
+							male = { PREV = { clone_leader_with_gender = { GENDER = male } } }
+						}
 					}
 				}
-			}
-			10 = {
-				modifier = {
-					factor = 0
-					event_target:leader_to_clone = { gender = indeterminable }
+				10 = {
+					modifier = {
+						factor = 0
+						event_target:leader_to_clone = { gender = indeterminable }
+					}
+					log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
+					clone_leader_with_gender = { GENDER = indeterminable }
 				}
-				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
-				clone_leader_with_gender = { GENDER = indeterminable }
-			}
-			10 = {
-				modifier = {
-					factor = 0
-					event_target:leader_to_clone = { gender = female }
+				10 = {
+					modifier = {
+						factor = 0
+						event_target:leader_to_clone = { gender = female }
+					}
+					log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
+					clone_leader_with_gender = { GENDER = female }
 				}
-				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
-				clone_leader_with_gender = { GENDER = female }
-			}
-			10 = {
-				modifier = {
-					factor = 0
-					event_target:leader_to_clone = { gender = male }
-				}
-				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
-				clone_leader_with_gender = { GENDER = male }
+				10 = {
+					modifier = {
+						factor = 0
+						event_target:leader_to_clone = { gender = male }
+					}
+					log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
+					clone_leader_with_gender = { GENDER = male }
 			}
 		}
 	}
@@ -144,3 +144,218 @@ event = {
 		}
 	}
 }
+
+# triggered by on_game_start_country
+# ROOT = country
+country_event = {
+	id = nonbinary_leaders.10
+	is_triggered_only = yes
+	title = nonbinary_leaders.10.title
+	desc = nonbinary_leaders.10.desc
+	picture = GFX_evt_unity_symbol
+	show_sound = event_default
+	trigger = {
+		is_ai = no
+		NOT = { has_origin = origin_clone_army }
+		owner_species = { uses_gender_species = yes }
+	}
+	option = {
+		name = YES
+		hidden_effect = {
+			ruler = {
+				leader_event = {
+					id = nonbinary_leaders.11
+				}
+			}
+		}
+	}
+	option = {
+		name = NO
+	}
+}
+
+# triggered by nonbinary_leaders.10 and .14
+# ROOT = leader
+leader_event = {
+	id = nonbinary_leaders.11
+	is_triggered_only = yes
+	title = nonbinary_leaders.11.title
+	desc = nonbinary_leaders.11.desc
+	picture = GFX_evt_unity_symbol
+	show_sound = event_default
+	option = {
+		name = nonbinary_leaders.11.a
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_leader_flag = gender_indeterminable } }
+				set_leader_flag = gender_indeterminable
+			}
+			if = {
+				limit = { has_leader_flag = gender_female }
+				remove_leader_flag = gender_female
+			}
+			if = {
+				limit = { has_leader_flag = gender_male }
+				remove_leader_flag = gender_male
+			}
+		}
+	}
+	option = {
+		name = nonbinary_leaders.11.b
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_leader_flag = gender_female } }
+				set_leader_flag = gender_female
+			}
+			if = {
+				limit = { has_leader_flag = gender_indeterminable }
+				remove_leader_flag = gender_indeterminable
+			}
+			if = {
+				limit = { has_leader_flag = gender_male }
+				remove_leader_flag = gender_male
+			}
+		}
+	}
+	option = {
+		name = nonbinary_leaders.11.c
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_leader_flag = gender_male } }
+				set_leader_flag = gender_male
+			}
+			if = {
+				limit = { has_leader_flag = gender_female }
+				remove_leader_flag = gender_female
+			}
+			if = {
+				limit = { has_leader_flag = gender_indeterminable }
+				remove_leader_flag = gender_indeterminable
+			}
+		}
+	}
+	after = {
+		hidden_effect = {
+			leader_event = {
+				id = nonbinary_leaders.12
+			}
+		}
+	}
+}
+
+# triggered by nonbinary_leaders.11
+# ROOT = leader
+leader_event = {
+	id = nonbinary_leaders.12
+	is_triggered_only = yes
+	title = nonbinary_leaders.12.title
+	desc = nonbinary_leaders.12.desc
+	picture = GFX_evt_unity_symbol
+	show_sound = event_default
+	immediate = {
+		if = {
+			limit = { has_gender_presentation_flag = no }
+			if = {
+				limit = { gender = female }
+				set_leader_flag = presents_fem
+			}
+			else = {
+				set_leader_flag = presents_masc
+			}
+		}
+	}
+	option = {
+		name = nonbinary_leaders.12.a
+		hidden_effect = {
+			if = {
+				limit = { has_leader_flag = presents_masc }
+				remove_leader_flag = presents_masc
+			}
+			if = {
+				limit = { NOT = { has_leader_flag = presents_fem } }
+				set_leader_flag = presents_fem
+			}
+		}
+	}
+	option = {
+		name = nonbinary_leaders.12.b
+		hidden_effect = {
+			if = {
+				limit = { has_leader_flag = presents_fem }
+				remove_leader_flag = presents_fem
+			}
+			if = {
+				limit = { NOT = { has_leader_flag = presents_masc } }
+				set_leader_flag = presents_masc
+			}
+		}
+	}
+	after = {
+		hidden_effect = {
+			leader_event = {
+				id = nonbinary_leaders.14
+			}
+		}
+	}
+}
+
+# triggered by nonbinary_leaders.12
+# ROOT = leader
+leader_event = {
+	id = nonbinary_leaders.14
+	is_triggered_only = yes
+	title = nonbinary_leaders.13.title
+	desc = nonbinary_leaders.13.desc
+	picture = GFX_evt_unity_symbol
+	show_sound = event_default
+	option = {
+		name = YES
+		hidden_effect = {
+			save_event_target_as = leader_to_pseudo_clone
+			set_leader_flag = no_change_portrait
+			owner = {
+				if = {
+					limit = { event_target:leader_to_pseudo_clone = { has_leader_flag = gender_indeterminable } }
+					clone_leader_with_gender = { GENDER = indeterminable }
+				}
+				else_if = {
+					limit = { event_target:leader_to_pseudo_clone = { has_leader_flag = gender_female } }
+					clone_leader_with_gender = { GENDER = female }
+				}
+				else_if = {
+					limit = { event_target:leader_to_pseudo_clone = { has_leader_flag = gender_male } }
+					clone_leader_with_gender = { GENDER = male }
+				}
+				else = {
+					event_target:leader_to_pseudo_clone = {
+						switch = {
+							trigger = gender
+							indeterminable = { owner = { clone_leader_with_gender = { GENDER = indeterminable } } }
+							female = { owner = { clone_leader_with_gender = { GENDER = female } } }
+							male = { owner = { clone_leader_with_gender = { GENDER = male } } }
+							default = {
+								log_error = "somehow ruler [This.GetTitle] [This.GetName] ([This.Owner.GetRealName]) had no gender flag and no gender"
+							}
+						}
+					}
+				}
+				event_target:cloned_leader = { change_leader_portrait = event_target:leader_to_pseudo_clone }
+				event_target:leader_to_pseudo_clone = {
+					clear_mandate = yes
+					fire_leader_via_class = yes
+				}
+				set_leader = event_target:cloned_leader
+			}
+		}
+	}
+	option = {
+		name = NO
+		hidden_effect = {
+			leader_event = {
+				id = nonbinary_leaders.11
+			}
+		}
+	}
+}
+
+# TODO: test democracy elections
