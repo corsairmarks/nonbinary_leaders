@@ -107,4 +107,10 @@ should_roll_to_reconsider_gender_identity = {
 		uses_gender_species = yes
 		is_custom_species_class = yes # custom species classes probably don't explicitly define "gender = no" and yes is the default, so assume yes
 	}
+	species = {
+		NOR = {
+			has_trait = trait_clone_soldier_infertile
+			has_trait = trait_clone_soldier_infertile_full_potential
+		}
+	}
 }
