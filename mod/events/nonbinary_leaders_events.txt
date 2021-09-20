@@ -51,6 +51,7 @@ country_event = {
 			NOT = { has_leader_flag = gender_reselected }
 			should_roll_to_reconsider_gender_identity = yes
 		}
+		any_pool_leader = { is_same_value = FROM }
 	}
 	immediate = {
 		FROM = { save_event_target_as = leader_to_pseudo_clone }
@@ -68,13 +69,6 @@ country_event = {
 						leader_class = envoy
 					}
 				}
-				owner = { any_pool_leader = { is_same_value = event_target:leader_to_pseudo_clone } }
-			}
-			event_target:leader_to_pseudo_clone = {
-				set_leader_class_code = yes
-				set_leader_gender_code = yes
-				set_owned_leader_count = yes
-				set_owned_leader_count_class = yes
 			}
 			random_list = {
 				76 = {
@@ -86,7 +80,6 @@ country_event = {
 					event_target:leader_to_pseudo_clone = {
 						set_leader_flag_gender = yes
 						set_leader_flag = gender_and_presentation_not_changed
-						clear_pseudo_clone_variables = yes
 						if = {
 							limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 							print_leader_info = yes
@@ -97,13 +90,7 @@ country_event = {
 					if = {
 						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = indeterminable } } }
 						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as nonbinary.\"" }
-						pseudo_clone_leader_with_gender_as_saved = {
-							NEW_GENDER = indeterminable
-							KEY_SUFFIX = "c[leader_to_pseudo_clone.leader_class_code]_g[leader_to_pseudo_clone.leader_gender_code]_cnt[leader_to_pseudo_clone.owned_leader_class_accumulator]_ttl[leader_to_pseudo_clone.owned_leader_accumulator]"
-						}
-						activate_pseudo_clone_leader = {
-							KEY_SUFFIX = "c[leader_to_pseudo_clone.leader_class_code]_g[leader_to_pseudo_clone.leader_gender_code]_cnt[leader_to_pseudo_clone.owned_leader_class_accumulator]_ttl[leader_to_pseudo_clone.owned_leader_accumulator]"
-						}
+						clone_leader_with_gender = { NEW_GENDER = indeterminable }
 						event_target:leader_to_pseudo_clone = { fire_leader_via_class = yes }
 					}
 					else = {
@@ -114,13 +101,7 @@ country_event = {
 					if = {
 						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = female } } }
 						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as female.\"" }
-						pseudo_clone_leader_with_gender_as_saved = {
-							NEW_GENDER = female
-							KEY_SUFFIX = "c[leader_to_pseudo_clone.leader_class_code]_g[leader_to_pseudo_clone.leader_gender_code]_cnt[leader_to_pseudo_clone.owned_leader_class_accumulator]_ttl[leader_to_pseudo_clone.owned_leader_accumulator]"
-						}
-						activate_pseudo_clone_leader = {
-							KEY_SUFFIX = "c[leader_to_pseudo_clone.leader_class_code]_g[leader_to_pseudo_clone.leader_gender_code]_cnt[leader_to_pseudo_clone.owned_leader_class_accumulator]_ttl[leader_to_pseudo_clone.owned_leader_accumulator]"
-						}
+						clone_leader_with_gender = { NEW_GENDER = female }
 						event_target:leader_to_pseudo_clone = { fire_leader_via_class = yes }
 					}
 					else = {
@@ -131,13 +112,7 @@ country_event = {
 					if = {
 						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = male } } }
 						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as male.\"" }
-						pseudo_clone_leader_with_gender_as_saved = {
-							NEW_GENDER = male
-							KEY_SUFFIX = "c[leader_to_pseudo_clone.leader_class_code]_g[leader_to_pseudo_clone.leader_gender_code]_cnt[leader_to_pseudo_clone.owned_leader_class_accumulator]_ttl[leader_to_pseudo_clone.owned_leader_accumulator]"
-						}
-						activate_pseudo_clone_leader = {
-							KEY_SUFFIX = "c[leader_to_pseudo_clone.leader_class_code]_g[leader_to_pseudo_clone.leader_gender_code]_cnt[leader_to_pseudo_clone.owned_leader_class_accumulator]_ttl[leader_to_pseudo_clone.owned_leader_accumulator]"
-						}
+						clone_leader_with_gender = { NEW_GENDER = male }
 						event_target:leader_to_pseudo_clone = { fire_leader_via_class = yes }
 					}
 					else = {

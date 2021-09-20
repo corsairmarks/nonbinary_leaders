@@ -130,254 +130,26 @@ print_leader_info = {
 	}
 }
 
-# requires leader scope
-# sets the variable "leader_class_code" on the leader to represent its class
-#     0 unknown
-#     1 ruler
-#     2 governor
-#     3 scientist
-#     4 admiral
-#     5 general
-#     6 envoy
-set_leader_class_code = {
-	set_variable = {
-		which = leader_class_code
-		value = 0
-	}
-	switch = {
-		trigger = leader_class
-		ruler = {
-			set_variable = {
-				which = leader_class_code
-				value = 1
-			}
-		}
-		governor = {
-			set_variable = {
-				which = leader_class_code
-				value = 2
-			}
-		}
-		scientist = {
-			set_variable = {
-				which = leader_class_code
-				value = 3
-			}
-		}
-		admiral = {
-			set_variable = {
-				which = leader_class_code
-				value = 4
-			}
-		}
-		general = {
-			set_variable = {
-				which = leader_class_code
-				value = 5
-			}
-		}
-		envoy = {
-			set_variable = {
-				which = leader_class_code
-				value = 6
-			}
-		}
-	}
-}
-
-# requires leader scope
-# sets the variable "leader_gender_code" on the leader to represent its gender
-#     0 unknown
-#     1 indeterminable
-#     2 female
-#     3 male
-set_leader_gender_code = {
-	set_variable = {
-		which = leader_gender_code
-		value = 0
-	}
-	switch = {
-		trigger = gender
-		indeterminable = {
-			set_variable = {
-				which = leader_gender_code
-				value = 1
-			}
-		}
-		female = {
-			set_variable = {
-				which = leader_gender_code
-				value = 2
-			}
-		}
-		male = {
-			set_variable = {
-				which = leader_gender_code
-				value = 3
-			}
-		}
-	}
-}
-
-# requires leader scope
-# sets the variable "owned_leader_accumulator" on the leader which is the total number of leaders owner by its owner
-set_owned_leader_count = {
-	set_variable = {
-		which = owned_leader_accumulator
-		value = 0
-	}
-	owner = {
-		every_owned_leader = {
-			PREVPREV = {
-				change_variable = {
-					which = owned_leader_accumulator
-					value = 1
-				}
-			}
-		}
-	}
-}
-
-# requires leader scope
-# sets the variable "owned_leader_class_accumulator" on the leader which is the total number of leaders of the same class owner by its owner
-set_owned_leader_count_class = {
-	set_variable = {
-		which = owned_leader_class_accumulator
-		value = 0
-	}
-	owner = {
-		every_owned_leader = {
-			limit = {
-				OR = {
-					AND = {
-						PREVPREV = { leader_class = governor }
-						leader_class = governor
-					}
-					AND = {
-						PREVPREV = { leader_class = scientist }
-						leader_class = scientist
-					}
-					AND = {
-						PREVPREV = { leader_class = admiral }
-						leader_class = admiral
-					}
-					AND = {
-						PREVPREV = { leader_class = general }
-						leader_class = general
-					}
-				}
-			}
-			PREVPREV = {
-				change_variable = {
-					which = owned_leader_class_accumulator
-					value = 1
-				}
-			}
-		}
-	}
-}
-
 # requires country scope
 # requires event_target:leader_to_pseudo_clone, which is the source for the clone's properties
-# requires 2 parameters:
-#     $NEW_GENDER$ as a gender
-#     $KEY_SUFFIX$ as an arbitrary string to make the key more unique
-pseudo_clone_leader_with_gender_as_saved = {
-	# shim to decode the leader's class
-	event_target:leader_to_pseudo_clone = {
-		switch = {
-			trigger = leader_class
-			ruler = {
-				PREV= {
-					pseudo_clone_leader_with_gender_and_class_as_saved = {
-						CLASS = ruler
-						NEW_GENDER = $NEW_GENDER$
-						KEY_SUFFIX = $KEY_SUFFIX$
-					}
-				}
-			}
-			governor = {
-				PREV= {
-					pseudo_clone_leader_with_gender_and_class_as_saved = {
-						CLASS = governor
-						NEW_GENDER = $NEW_GENDER$
-						KEY_SUFFIX = $KEY_SUFFIX$
-					}
-				}
-			}
-			scientist = {
-				PREV= {
-					pseudo_clone_leader_with_gender_and_class_as_saved = {
-						CLASS = scientist
-						NEW_GENDER = $NEW_GENDER$
-						KEY_SUFFIX = $KEY_SUFFIX$
-					}
-				}
-			}
-			admiral = {
-				PREV= {
-					pseudo_clone_leader_with_gender_and_class_as_saved = {
-						CLASS = admiral
-						NEW_GENDER = $NEW_GENDER$
-						KEY_SUFFIX = $KEY_SUFFIX$
-					}
-				}
-			}
-			general = {
-				PREV= {
-					pseudo_clone_leader_with_gender_and_class_as_saved = {
-						CLASS = general
-						NEW_GENDER = $NEW_GENDER$
-						KEY_SUFFIX = $KEY_SUFFIX$
-					}
-				}
-			}
-			envoy = {
-				PREV= {
-					pseudo_clone_leader_with_gender_and_class_as_saved = {
-						CLASS = envoy
-						NEW_GENDER = $NEW_GENDER$
-						KEY_SUFFIX = $KEY_SUFFIX$
-					}
-				}
-			}
-		}
-	}
-}
-
-# requires country scope
-# requires event_target:leader_to_pseudo_clone, which is the source for the clone's properties
-# requires 3 parameters:
-#     $CLASS$ as a leader class
-#     $NEW_GENDER$ as a gender
-#     $KEY_SUFFIX$ as an arbitrary string to make the key more unique
-pseudo_clone_leader_with_gender_and_class_as_saved = {
-	create_saved_leader = {
-		key = pseudo_clone_leader_$KEY_SUFFIX$
-		creator = event_target:leader_to_pseudo_clone.owner
-		event_leader = no
-		class = $CLASS$
+# requires 1 parameter:
+#	$NEW_GENDER$ as a gender
+clone_leader_with_gender = {
+	clone_leader = {
+		target = event_target:leader_to_pseudo_clone
 		gender = $NEW_GENDER$
-		species = event_target:leader_to_pseudo_clone
 		effect = {
-			set_properties_from_original = yes
-		}
-	}
-}
-
-# requires country scope
-# requires 1 parameters:
-#     $KEY_SUFFIX$ as an arbitrary string to make the key more unique
-activate_pseudo_clone_leader = {
-	activate_saved_leader = {
-		key = pseudo_clone_leader_$KEY_SUFFIX$
-		add_to_owned = no
-		effect = {
+			set_name = event_target:leader_to_pseudo_clone
+			set_leader_flag = gender_reselected
+			set_leader_flag_gender = yes
+			set_randomized_gender_presentation = yes
+			change_leader_portrait = event_target:leader_to_pseudo_clone
+			set_skill = event_target:leader_to_pseudo_clone.trigger:has_skill
+			add_experience = event_target:leader_to_pseudo_clone.trigger:has_experience
+			set_age = event_target:leader_to_pseudo_clone.trigger:leader_age
+			recruitable = no
 			recruitable = yes
-			if = {
-				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-				print_leader_info = yes
-			}
+			print_leader_info = yes
 		}
 	}
 }
@@ -395,7 +167,6 @@ handle_unchanged_gender_identity = {
 			limit = { has_gender_presentation_flag = no }
 			set_randomized_gender_presentation = yes
 		}
-		clear_pseudo_clone_variables = yes
 		if = {
 			limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 			print_leader_info = yes
@@ -528,23 +299,6 @@ kill_leader_via_class = {
 }
 
 # requires leader scope
-# requires event_target:leader_to_pseudo_clone as the original
-set_properties_from_original = {
-	set_leader_flag = gender_reselected
-	set_leader_flag_gender = yes
-	set_randomized_gender_presentation = yes
-	set_name = event_target:leader_to_pseudo_clone
-	change_leader_portrait = event_target:leader_to_pseudo_clone
-	set_skill_from_original = yes
-	set_age_from_original = yes
-	# Because copying traits would require explicitly checking each possible
-	# trait versus event_target:leader_to_pseudo_clone, I have decided to accept
-	# that the cloned leader's trait(s) are rerolled.  That will ultimately be
-	# more compatible with mods that add leader traits.
-	recruitable = no
-}
-
-# requires leader scope
 set_leader_flag_gender = {
 	switch = {
 		trigger = gender
@@ -552,153 +306,6 @@ set_leader_flag_gender = {
 		female = { set_leader_flag = gender_female }
 		male = { set_leader_flag = gender_male }
 		default = { set_leader_flag = gender_unknown }
-	}
-}
-
-# requires leader scope, where PREV is also a leader
-set_age_from_original = {
-	event_target:leader_to_pseudo_clone = {
-		switch = {
-			trigger = leader_age
-			1 = { PREV = { set_age = 1 } }
-			2 = { PREV = { set_age = 2 } }
-			3 = { PREV = { set_age = 3 } }
-			4 = { PREV = { set_age = 4 } }
-			5 = { PREV = { set_age = 5 } }
-			6 = { PREV = { set_age = 6 } }
-			7 = { PREV = { set_age = 7 } }
-			8 = { PREV = { set_age = 8 } }
-			9 = { PREV = { set_age = 9 } }
-
-			10 = { PREV = { set_age = 10 } }
-			11 = { PREV = { set_age = 11 } }
-			12 = { PREV = { set_age = 12 } }
-			13 = { PREV = { set_age = 13 } }
-			14 = { PREV = { set_age = 14 } }
-			15 = { PREV = { set_age = 15 } }
-			16 = { PREV = { set_age = 16 } }
-			17 = { PREV = { set_age = 17 } }
-			18 = { PREV = { set_age = 18 } }
-			19 = { PREV = { set_age = 19 } }
-
-			20 = { PREV = { set_age = 20 } }
-			21 = { PREV = { set_age = 21 } }
-			22 = { PREV = { set_age = 22 } }
-			23 = { PREV = { set_age = 23 } }
-			24 = { PREV = { set_age = 24 } }
-			25 = { PREV = { set_age = 25 } }
-			26 = { PREV = { set_age = 26 } }
-			27 = { PREV = { set_age = 27 } }
-			28 = { PREV = { set_age = 28 } }
-			29 = { PREV = { set_age = 29 } }
-
-			30 = { PREV = { set_age = 30 } }
-			31 = { PREV = { set_age = 31 } }
-			32 = { PREV = { set_age = 32 } }
-			33 = { PREV = { set_age = 33 } }
-			34 = { PREV = { set_age = 34 } }
-			35 = { PREV = { set_age = 35 } }
-			36 = { PREV = { set_age = 36 } }
-			37 = { PREV = { set_age = 37 } }
-			38 = { PREV = { set_age = 38 } }
-			39 = { PREV = { set_age = 39 } }
-			
-			40 = { PREV = { set_age = 40 } }
-			41 = { PREV = { set_age = 41 } }
-			42 = { PREV = { set_age = 42 } }
-			43 = { PREV = { set_age = 43 } }
-			44 = { PREV = { set_age = 44 } }
-			45 = { PREV = { set_age = 45 } }
-			46 = { PREV = { set_age = 46 } }
-			47 = { PREV = { set_age = 47 } }
-			48 = { PREV = { set_age = 48 } }
-			49 = { PREV = { set_age = 49 } }
-
-			50 = { PREV = { set_age = 50 } }
-			51 = { PREV = { set_age = 51 } }
-			52 = { PREV = { set_age = 52 } }
-			53 = { PREV = { set_age = 53 } }
-			54 = { PREV = { set_age = 54 } }
-			55 = { PREV = { set_age = 55 } }
-			56 = { PREV = { set_age = 56 } }
-			57 = { PREV = { set_age = 57 } }
-			58 = { PREV = { set_age = 58 } }
-			59 = { PREV = { set_age = 59 } }
-
-			60 = { PREV = { set_age = 60 } }
-			61 = { PREV = { set_age = 61 } }
-			62 = { PREV = { set_age = 62 } }
-			63 = { PREV = { set_age = 63 } }
-			64 = { PREV = { set_age = 64 } }
-			65 = { PREV = { set_age = 65 } }
-			66 = { PREV = { set_age = 66 } }
-			67 = { PREV = { set_age = 67 } }
-			68 = { PREV = { set_age = 68 } }
-			69 = { PREV = { set_age = 69 } }
-			
-			70 = { PREV = { set_age = 70 } }
-			71 = { PREV = { set_age = 71 } }
-			72 = { PREV = { set_age = 72 } }
-			73 = { PREV = { set_age = 73 } }
-			74 = { PREV = { set_age = 74 } }
-			75 = { PREV = { set_age = 75 } }
-			76 = { PREV = { set_age = 76 } }
-			77 = { PREV = { set_age = 77 } }
-			78 = { PREV = { set_age = 78 } }
-			79 = { PREV = { set_age = 79 } }
-			
-			80 = { PREV = { set_age = 80 } }
-			81 = { PREV = { set_age = 81 } }
-			82 = { PREV = { set_age = 82 } }
-			83 = { PREV = { set_age = 83 } }
-			84 = { PREV = { set_age = 84 } }
-			85 = { PREV = { set_age = 85 } }
-			86 = { PREV = { set_age = 86 } }
-			87 = { PREV = { set_age = 87 } }
-			88 = { PREV = { set_age = 88 } }
-			89 = { PREV = { set_age = 89 } }
-			
-			90 = { PREV = { set_age = 90 } }
-			91 = { PREV = { set_age = 91 } }
-			92 = { PREV = { set_age = 92 } }
-			93 = { PREV = { set_age = 93 } }
-			94 = { PREV = { set_age = 94 } }
-			95 = { PREV = { set_age = 95 } }
-			96 = { PREV = { set_age = 96 } }
-			97 = { PREV = { set_age = 97 } }
-			98 = { PREV = { set_age = 98 } }
-			99 = { PREV = { set_age = 99 } }
-			
-			100 = { PREV = { set_age = 100 } }
-			101 = { PREV = { set_age = 101 } }
-			102 = { PREV = { set_age = 102 } }
-			103 = { PREV = { set_age = 103 } }
-			104 = { PREV = { set_age = 104 } }
-			105 = { PREV = { set_age = 105 } }
-			106 = { PREV = { set_age = 106 } }
-			107 = { PREV = { set_age = 107 } }
-			108 = { PREV = { set_age = 108 } }
-			109 = { PREV = { set_age = 109 } }
-		}
-	}
-}
-
-# requires leader scope, where PREV is also a leader
-set_skill_from_original = {
-	event_target:leader_to_pseudo_clone = {
-		switch = {
-			trigger = has_skill
-			1 = { PREV = { set_skill = 1 } }
-			2 = { PREV = { set_skill = 2 } }
-			3 = { PREV = { set_skill = 3 } }
-			4 = { PREV = { set_skill = 4 } }
-			5 = { PREV = { set_skill = 5 } }
-			6 = { PREV = { set_skill = 6 } }
-			7 = { PREV = { set_skill = 7 } }
-			8 = { PREV = { set_skill = 8 } }
-			9 = { PREV = { set_skill = 9 } }
-			10 = { PREV = { set_skill = 10 } }
-		}
 	}
 }
 
@@ -747,25 +354,5 @@ log_if_enabled = {
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 		log = $MESSAGE$
-	}
-}
-
-# any scope, checks that each relevant variable exist before clearing it
-clear_pseudo_clone_variables = {
-	if = {
-		limit = { is_variable_set = leader_class_code }
-		clear_variable = leader_class_code
-	}
-	if = {
-		limit = { is_variable_set = leader_gender_code }
-		clear_variable = leader_gender_code
-	}
-	if = {
-		limit = { is_variable_set = owned_leader_accumulator }
-		clear_variable = owned_leader_accumulator
-	}
-	if = {
-		limit = { is_variable_set = owned_leader_class_accumulator }
-		clear_variable = owned_leader_class_accumulator
 	}
 }
