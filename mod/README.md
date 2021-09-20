@@ -28,9 +28,9 @@ As discussed above, a compatibility patch is necessary to fully support varying 
 
 If you would like me to implement a compatibility patch (to support feminine/masculine presentation from sexual dimorphism and/or to respect a custom species class as non-gendered), please leave a comment asking nicely, what you want, and with a link to the mod you want to be compatible.
 
-This mod is not compatible with achievements.
+Built for Stellaris version 3.1.* "Lem."  Not compatible with achievements.
 
-### Post-Game Start
+### When to Install
 
 This mod can be added to or removed from your savegame safely without issue.  If you remove this mod, any leaders which already have had their gender identities set will remain as-is but new leaders will only spawn to match either binary genders or indeterminable genders depending on species class.  Leader portraits will revert to the default selection criteria.  Although leaders retain any custom flags set on them, this doesn't affect gameplay.
 
@@ -38,7 +38,7 @@ This mod can be added to or removed from your savegame safely without issue.  If
 
 ### Unresolvable Issues
 
-If you recruit a leader while paused, and the newly-created replacement in the leader pool has changed their gender identity, you may see two leaders by the same name in the leader pool.  Unpause the game and the duplicate will be removed.  If you have the "Recruit Leader" window open when the duplicate is removed, you will see the leader's portrait change clothes (to the defaults) and their level become -1.  This is purely a display issue - that leader has been removed.  If you never hire leaders while paused, or if you close the "Recruit Leader" window before resuming the game, you will not experience this graphical glitch.  This graphical glitch also leads to lots of leader-related logs in error.log - most of which are because the removed duplicate leader has no owner, and thus some triggers related to their portrait's clothing break until the game finishes removing the leader.
+If you recruit a leader while paused, and the newly-created replacement in the leader pool has changed their gender identity, you may see two leaders by the same name in the leader pool.  Unpause the game and the duplicate will be removed.  If you have the "Recruit Leader" window open when the duplicate is removed, you will see the leader's portrait change clothes (to the defaults) and their level become -1.  This is purely a display issue - that leader has been removed.  If you never hire leaders while paused, or if you do not reopen the "Recruit Leader" window before resuming the game, you will not experience this graphical glitch.  This graphical glitch also leads to lots of leader-related logs in error.log - most of which are because the removed duplicate leader has no owner, and thus some triggers related to their portrait's clothing break until the game finishes removing the leader.
 
 ### Limitations
 
@@ -56,6 +56,10 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* Prepare code for submod
 	* More legible font for thumbnail
 * 1.2.0 Add `on_action` to flag mod as installed when loading a single-player game
+* 2.0.0 Update for Stellaris version 3.1.* "Lem"
+    * Simplify leader re-creation code with new features from 3.1.1
+    * Simplify leader re-creation code to use `clone_leader` instead, eliminating redundant checks
+    * Origin: Clone Army species that are infertile will not randomize their gender presentation
 
 ## Source Code
 
