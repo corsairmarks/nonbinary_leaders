@@ -152,3 +152,19 @@ event = {
 		}
 	}
 }
+
+# toggle force all leaders to re-evaluate
+event = {
+	id = nonbinary_leaders.4
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = { has_global_flag = nonbinary_leaders_force_all_spawned }
+			remove_global_flag = nonbinary_leaders_force_all_spawned
+		}
+		else = {
+			set_global_flag = nonbinary_leaders_force_all_spawned
+		}
+	}
+}
