@@ -54,8 +54,8 @@ country_event = {
 		any_pool_leader = { is_same_value = FROM }
 	}
 	immediate = {
-		FROM = { save_event_target_as = leader_to_pseudo_clone }
-		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_pseudo_clone.GetTitle] \\[leader_to_pseudo_clone.GetName] of gendered species class \\[leader_to_pseudo_clone.GetSpeciesClassOrCustom]...\"" }
+		FROM = { save_event_target_as = leader_to_clone }
+		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_clone.GetTitle] \\[leader_to_clone.GetName] of gendered species class \\[leader_to_clone.GetSpeciesClassOrCustom]...\"" }
 		# for now, only change leaders of known leader_classes when they spawn into the leader pool
 		if = {
 			limit = {
@@ -76,8 +76,8 @@ country_event = {
 						factor = 0
 						has_global_flag = nonbinary_leaders_force_all_spawned
 					}
-					log_if_enabled = { MESSAGE = "\"...and [leader_to_pseudo_clone.GetSubjectPronoun] did not consider changing [leader_to_pseudo_clone.GetPossPronoun] gender identity from [leader_to_pseudo_clone.GetSubjectPronoun]/[leader_to_pseudo_clone.GetObjectPronoun]/[leader_to_pseudo_clone.GetPossPronoun].\"" }
-					event_target:leader_to_pseudo_clone = {
+					log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] did not consider changing [leader_to_clone.GetPossPronoun] gender identity from [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
+					event_target:leader_to_clone = {
 						set_leader_flag_gender = yes
 						set_leader_flag = gender_and_presentation_not_changed
 						if = {
@@ -88,10 +88,10 @@ country_event = {
 				}
 				8 = {
 					if = {
-						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = indeterminable } } }
-						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as nonbinary.\"" }
+						limit = { event_target:leader_to_clone = { NOT = { gender = indeterminable } } }
+						log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
 						clone_leader_with_gender = { NEW_GENDER = indeterminable }
-						event_target:leader_to_pseudo_clone = { fire_leader_via_class = yes }
+						event_target:leader_to_clone = { fire_leader_via_class = yes }
 					}
 					else = {
 						handle_unchanged_gender_identity = yes
@@ -99,10 +99,10 @@ country_event = {
 				}
 				8 = {
 					if = {
-						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = female } } }
-						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as female.\"" }
+						limit = { event_target:leader_to_clone = { NOT = { gender = female } } }
+						log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
 						clone_leader_with_gender = { NEW_GENDER = female }
-						event_target:leader_to_pseudo_clone = { fire_leader_via_class = yes }
+						event_target:leader_to_clone = { fire_leader_via_class = yes }
 					}
 					else = {
 						handle_unchanged_gender_identity = yes
@@ -110,10 +110,10 @@ country_event = {
 				}
 				8 = {
 					if = {
-						limit = { event_target:leader_to_pseudo_clone = { NOT = { gender = male } } }
-						log_if_enabled = { MESSAGE = "\"...[leader_to_pseudo_clone.GetName] chose to identify as male.\"" }
+						limit = { event_target:leader_to_clone = { NOT = { gender = male } } }
+						log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
 						clone_leader_with_gender = { NEW_GENDER = male }
-						event_target:leader_to_pseudo_clone = { fire_leader_via_class = yes }
+						event_target:leader_to_clone = { fire_leader_via_class = yes }
 					}
 					else = {
 						handle_unchanged_gender_identity = yes

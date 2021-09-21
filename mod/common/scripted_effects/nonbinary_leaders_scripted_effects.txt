@@ -131,21 +131,21 @@ print_leader_info = {
 }
 
 # requires country scope
-# requires event_target:leader_to_pseudo_clone, which is the source for the clone's properties
+# requires event_target:leader_to_clone, which is the source for the clone's properties
 # requires 1 parameter:
 #	$NEW_GENDER$ as a gender
 clone_leader_with_gender = {
 	clone_leader = {
-		target = event_target:leader_to_pseudo_clone
+		target = event_target:leader_to_clone
 		gender = $NEW_GENDER$
 		effect = {
-			set_name = event_target:leader_to_pseudo_clone
+			set_name = event_target:leader_to_clone
 			set_leader_flag = gender_reselected
 			set_leader_flag_gender = yes
 			set_randomized_gender_presentation = yes
-			set_skill = event_target:leader_to_pseudo_clone.trigger:has_skill
-			add_experience = event_target:leader_to_pseudo_clone.trigger:has_experience
-			set_age = event_target:leader_to_pseudo_clone.trigger:leader_age
+			set_skill = event_target:leader_to_clone.trigger:has_skill
+			add_experience = event_target:leader_to_clone.trigger:has_experience
+			set_age = event_target:leader_to_clone.trigger:leader_age
 			recruitable = no
 			recruitable = yes
 			print_leader_info = yes
@@ -153,13 +153,13 @@ clone_leader_with_gender = {
 	}
 }
 
-# requires event_target:leader_to_pseudo_clone, which is the leaders that _wasn't_ cloned but still needs post-processing
+# requires event_target:leader_to_clone, which is the leaders that _wasn't_ cloned but still needs post-processing
 handle_unchanged_gender_identity = {
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-		log = "...\\[leader_to_pseudo_clone.GetSubjectPronoun] decided to continue identifying as \\[leader_to_pseudo_clone.GetGender]."
+		log = "...\\[leader_to_clone.GetSubjectPronoun] decided to continue identifying as \\[leader_to_clone.GetGender]."
 	}
-	event_target:leader_to_pseudo_clone = {
+	event_target:leader_to_clone = {
 		set_leader_flag = gender_retained
 		set_leader_flag_gender = yes
 		if = {
