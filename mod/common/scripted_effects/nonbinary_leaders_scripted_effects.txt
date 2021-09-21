@@ -143,7 +143,6 @@ clone_leader_with_gender = {
 			set_leader_flag = gender_reselected
 			set_leader_flag_gender = yes
 			set_randomized_gender_presentation = yes
-			change_leader_portrait = event_target:leader_to_pseudo_clone
 			set_skill = event_target:leader_to_pseudo_clone.trigger:has_skill
 			add_experience = event_target:leader_to_pseudo_clone.trigger:has_experience
 			set_age = event_target:leader_to_pseudo_clone.trigger:leader_age
@@ -313,10 +312,15 @@ set_leader_flag_gender = {
 set_randomized_gender_presentation = {
 	random_list = {
 		10 = {
-			set_leader_flag = presents_fem
 			modifier = {
 				factor = 9
 				gender = female
+			}
+			set_leader_flag = presents_fem
+			if = {
+				limit = { gender = male }
+				random_galaxy_planet = { log = "effect set_randomized_gender_presentation wasted some time randomly finding \\[This.GetName] to try and apply the right portrait for \\[Prev.GetName]" }
+				change_leader_portrait = THIS
 			}
 			if = {
 				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
@@ -330,10 +334,15 @@ set_randomized_gender_presentation = {
 			}
 		}
 		10 = {
-			set_leader_flag = presents_masc
 			modifier = {
 				factor = 9
 				gender = male
+			}
+			set_leader_flag = presents_masc
+			if = {
+				limit = { gender = female }
+				random_galaxy_planet = { log = "effect set_randomized_gender_presentation wasted some time randomly finding \\[This.GetName] to try and apply the right portrait for \\[Prev.GetName]" }
+				change_leader_portrait = THIS
 			}
 			if = {
 				limit = { has_global_flag = nonbinary_leaders_enable_tracing }

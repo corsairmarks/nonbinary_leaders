@@ -18,7 +18,7 @@ What this means to you is that if you have a custom species class that is set to
 
 This mod optionally adds copious log entries to game.log file when running; use the in-game console to enable it with [b]event nonbinary_leaders.3[/b]. Here's where you can find the game.log file: [b]%USERPROFILE%\Documents\Paradox Interactive\Stellaris\logs[/b] (Windows), [b]~/Documents/Paradox Interactive/Stellaris/logs[/b] (MacOS), or [b]~/.local/share/Paradox Interactive/Stellaris/logs[/b] (*nix). To turn tracing off again, use the same command again.
 
-Lastly, you can log detailed information about all of your leaders (owned and pool) to game.log by firing my debugging event from the in-game console: [b]event nonbinary_leaders.1000[/b]. I used this to help understand the game state while developing and decided to leave it available for future use.
+Lastly, you can log detailed information about all of your leaders (owned and pool) to game.log by firing my debugging event from the in-game console: [b]event nonbinary_leaders.1000[/b].
 
 [h2]Compatibility[/h2]
 
@@ -32,17 +32,22 @@ Built for Stellaris version 3.1.* "Lem." Not compatible with achievements.
 
 [h3]When to Install[/h3]
 
-This mod can be added to or removed from your savegame safely without issue. If you remove this mod, any leaders which already have had their gender identities set will remain as-is but new leaders will only spawn to match the gender usage of their species class. Leader portraits will revert to the default selection criteria. Although leaders retain any custom flags set on them, this doesn't affect gameplay.
+This mod can be added to or removed from your savegame safely without issue. If you remove this mod, existing leaders will remain as-is but new leaders will only spawn to match the gender usage of their species class and portraits will revert to the default selection criteria. Leaders retain custom flags set on them, but this doesn't affect gameplay.
 
 [h2]Known Issues[/h2]
 
 [h3]Unresolvable Issues[/h3]
 
-If you recruit a leader while paused, you may see two leaders by the same name in the leader pool. Unpause the game and the duplicate will be removed. This graphical glitch also leads to lots of leader-related logs in error.log - most of which are because the removed duplicate leader has no owner, and thus some triggers related to their portrait's clothing break until the game finishes removing the leader.
+Recruiting leaders while paused has two caveats:
+
+[olist]
+[*]Changing a leader's gender identity creates an updated duplicate, but the original may appear to remain in the leader pool. Unpause the game and the original will be removed. If the "Recruit Leader" window is open, leader's portrait will change clothes (to the defaults) and their level become -1; this is purely a display issue - that leader has been removed from the game. This graphical glitch also leads to lots of leader-related logs in error.log because the removed, zombie leader had no owner.
+[*]Randomized leaders in the pool who choose to retain their assigned gender identity but change their presentation do not propelry switch their portrait. Playing unpaused reduces (but does not eliminate) this issue. New in 3.1 due to the game being more conservative about changing a leader's portrait graphic. This a very minor issue that impacts very few leaders and is not noticable unless viewing things with [b]debugtooltip[/b].
+[/olist]
 
 [h3]Limitations[/h3]
 
-Only leaders that are spawned into the leader pool (whether the pool is for a player or an AI) will have a chance to randomize their gender identity and presentation. Leaders created through other means (for example, the [i]create_leader[/i] and [i]clone_leader[/i] effects) are unaffected. Generally those are special event leaders and are intended to have a particular gender.
+Only leaders that are spawned into the leader pool will have a chance to randomize their gender identity and presentation. Leaders created through other means are unaffected. Generally those are special event leaders and are intended to have a particular gender.
 
 Leaders which select to identify as nonbinary (indeterminable) will not show a gender in their tooltip. This is as-designed by Paradox, because the original purpose of the third gender is for non-gendered species (i.e. has no concept of gender at all). Showing the line "Gender: Indeterminable" for every one of their leaders would be redundant.
 
@@ -55,10 +60,6 @@ See [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2528614880
 [h2]Source Code[/h2]
 
 Hosted on [url=https://github.com/corsairmarks/nonbinary_leaders]GitHub[/url]
-
-[h1]Request for Collaboration[/h1]
-
-I'm looking for one or more people knowledgeable about modding portraits and models for Paradox games. With my newly-discovered ability to unlink the in-game gender of a leader from their appearance, I want to create some additional options for the human portrait set. Notably, I'd like to have more variability in gender presentation of the portraits. The existing portraits only offer feminine and masculine presentation.
 
 [h1]Special Thanks[/h1]
 

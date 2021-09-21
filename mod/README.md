@@ -44,7 +44,10 @@ This mod can be added to or removed from your savegame safely without issue.  If
 
 ### Unresolvable Issues
 
-If you recruit a leader while paused, and the newly-created replacement in the leader pool has changed their gender identity, you may see two leaders by the same name in the leader pool.  Unpause the game and the duplicate will be removed.  If you have the "Recruit Leader" window open when the duplicate is removed, you will see the leader's portrait change clothes (to the defaults) and their level become -1.  This is purely a display issue - that leader has been removed.  If you never hire leaders while paused, or if you do not reopen the "Recruit Leader" window before resuming the game, you will not experience this graphical glitch.  This graphical glitch also leads to lots of leader-related logs in error.log - most of which are because the removed duplicate leader has no owner, and thus some triggers related to their portrait's clothing break until the game finishes removing the leader.
+Recruiting leaders while paused can cause two different, incorrect things to happen (although not at the same time):
+
+1. Changing a leader's gender identity creates an updated duplicate, but the original may appear to remain in the leader pool.  Unpause the game and the original will be removed.  If the "Recruit Leader" window is open, leader's portrait will change clothes (to the defaults) and their level become -1; this is purely a display issue - that leader has been removed from the game.  This graphical glitch also leads to lots of leader-related logs in error.log because the removed, zombie leader had no owner.
+2. Randomized leaders in the pool who choose to retain their assigned gender identity but change their presentation do not propelry switch their portrait.  Playing unpaused reduces (but does not eliminate) this issue.  New in 3.1 due to the game being more conservative about changing a leader's portrait graphic.  This a very minor issue that impacts very few leaders and is not noticable unless viewing things with `debugtooltip`.
 
 ### Limitations
 
