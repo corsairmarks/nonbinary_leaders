@@ -63,9 +63,10 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* More legible font for thumbnail
 * 1.2.0 Add `on_action` to flag mod as installed when loading a single-player game
 * 2.0.0 Update for Stellaris version 3.1.* "Lem"
-    * Simplify leader re-creation code with new features from 3.1.1
-    * Simplify leader re-creation code to use `clone_leader` instead, eliminating redundant checks
-    * Origin: Clone Army species that are infertile will not randomize their gender presentation
+	* Simplify leader re-creation code with new features from 3.1.1
+	* Simplify leader re-creation code to use `clone_leader` instead, eliminating redundant checks
+	* Origin: Clone Army species that are infertile will not randomize their gender presentation
+	* Unfortunatly, currently not able to offer an event to choose your starting ruler's pronouns without the portrait changing
 
 ## Source Code
 
