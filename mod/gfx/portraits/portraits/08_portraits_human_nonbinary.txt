@@ -27,44 +27,44 @@ portrait_groups = {
 			#	portraits = { ... }
 			#	#using "set =" instead of "add" will first clear any portraits already added
 			#}
-		}		
-		
+		}
+
 		#species scope
 		species = { #generic portrait for a species
 			add = {
 				portraits = {
 					human_female_01
 					human_female_02
-					human_female_03					
+					human_female_03
 					human_female_04
 					human_female_05
 					human_male_01
 					human_male_02
-					human_male_03					
+					human_male_03
 					human_male_04
 					human_male_05
 				}
 			}
-		}		
-		
+		}
+
 		#pop scope
 		pop = { #for a specific pop
 			add = {
 				portraits = {
 					human_female_01
 					human_female_02
-					human_female_03				
+					human_female_03
 					human_female_04
 					human_female_05
 					human_male_01
 					human_male_02
-					human_male_03					
+					human_male_03
 					human_male_04
 					human_male_05
 				}
 			}
 		}
-		
+
 		#leader scope
 		leader = { #scientists, generals, admirals, governor
 			add = {
@@ -72,7 +72,7 @@ portrait_groups = {
 				portraits = {
 					human_female_01
 					human_female_02
-					human_female_03					
+					human_female_03
 					human_female_04
 					human_female_05
 				}
@@ -82,22 +82,21 @@ portrait_groups = {
 				portraits = {
 					human_male_01
 					human_male_02
-					human_male_03					
+					human_male_03
 					human_male_04
 					human_male_05
 				}
 			}
 		}
 
-			
-		#leader scope 
+		#leader scope
 		ruler = {
 			add = {
 				trigger = { allows_fem_portraits = yes }
 				portraits = {
 					human_female_01
 					human_female_02
-					human_female_03					
+					human_female_03
 					human_female_04
 					human_female_05
 				}
@@ -107,7 +106,7 @@ portrait_groups = {
 				portraits = {
 					human_male_01
 					human_male_02
-					human_male_03					
+					human_male_03
 					human_male_04
 					human_male_05
 				}
