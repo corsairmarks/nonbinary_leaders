@@ -6,9 +6,9 @@ The effects are more noticeable for species portraits that have sexual dimorphis
 
 # Changes
 
-Stellaris supports 3 gender states in code (`male`, `female`, `indeterminable`), which correspond to the pronouns he, she, and they.  Whether a species uses binary male/female genders or the indeterminable gender is determined by its species class (e.g. molluscoid or fungoid).  This mod adds a chance for the binary-gendered species classes to have leaders adopt a new gender identity when they are spawned by the game (24% chance to consider changing their gender identity - 8% each to identify as indeterminable, female, or male).
+Stellaris supports 3 gender states in code (`male`, `female`, `indeterminable`), which correspond to the pronouns he, she, and they.  Whether a species uses binary male/female genders or the indeterminable gender is determined by its species class (e.g. molluscoid or fungoid).  This mod adds a chance for binary-gendered species classes to have leaders adopt a new gender identity when they are spawned by the game (20% chance to change from their assigned gender identity - 10% for each of the other two genders).
 
-With this mod, leaders of a binary-gendered species who become indeterminable have a 50/50 chance of presenting as feminine or masculine, and leaders who become female/male (or do not change from their starting gender) have a 10% chance to present as the opposite normative gender in their portrait.  In order to implement this effect, it was necessary to redefine the portrait groups associated with each species.
+With this mod, leaders of a binary-gendered species who become indeterminable have a 50/50 chance of presenting as feminine or masculine, and leaders who become female/male (or do not change from their starting gender identity) have a 10% chance to present as the opposite normative gender in their portrait.  In order to implement this effect, it was necessary to redefine the portrait groups associated with each species.
 
 What this means to you is that most leader portrait mods will need a compatibility patch in order to properly respect the leader's gender presentation flag.  Without a patch, males will always present as masculine, females will present as feminine, and indeterminables will present as the default for the species.  Fun fact: some built-in species use the female portrait as default, but most use male.
 
@@ -44,10 +44,7 @@ This mod can be added to or removed from your savegame safely without issue.  If
 
 ### Unresolvable Issues
 
-Recruiting leaders while paused can cause two different, incorrect things to happen (although not at the same time):
-
-1. Changing a leader's gender identity creates an updated duplicate, but the original may appear to remain in the leader pool.  Unpause the game and the original will be removed.  If the "Recruit Leader" window is open, leader's portrait will change clothes (to the defaults) and their level become -1; this is purely a display issue - that leader has been removed from the game.  This graphical glitch also leads to lots of leader-related logs in error.log because the removed, zombie leader had no owner.
-2. Randomized leaders in the pool who choose to retain their assigned gender identity but change their presentation do not propelry switch their portrait.  Playing unpaused reduces (but does not eliminate) this issue.  New in 3.1 due to the game being more conservative about changing a leader's portrait graphic.  This a very minor issue that impacts very few leaders and is not noticable unless viewing things with `debugtooltip`.
+Changing a leader's gender identity creates an updated duplicate, but if the game is paused the original may appear to remain in the leader pool.  Unpause the game and the original will be removed.  If the "Recruit Leader" window is open, the leader's portrait will change clothes (to the defaults) and their level becomes -1; this is purely a display issue - that leader has been removed from the game.  This graphical glitch also leads to lots of leader-related logs in error.log because the removed, zombie leader had no owner.
 
 ### Limitations
 
@@ -69,7 +66,8 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* Simplify leader re-creation code with new features from 3.1.1
 	* Simplify leader re-creation code to use `clone_leader` instead, eliminating redundant checks
 	* Origin: Clone Army species that are infertile will not randomize their gender presentation
-	* Unfortunatly, currently not able to offer an event to choose your starting ruler's pronouns without the portrait changing
+	* Unfortunately, currently not able to offer an event to choose your starting ruler's pronouns without the portrait changing
+* 2.1.0 Improve gender presentation swaps to also use cloned leaders - leaders who alter their gender presentation now reliably have the correct portrait
 
 ## Source Code
 
