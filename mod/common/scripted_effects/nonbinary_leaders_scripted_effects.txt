@@ -133,43 +133,83 @@ print_leader_info = {
 # requires country scope
 # requires event_target:leader_to_clone, which is the source for the clone's properties
 # requires 1 parameter:
-#	$NEW_GENDER$ as a gender
+#	$GENDER$ as a gender
 clone_leader_with_gender = {
-	clone_leader = {
-		target = event_target:leader_to_clone
-		gender = $NEW_GENDER$
-		effect = {
-			set_name = event_target:leader_to_clone
-			set_leader_flag = gender_reselected
-			set_leader_flag_gender = yes
+	event_target:leader_to_clone = { 
+		if = {
+			limit = { gender = $GENDER$ }
 			set_randomized_gender_presentation = yes
-			set_skill = event_target:leader_to_clone.trigger:has_skill
-			add_experience = event_target:leader_to_clone.trigger:has_experience
-			set_age = event_target:leader_to_clone.trigger:leader_age
-			recruitable = no
-			recruitable = yes
-			print_leader_info = yes
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							gender = female
+							has_leader_flag = presents_masc
+						}
+						AND = {
+							gender = male
+							has_leader_flag = presents_fem
+						}
+					}
+				}
+				PREV = {
+					clone_leader = {
+						target = PREV
+						effect = {
+							set_leader_flag = gender_retained
+							if = {
+								limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
+								set_leader_flag = presents_fem
+							}
+							else = {
+								set_leader_flag = presents_masc
+							}
+							clone_leader_with_gender_post_process = yes
+						}
+					}
+				}
+				fire_leader_via_class = yes
+			}
+			else = {
+				set_leader_flag = not_cloned
+				set_leader_flag_gender = yes
+				if = {
+					limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+					log = "...\\[This.GetName] did not change gender identity or gender presentation, and therefore was not cloned"
+					print_leader_info = yes
+				}
+			}
+		}
+		else = {
+			PREV = {
+				clone_leader = {
+					target = PREV
+					gender = $GENDER$
+					effect = {
+						set_leader_flag = gender_reselected
+						set_randomized_gender_presentation = yes
+						clone_leader_with_gender_post_process = yes
+					}
+				}
+			}
+			fire_leader_via_class = yes
 		}
 	}
 }
 
-# requires event_target:leader_to_clone, which is the leaders that _wasn't_ cloned but still needs post-processing
-handle_unchanged_gender_identity = {
+# requires leader scope
+# requires event_target:leader_to_clone, which is the source for the clone's properties
+clone_leader_with_gender_post_process = {
+	set_name = event_target:leader_to_clone
+	set_leader_flag_gender = yes
+	set_skill = event_target:leader_to_clone.trigger:has_skill
+	add_experience = event_target:leader_to_clone.trigger:has_experience
+	set_age = event_target:leader_to_clone.trigger:leader_age
+	recruitable = no
+	recruitable = yes
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-		log = "...\\[leader_to_clone.GetSubjectPronoun] decided to continue identifying as \\[leader_to_clone.GetGender]."
-	}
-	event_target:leader_to_clone = {
-		set_leader_flag = gender_retained
-		set_leader_flag_gender = yes
-		if = {
-			limit = { has_gender_presentation_flag = no }
-			set_randomized_gender_presentation = yes
-		}
-		if = {
-			limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-			print_leader_info = yes
-		}
+		print_leader_info = yes
 	}
 }
 
@@ -318,11 +358,6 @@ set_randomized_gender_presentation = {
 			}
 			set_leader_flag = presents_fem
 			if = {
-				limit = { gender = male }
-				random_galaxy_planet = { log = "effect set_randomized_gender_presentation wasted some time randomly finding \\[This.GetName] to try and apply the right portrait for \\[Prev.GetName]" }
-				change_leader_portrait = THIS
-			}
-			if = {
 				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 				if = {
 					limit = { gender = female }
@@ -339,11 +374,6 @@ set_randomized_gender_presentation = {
 				gender = male
 			}
 			set_leader_flag = presents_masc
-			if = {
-				limit = { gender = female }
-				random_galaxy_planet = { log = "effect set_randomized_gender_presentation wasted some time randomly finding \\[This.GetName] to try and apply the right portrait for \\[Prev.GetName]" }
-				change_leader_portrait = THIS
-			}
 			if = {
 				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 				if = {

@@ -71,53 +71,47 @@ country_event = {
 				}
 			}
 			random_list = {
-				76 = {
+				80 = {
 					modifier = {
 						factor = 0
 						has_global_flag = nonbinary_leaders_force_all_spawned
 					}
 					log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] did not consider changing [leader_to_clone.GetPossPronoun] gender identity from [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
 					event_target:leader_to_clone = {
-						set_leader_flag_gender = yes
-						set_leader_flag = gender_and_presentation_not_changed
-						if = {
-							limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-							print_leader_info = yes
+						switch = {
+							trigger = gender
+							indeterminable = { PREV = { clone_leader_with_gender = { GENDER = indeterminable } } }
+							female = { PREV = { clone_leader_with_gender = { GENDER = female } } }
+							male = { PREV = { clone_leader_with_gender = { GENDER = male } } }
 						}
 					}
 				}
-				8 = {
-					if = {
-						limit = { event_target:leader_to_clone = { NOT = { gender = indeterminable } } }
-						log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
-						clone_leader_with_gender = { NEW_GENDER = indeterminable }
-						event_target:leader_to_clone = { fire_leader_via_class = yes }
+				10 = {
+					modifier = {
+						factor = 0
+						event_target:leader_to_clone = { gender = indeterminable }
 					}
-					else = {
-						handle_unchanged_gender_identity = yes
-					}
+					log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
+					clone_leader_with_gender = { GENDER = indeterminable }
+					event_target:leader_to_clone = { fire_leader_via_class = yes }
 				}
-				8 = {
-					if = {
-						limit = { event_target:leader_to_clone = { NOT = { gender = female } } }
-						log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
-						clone_leader_with_gender = { NEW_GENDER = female }
-						event_target:leader_to_clone = { fire_leader_via_class = yes }
+				10 = {
+					modifier = {
+						factor = 0
+						event_target:leader_to_clone = { gender = female }
 					}
-					else = {
-						handle_unchanged_gender_identity = yes
-					}
+					log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
+					clone_leader_with_gender = { GENDER = female }
+					event_target:leader_to_clone = { fire_leader_via_class = yes }
 				}
-				8 = {
-					if = {
-						limit = { event_target:leader_to_clone = { NOT = { gender = male } } }
-						log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
-						clone_leader_with_gender = { NEW_GENDER = male }
-						event_target:leader_to_clone = { fire_leader_via_class = yes }
+				10 = {
+					modifier = {
+						factor = 0
+						event_target:leader_to_clone = { gender = male }
 					}
-					else = {
-						handle_unchanged_gender_identity = yes
-					}
+					log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
+					clone_leader_with_gender = { GENDER = male }
+					event_target:leader_to_clone = { fire_leader_via_class = yes }
 				}
 			}
 		}
