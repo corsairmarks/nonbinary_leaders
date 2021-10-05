@@ -137,11 +137,24 @@ defined_text = {
 defined_text = {
 	name = GetIndeterminableGenderActiveSuffix
 	text = {
-		trigger = { gender = indeterminable }
+		trigger = {
+			OR = {
+				has_leader_flag = gender_indeterminable
+				AND = {
+					has_gender_identity_flag = no
+					gender = indeterminable
+				}
+			}
+		}
 		localization_key = nonbinary_leaders.option.suffix
 	}
 	text = {
-		trigger = { NOT = { gender = indeterminable } }
+		trigger = {
+			NOR = {
+				has_leader_flag = gender_indeterminable
+				gender = indeterminable
+			}
+		}
 		localization_key = BLANK_STRING
 	}
 }
@@ -149,11 +162,24 @@ defined_text = {
 defined_text = {
 	name = GetFemaleGenderActiveSuffix
 	text = {
-		trigger = { gender = female }
+		trigger = {
+			OR = {
+				has_leader_flag = gender_female
+				AND = {
+					has_gender_identity_flag = no
+					gender = female
+				}
+			}
+		}
 		localization_key = nonbinary_leaders.option.suffix
 	}
 	text = {
-		trigger = { NOT = { gender = female } }
+		trigger = {
+			NOR = {
+				has_leader_flag = gender_female
+				gender = female
+			}
+		}
 		localization_key = BLANK_STRING
 	}
 }
@@ -161,11 +187,24 @@ defined_text = {
 defined_text = {
 	name = GetMaleGenderActiveSuffix
 	text = {
-		trigger = { gender = male }
+		trigger = {
+			OR = {
+				has_leader_flag = gender_male
+				AND = {
+					has_gender_identity_flag = no
+					gender = male
+				}
+			}
+		}
 		localization_key = nonbinary_leaders.option.suffix
 	}
 	text = {
-		trigger = { NOT = { gender = male } }
+		trigger = {
+			NOR = {
+				has_leader_flag = gender_male
+				gender = male
+			}
+		}
 		localization_key = BLANK_STRING
 	}
 }
