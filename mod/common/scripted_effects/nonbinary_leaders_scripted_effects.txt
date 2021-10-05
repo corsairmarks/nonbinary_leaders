@@ -139,7 +139,10 @@ clone_leader_with_gender = {
 	event_target:leader_to_clone = { 
 		if = {
 			limit = { gender = $GENDER$ }
-			set_randomized_gender_presentation = yes
+			if = {
+				limit = { has_gender_presentation_flag = no }
+				set_randomized_gender_presentation = yes
+			}
 			if = {
 				limit = {
 					OR = {
@@ -204,7 +207,10 @@ clone_leader_with_gender = {
 # 	RECRUITABLE as a bool (default no)
 clone_leader_with_gender_post_process = {
 	set_name = event_target:leader_to_clone
-	set_leader_flag_gender = yes
+	if = {
+		limit = { has_gender_identity_flag = no }
+		set_leader_flag_gender = yes
+	}
 	set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
 	set_age = event_target:leader_to_clone.trigger:leader_age
