@@ -136,10 +136,10 @@ print_leader_info = {
 #	GENDER as a gender
 # 	RECRUITABLE as a bool (default no)
 clone_leader_with_gender = {
-	event_target:leader_to_clone = { 
+	event_target:leader_to_clone = {
+		set_randomized_gender_presentation = yes
 		if = {
 			limit = { gender = $GENDER$ }
-			set_randomized_gender_presentation = yes
 			if = {
 				limit = {
 					OR = {
@@ -158,16 +158,14 @@ clone_leader_with_gender = {
 						target = PREV
 						effect = {
 							set_leader_flag = gender_retained
-							if = {
-								limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
-								set_leader_flag = presents_fem
-							}
-							else = {
-								set_leader_flag = presents_masc
-							}
 							clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE$ }
+							save_event_target_as = cloned_leader
 						}
 					}
+				}
+				if = {
+					limit = { is_same_value = PREV.ruler }
+					clear_mandate = yes
 				}
 				fire_leader_via_class = yes
 			}
@@ -179,6 +177,7 @@ clone_leader_with_gender = {
 					log = "...\\[This.GetName] did not change gender identity or gender presentation, and therefore was not cloned"
 					print_leader_info = yes
 				}
+				save_event_target_as = cloned_leader
 			}
 		}
 		else = {
@@ -188,10 +187,14 @@ clone_leader_with_gender = {
 					gender = $GENDER$
 					effect = {
 						set_leader_flag = gender_reselected
-						set_randomized_gender_presentation = yes
 						clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE$ }
+						save_event_target_as = cloned_leader
 					}
 				}
+			}
+			if = {
+				limit = { is_same_value = PREV.ruler }
+				clear_mandate = yes
 			}
 			fire_leader_via_class = yes
 		}
@@ -205,6 +208,14 @@ clone_leader_with_gender = {
 clone_leader_with_gender_post_process = {
 	set_name = event_target:leader_to_clone
 	set_leader_flag_gender = yes
+	if = {
+		limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
+		set_leader_flag = presents_fem
+	}
+	else_if = {
+		limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
+		set_leader_flag = presents_masc
+	}
 	set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
 	set_age = event_target:leader_to_clone.trigger:leader_age
