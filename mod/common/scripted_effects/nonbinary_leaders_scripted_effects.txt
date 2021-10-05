@@ -137,9 +137,9 @@ print_leader_info = {
 # 	RECRUITABLE as a bool (default no)
 clone_leader_with_gender = {
 	event_target:leader_to_clone = {
-		set_randomized_gender_presentation = yes
 		if = {
 			limit = { gender = $GENDER$ }
+			set_randomized_gender_presentation = yes
 			if = {
 				limit = {
 					OR = {
@@ -163,11 +163,6 @@ clone_leader_with_gender = {
 						}
 					}
 				}
-				if = {
-					limit = { is_same_value = PREV.ruler }
-					clear_mandate = yes
-				}
-				fire_leader_via_class = yes
 			}
 			else = {
 				set_leader_flag = not_cloned
@@ -192,11 +187,6 @@ clone_leader_with_gender = {
 					}
 				}
 			}
-			if = {
-				limit = { is_same_value = PREV.ruler }
-				clear_mandate = yes
-			}
-			fire_leader_via_class = yes
 		}
 	}
 }
@@ -211,10 +201,31 @@ clone_leader_with_gender_post_process = {
 	if = {
 		limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
 		set_leader_flag = presents_fem
+		if = {
+			limit = {
+				event_target:leader_to_clone = {
+					gender = female
+					NOT = { has_leader_flag = no_change_portrait }
+				}
+			}
+			change_leader_portrait = event_target:leader_to_clone
+		}
 	}
 	else_if = {
-		limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
+		limit = { event_target:leader_to_clone = { has_leader_flag = presents_masc } }
 		set_leader_flag = presents_masc
+		if = {
+			limit = {
+				event_target:leader_to_clone = {
+					gender = male
+					NOT = { has_leader_flag = no_change_portrait }
+				}
+			}
+			change_leader_portrait = event_target:leader_to_clone
+		}
+	}
+	else = {
+		set_randomized_gender_presentation = yes
 	}
 	set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
