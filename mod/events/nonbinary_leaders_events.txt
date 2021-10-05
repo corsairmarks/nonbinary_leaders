@@ -311,23 +311,23 @@ leader_event = {
 	option = {
 		name = YES
 		hidden_effect = {
-			save_event_target_as = leader_to_pseudo_clone
+			save_event_target_as = leader_to_clone
 			set_leader_flag = no_change_portrait
 			owner = {
 				if = {
-					limit = { event_target:leader_to_pseudo_clone = { has_leader_flag = gender_indeterminable } }
+					limit = { event_target:leader_to_clone = { has_leader_flag = gender_indeterminable } }
 					clone_leader_with_gender = { GENDER = indeterminable }
 				}
 				else_if = {
-					limit = { event_target:leader_to_pseudo_clone = { has_leader_flag = gender_female } }
+					limit = { event_target:leader_to_clone = { has_leader_flag = gender_female } }
 					clone_leader_with_gender = { GENDER = female }
 				}
 				else_if = {
-					limit = { event_target:leader_to_pseudo_clone = { has_leader_flag = gender_male } }
+					limit = { event_target:leader_to_clone = { has_leader_flag = gender_male } }
 					clone_leader_with_gender = { GENDER = male }
 				}
 				else = {
-					event_target:leader_to_pseudo_clone = {
+					event_target:leader_to_clone = {
 						switch = {
 							trigger = gender
 							indeterminable = { owner = { clone_leader_with_gender = { GENDER = indeterminable } } }
@@ -339,8 +339,8 @@ leader_event = {
 						}
 					}
 				}
-				event_target:cloned_leader = { change_leader_portrait = event_target:leader_to_pseudo_clone }
-				event_target:leader_to_pseudo_clone = {
+				event_target:cloned_leader = { change_leader_portrait = event_target:leader_to_clone }
+				event_target:leader_to_clone = {
 					clear_mandate = yes
 					fire_leader_via_class = yes
 				}
