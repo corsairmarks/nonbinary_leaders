@@ -339,7 +339,6 @@ leader_event = {
 						}
 					}
 				}
-				event_target:cloned_leader = { change_leader_portrait = event_target:leader_to_clone }
 				event_target:leader_to_clone = {
 					clear_mandate = yes
 					fire_leader_via_class = yes
