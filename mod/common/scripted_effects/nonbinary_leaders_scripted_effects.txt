@@ -139,10 +139,7 @@ clone_leader_with_gender = {
 	event_target:leader_to_clone = { 
 		if = {
 			limit = { gender = $GENDER$ }
-			if = {
-				limit = { has_gender_presentation_flag = no }
-				set_randomized_gender_presentation = yes
-			}
+			set_randomized_gender_presentation = yes
 			if = {
 				limit = {
 					OR = {
@@ -207,10 +204,7 @@ clone_leader_with_gender = {
 # 	RECRUITABLE as a bool (default no)
 clone_leader_with_gender_post_process = {
 	set_name = event_target:leader_to_clone
-	if = {
-		limit = { has_gender_identity_flag = no }
-		set_leader_flag_gender = yes
-	}
+	set_leader_flag_gender = yes
 	set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
 	set_age = event_target:leader_to_clone.trigger:leader_age
@@ -350,49 +344,55 @@ kill_leader_via_class = {
 
 # requires leader scope
 set_leader_flag_gender = {
-	switch = {
-		trigger = gender
-		indeterminable = { set_leader_flag = gender_indeterminable }
-		female = { set_leader_flag = gender_female }
-		male = { set_leader_flag = gender_male }
-		default = { set_leader_flag = gender_unknown }
+	if = {
+		limit = { has_gender_identity_flag = no }
+		switch = {
+			trigger = gender
+			indeterminable = { set_leader_flag = gender_indeterminable }
+			female = { set_leader_flag = gender_female }
+			male = { set_leader_flag = gender_male }
+			default = { set_leader_flag = gender_unknown }
+		}
 	}
 }
 
 # requires leader scope
 set_randomized_gender_presentation = {
-	random_list = {
-		10 = {
-			modifier = {
-				factor = 9
-				gender = female
-			}
-			set_leader_flag = presents_fem
-			if = {
-				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+	if = {
+		limit = { has_gender_presentation_flag = no }
+		random_list = {
+			10 = {
+				modifier = {
+					factor = 9
+					gender = female
+				}
+				set_leader_flag = presents_fem
 				if = {
-					limit = { gender = female }
-					log = "...\\[This.GetSubjectPronoun] already presented as feminine."
-				}
-				else = {
-					log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as feminine."
+					limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+					if = {
+						limit = { gender = female }
+						log = "...\\[This.GetSubjectPronoun] already presented as feminine."
+					}
+					else = {
+						log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as feminine."
+					}
 				}
 			}
-		}
-		10 = {
-			modifier = {
-				factor = 9
-				gender = male
-			}
-			set_leader_flag = presents_masc
-			if = {
-				limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+			10 = {
+				modifier = {
+					factor = 9
+					gender = male
+				}
+				set_leader_flag = presents_masc
 				if = {
-					limit = { gender = male }
-					log = "...\\[This.GetSubjectPronoun] already presented as masculine."
-				}
-				else = {
-					log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as masculine."
+					limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+					if = {
+						limit = { gender = male }
+						log = "...\\[This.GetSubjectPronoun] already presented as masculine."
+					}
+					else = {
+						log = "...\\[This.GetSubjectPronoun] now present\\[This.GetSXX] as masculine."
+					}
 				}
 			}
 		}
