@@ -66,9 +66,30 @@ country_event = {
 				event_target:leader_to_clone = {
 					switch = {
 						trigger = gender
-						indeterminable = { PREV = { clone_leader_with_gender = { GENDER = indeterminable } } }
-						female = { PREV = { clone_leader_with_gender = { GENDER = female } } }
-						male = { PREV = { clone_leader_with_gender = { GENDER = male } } }
+						indeterminable = {
+							PREV = {
+								clone_leader_with_gender = {
+									GENDER = indeterminable
+									RECRUITABLE = yes
+								}
+							}
+						}
+						female = {
+							PREV = {
+								clone_leader_with_gender = {
+									GENDER = female
+									RECRUITABLE = yes
+								}
+							}
+						}
+						male = {
+							PREV = {
+								clone_leader_with_gender = {
+									GENDER = male
+									RECRUITABLE = yes
+								}
+							}
+						}
 					}
 				}
 			}
@@ -78,7 +99,10 @@ country_event = {
 					event_target:leader_to_clone = { gender = indeterminable }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
-				clone_leader_with_gender = { GENDER = indeterminable }
+				clone_leader_with_gender = {
+					GENDER = indeterminable
+					RECRUITABLE = yes
+				}
 			}
 			10 = {
 				modifier = {
@@ -86,7 +110,10 @@ country_event = {
 					event_target:leader_to_clone = { gender = female }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
-				clone_leader_with_gender = { GENDER = female }
+				clone_leader_with_gender = {
+					GENDER = female
+					RECRUITABLE = yes
+				}
 			}
 			10 = {
 				modifier = {
@@ -94,7 +121,10 @@ country_event = {
 					event_target:leader_to_clone = { gender = male }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
-				clone_leader_with_gender = { GENDER = male }
+				clone_leader_with_gender = {
+					GENDER = male
+					RECRUITABLE = yes
+				}
 			}
 		}
 		# dispose of the original if cloned
@@ -349,6 +379,7 @@ leader_event = {
 				event_target:leader_to_clone = {
 					if = {
 						limit = { NOT = { is_same_value = owner.ruler } }
+						event_target:cloned_leader = { change_leader_portrait = event_target:leader_to_clone }
 						clear_mandate = yes
 						fire_leader_via_class = yes
 						PREV = { assign_leader = event_target:cloned_leader }

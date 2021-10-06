@@ -134,7 +134,7 @@ print_leader_info = {
 # requires event_target:leader_to_clone, which is the source for the clone's properties
 # requires 2 parameters:
 #	GENDER as a gender
-# 	RECRUITABLE as a bool (default no)
+# 	RECRUITABLE as a bool (default: no)
 clone_leader_with_gender = {
 	event_target:leader_to_clone = {
 		if = {
@@ -158,7 +158,7 @@ clone_leader_with_gender = {
 						target = PREV
 						effect = {
 							set_leader_flag = gender_retained
-							clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE$ }
+							clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE|no$ }
 							save_event_target_as = cloned_leader
 						}
 					}
@@ -167,12 +167,12 @@ clone_leader_with_gender = {
 			else = {
 				set_leader_flag = not_cloned
 				set_leader_flag_gender = yes
+				save_event_target_as = cloned_leader
 				if = {
 					limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 					log = "...\\[This.GetName] did not change gender identity or gender presentation, and therefore was not cloned"
 					print_leader_info = yes
 				}
-				save_event_target_as = cloned_leader
 			}
 		}
 		else = {
@@ -182,7 +182,7 @@ clone_leader_with_gender = {
 					gender = $GENDER$
 					effect = {
 						set_leader_flag = gender_reselected
-						clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE$ }
+						clone_leader_with_gender_post_process = { RECRUITABLE = $RECRUITABLE|no$ }
 						save_event_target_as = cloned_leader
 					}
 				}
@@ -194,7 +194,7 @@ clone_leader_with_gender = {
 # requires leader scope
 # requires event_target:leader_to_clone, which is the source for the clone's properties
 # requires 1 parameter:
-# 	RECRUITABLE as a bool (default no)
+# 	RECRUITABLE as a bool (default: no)
 clone_leader_with_gender_post_process = {
 	set_name = event_target:leader_to_clone
 	set_leader_flag_gender = yes
@@ -204,8 +204,10 @@ clone_leader_with_gender_post_process = {
 		if = {
 			limit = {
 				event_target:leader_to_clone = {
-					gender = female
-					NOT = { has_leader_flag = no_change_portrait }
+					NOR = {
+						gender = male
+						has_leader_flag = no_change_portrait
+					}
 				}
 			}
 			change_leader_portrait = event_target:leader_to_clone
@@ -217,23 +219,26 @@ clone_leader_with_gender_post_process = {
 		if = {
 			limit = {
 				event_target:leader_to_clone = {
-					gender = male
-					NOT = { has_leader_flag = no_change_portrait }
+					NOR = {
+						gender = female
+						has_leader_flag = no_change_portrait
+					}
 				}
 			}
 			change_leader_portrait = event_target:leader_to_clone
 		}
 	}
-	else = {
-		set_randomized_gender_presentation = yes
-	}
+	# else = {
+	# 	set_randomized_gender_presentation = yes
+	# }
 	set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
 	set_age = event_target:leader_to_clone.trigger:leader_age
-	[[RECRUITABLE]
+	if = {
+		limit = { always = $RECRUITABLE$ }
 		recruitable = no
 		recruitable = yes
-	]
+	}
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 		print_leader_info = yes
