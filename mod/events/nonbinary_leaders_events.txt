@@ -79,7 +79,6 @@ country_event = {
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
 				clone_leader_with_gender = { GENDER = indeterminable }
-				event_target:leader_to_clone = { fire_leader_via_class = yes }
 			}
 			10 = {
 				modifier = {
@@ -88,7 +87,6 @@ country_event = {
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
 				clone_leader_with_gender = { GENDER = female }
-				event_target:leader_to_clone = { fire_leader_via_class = yes }
 			}
 			10 = {
 				modifier = {
@@ -97,7 +95,6 @@ country_event = {
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
 				clone_leader_with_gender = { GENDER = male }
-				event_target:leader_to_clone = { fire_leader_via_class = yes }
 			}
 		}
 	}
