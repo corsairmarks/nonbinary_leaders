@@ -348,43 +348,8 @@ leader_event = {
 	option = {
 		name = YES
 		hidden_effect = {
-			save_event_target_as = leader_to_clone
-			set_leader_flag = no_change_portrait
-			owner = {
-				if = {
-					limit = { event_target:leader_to_clone = { has_leader_flag = gender_indeterminable } }
-					clone_leader_with_gender = { GENDER = indeterminable }
-				}
-				else_if = {
-					limit = { event_target:leader_to_clone = { has_leader_flag = gender_female } }
-					clone_leader_with_gender = { GENDER = female }
-				}
-				else_if = {
-					limit = { event_target:leader_to_clone = { has_leader_flag = gender_male } }
-					clone_leader_with_gender = { GENDER = male }
-				}
-				else = {
-					event_target:leader_to_clone = {
-						switch = {
-							trigger = gender
-							indeterminable = { owner = { clone_leader_with_gender = { GENDER = indeterminable } } }
-							female = { owner = { clone_leader_with_gender = { GENDER = female } } }
-							male = { owner = { clone_leader_with_gender = { GENDER = male } } }
-							default = {
-								log_error = "somehow ruler [This.GetTitle] [This.GetName] ([This.Owner.GetRealName]) had no gender flag and no gender"
-							}
-						}
-					}
-				}
-				event_target:leader_to_clone = {
-					if = {
-						limit = { NOT = { is_same_value = owner.ruler } }
-						event_target:cloned_leader = { change_leader_portrait = event_target:leader_to_clone }
-						clear_mandate = yes
-						fire_leader_via_class = yes
-						PREV = { assign_leader = event_target:cloned_leader }
-					}
-				}
+			leader_event = {
+				id = nonbinary_leaders.15
 			}
 		}
 	}
@@ -395,6 +360,115 @@ leader_event = {
 				id = nonbinary_leaders.11
 			}
 		}
+	}
+}
+
+# triggered by nonbinary_leaders.14
+leader_event = {
+	id = nonbinary_leaders.15
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		save_event_target_as = leader_to_clone
+		set_leader_flag = no_change_portrait
+		owner = {
+			if = {
+				limit = { event_target:leader_to_clone = { has_leader_flag = gender_indeterminable } }
+				clone_leader_with_gender = { GENDER = indeterminable }
+			}
+			else_if = {
+				limit = { event_target:leader_to_clone = { has_leader_flag = gender_female } }
+				clone_leader_with_gender = { GENDER = female }
+			}
+			else_if = {
+				limit = { event_target:leader_to_clone = { has_leader_flag = gender_male } }
+				clone_leader_with_gender = { GENDER = male }
+			}
+			else = {
+				event_target:leader_to_clone = {
+					switch = {
+						trigger = gender
+						indeterminable = { owner = { clone_leader_with_gender = { GENDER = indeterminable } } }
+						female = { owner = { clone_leader_with_gender = { GENDER = female } } }
+						male = { owner = { clone_leader_with_gender = { GENDER = male } } }
+						default = {
+							log_error = "somehow ruler [This.GetTitle] [This.GetName] ([This.Owner.GetRealName]) had no gender flag and no gender"
+						}
+					}
+				}
+			}
+			event_target:leader_to_clone = {
+				if = {
+					limit = { NOT = { is_same_value = owner.ruler } }
+					# event_target:cloned_leader = { change_leader_portrait = event_target:leader_to_clone }
+					clear_mandate = yes
+					PREV = { assign_leader = event_target:cloned_leader }
+					fire_leader_via_class = yes
+				}
+			}
+		}
+	}
+}
+
+# test event
+country_event = {
+	id = nonbinary_leaders.100
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		ruler = { save_global_event_target_as = original_leader }
+		clone_leader = {
+			target = event_target:original_leader
+			gender = indeterminable
+			effect = {
+				set_name = "Cloned: [original_leader.GetName]"
+				set_leader_flag = presents_fem
+				# change_leader_portrait = event_target:original_leader
+				save_event_target_as = cloned_leader
+			}
+		}
+		create_leader = {
+			class = ruler
+			gender = indeterminable
+			species = event_target:original_leader
+			effect = {
+				set_name = "Created: [original_leader.GetName]"
+				set_skill = event_target:original_leader.trigger:has_skill
+				add_experience = event_target:original_leader.trigger:has_experience
+				set_age = event_target:original_leader.trigger:leader_age
+				set_leader_flag = presents_fem
+				# change_leader_portrait = event_target:original_leader
+				save_event_target_as = created_leader
+			}
+		}
+		create_saved_leader = {
+			key = test_csl
+			creator = ROOT
+			class = ruler
+			species = event_target:original_leader
+			gender = indeterminable
+			effect = {
+				set_name = "Saved: [original_leader.GetName]"
+				set_skill = event_target:original_leader.trigger:has_skill
+				add_experience = event_target:original_leader.trigger:has_experience
+				set_age = event_target:original_leader.trigger:leader_age
+				set_leader_flag = presents_fem
+				# change_leader_portrait = event_target:original_leader
+			}
+		}
+		activate_saved_leader = {
+			key = test_csl
+			add_to_owned = yes
+			effect = {
+				set_leader_flag = presents_fem
+				change_leader_portrait = event_target:original_leader
+				save_event_target_as = activated_leader
+			}
+		}
+
+		ruler = { clear_mandate = yes }
+		assign_leader = event_target:created_leader
+		ruler = { change_leader_portrait = event_target:original_leader }
 	}
 }
 
