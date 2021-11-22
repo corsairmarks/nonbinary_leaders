@@ -1,0 +1,609 @@
+portrait_groups = {
+	aqu1 = {
+		default = aqu1_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					aqu1_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					aqu1_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					aqu1_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					aqu1_m
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					aqu1_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					aqu1_f
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu1_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu1_f
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu1_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu1_f
+				}
+			}
+		}
+	}
+
+	aqu2 = {
+		default = aqu2_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					aqu2_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					aqu2_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					aqu2_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					aqu2_m
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					aqu2_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					aqu2_f
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu2_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu2_f
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu2_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu2_f
+				}
+			}
+		}
+	}
+
+	aqu4 = {
+		default = aqu4_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					aqu4_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					aqu4_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					aqu4_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					aqu4_m
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					aqu4_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					aqu4_f
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu4_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu4_f
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu4_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu4_f
+				}
+			}
+		}
+	}
+
+	aqu15 = {
+		default = aqu15_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					aqu15_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					aqu15_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					aqu15_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					aqu15_m
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					aqu15_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					aqu15_f
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu15_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu15_f
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu15_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu15_f
+				}
+			}
+		}
+	}
+
+	aqu13 = {
+		default = aqu13_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					aqu13_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					aqu13_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					aqu13_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					aqu13_m
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					aqu13_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					aqu13_f
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu13_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu13_f
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu13_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu13_f
+				}
+			}
+		}
+	}
+	aqu5 = {
+		default = aqu5_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					aqu5_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					aqu5_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					aqu5_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					aqu5_m
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					aqu5_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					aqu5_f
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu5_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu5_f
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu5_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu5_f
+				}
+			}
+		}
+	}
+
+	aqu6 = {
+		default = aqu6_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					aqu6_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					aqu6_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					aqu6_f
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					aqu6_m
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					aqu6_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					aqu6_f
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu6_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu6_f
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					aqu6_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					aqu6_f
+				}
+			}
+		}
+	}
+}

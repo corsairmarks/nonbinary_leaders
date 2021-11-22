@@ -3,7 +3,7 @@ portrait_groups = {
 		default = human_male_01
 		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
 			add = {
-				trigger = { ruler = { allows_masc_portraits = yes } }
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
 				portraits = {
 					human_male_01
 					human_male_02
@@ -13,7 +13,7 @@ portrait_groups = {
 				}
 			}
 			add = {
-				trigger = { ruler = { allows_fem_portraits = yes  } }
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
 				portraits = {
 					human_female_01
 					human_female_02
@@ -32,12 +32,18 @@ portrait_groups = {
 		#species scope
 		species = { #generic portrait for a species
 			add = {
+				trigger = { allows_fem_portraits_species = yes }
 				portraits = {
 					human_female_01
 					human_female_02
 					human_female_03
 					human_female_04
 					human_female_05
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
 					human_male_01
 					human_male_02
 					human_male_03
@@ -50,12 +56,18 @@ portrait_groups = {
 		#pop scope
 		pop = { #for a specific pop
 			add = {
-				portraits = {
+				trigger = { allows_fem_portraits_pop = yes }
+					portraits = {
 					human_female_01
 					human_female_02
 					human_female_03
 					human_female_04
 					human_female_05
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+					portraits = {
 					human_male_01
 					human_male_02
 					human_male_03
@@ -68,7 +80,7 @@ portrait_groups = {
 		#leader scope
 		leader = { #scientists, generals, admirals, governor
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					human_female_01
 					human_female_02
@@ -78,7 +90,7 @@ portrait_groups = {
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					human_male_01
 					human_male_02
@@ -92,7 +104,7 @@ portrait_groups = {
 		#leader scope
 		ruler = {
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					human_female_01
 					human_female_02
@@ -102,7 +114,7 @@ portrait_groups = {
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					human_male_01
 					human_male_02

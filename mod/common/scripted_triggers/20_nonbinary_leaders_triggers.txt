@@ -66,31 +66,61 @@ is_custom_species_class = {
 }
 
 # leader
-allows_fem_portraits = {
+allows_fem_portraits_leader = {
+	allows_fem_portraits_pop = yes
 	OR = {
+		species_gender = female
 		AND = {
 			gender = female
 			NOT = { has_leader_flag = presents_masc }
 		}
 		AND = {
-			NOT = { gender = female }
+			OR = {
+				gender = male
+				gender = indeterminable
+			}
 			has_leader_flag = presents_fem
 		}
 	}
 }
 
+# species
+allows_fem_portraits_species = {
+	NOT = { species_gender = male }
+}
+
+# pop/leader
+allows_fem_portraits_pop = {
+	species = { allows_fem_portraits_species = yes }
+}
+
 # leader
-allows_masc_portraits = {
+allows_masc_portraits_leader = {
+	allows_masc_portraits_pop = yes
 	OR = {
+		species_gender = male
 		AND = {
 			gender = male
 			NOT = { has_leader_flag = presents_fem }
 		}
 		AND = {
-			NOT = { gender = male }
+			OR = {
+				gender = female
+				gender = indeterminable
+			}
 			has_leader_flag = presents_masc
 		}
 	}
+}
+
+# species
+allows_masc_portraits_species = {
+	NOT = { species_gender = female }
+}
+
+# pop/leader
+allows_masc_portraits_pop = {
+	species = { allows_masc_portraits_species = yes }
 }
 
 # requires leader scope

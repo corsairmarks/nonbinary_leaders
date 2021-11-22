@@ -3,13 +3,13 @@ portrait_groups = {
 		default = avi6_m
 		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
 			add = {
-				trigger = { ruler = { allows_masc_portraits = yes } }
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
 				portraits = {
 					avi6_m
 				}
 			}
 			add = {
-				trigger = { ruler = { allows_fem_portraits = yes } }
+				trigger = { ruler = { allows_fem_portraits_leader = yes } }
 				portraits = {
 					avi6_f
 				}
@@ -19,71 +19,84 @@ portrait_groups = {
 			#	portraits = { ... }
 			#	#using "set =" instead of "add" will first clear any portraits already added
 			#}
-		}		
-		
+		}
+
 		#species scope
 		species = { #generic portrait for a species
 			add = {
+				trigger = { allows_fem_portraits_species = yes }
 				portraits = {
 					avi6_f
 				}
 			}
-		}		
-		
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					avi6_m
+				}
+			}
+		}
+
 		#pop scope
 		pop = { #for a specific pop
 			add = {
+				trigger = { allows_masc_portraits_pop = yes }
 				portraits = {
 					avi6_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
 					avi6_f
 				}
 			}
 		}
-		
+
 		#leader scope
 		leader = { #scientists, generals, admirals, governor
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					avi6_f
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					avi6_m
 				}
 			}
 		}
-		
-		#leader scope 
+
+		#leader scope
 		ruler = {
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					avi6_f
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					avi6_m
 				}
 			}
 		}
 	}
-	
+
 	avi7 = {
 		default = avi7_m
 		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
 			add = {
-				trigger = { ruler = { allows_masc_portraits = yes } }
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
 				portraits = {
 					avi7_m
 				}
 			}
 			add = {
-				trigger = { ruler = { allows_fem_portraits = yes } }
+				trigger = { ruler = { allows_fem_portraits_leader = yes } }
 				portraits = {
 					avi7_f
 				}
@@ -93,53 +106,66 @@ portrait_groups = {
 			#	portraits = { ... }
 			#	#using "set =" instead of "add" will first clear any portraits already added
 			#}
-		}		
-		
+		}
+
 		#species scope
 		species = { #generic portrait for a species
 			add = {
+				trigger = { allows_fem_portraits_species = yes }
 				portraits = {
 					avi7_f
 				}
 			}
-		}		
-		
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					avi7_m
+				}
+			}
+		}
+
 		#pop scope
 		pop = { #for a specific pop
 			add = {
+				trigger = { allows_masc_portraits_pop = yes }
 				portraits = {
 					avi7_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
 					avi7_f
 				}
 			}
 		}
-		
+
 		#leader scope
 		leader = { #scientists, generals, admirals, governor
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					avi7_f
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					avi7_m
 				}
 			}
 		}
-		
-		#leader scope 
+
+		#leader scope
 		ruler = {
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					avi7_f
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					avi7_m
 				}
@@ -147,18 +173,17 @@ portrait_groups = {
 		}
 	}
 
-		
 	avi14 = {
 		default = avi14_m
 		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
 			add = {
-				trigger = { ruler = { allows_masc_portraits = yes } }
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
 				portraits = {
 					avi14_m
 				}
 			}
 			add = {
-				trigger = { ruler = { allows_fem_portraits = yes } }
+				trigger = { ruler = { allows_fem_portraits_leader = yes } }
 				portraits = {
 					avi14_f
 				}
@@ -168,53 +193,66 @@ portrait_groups = {
 			#	portraits = { ... }
 			#	#using "set =" instead of "add" will first clear any portraits already added
 			#}
-		}		
-		
+		}
+
 		#species scope
 		species = { #generic portrait for a species
 			add = {
+				trigger = { allows_fem_portraits_species = yes }
 				portraits = {
 					avi14_f
 				}
 			}
-		}		
-		
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					avi14_m
+				}
+			}
+		}
+
 		#pop scope
 		pop = { #for a specific pop
 			add = {
+				trigger = { allows_masc_portraits_pop = yes }
 				portraits = {
 					avi14_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
 					avi14_f
 				}
 			}
 		}
-		
+
 		#leader scope
 		leader = { #scientists, generals, admirals, governor
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					avi14_f
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					avi14_m
 				}
 			}
 		}
-		
-		#leader scope 
+
+		#leader scope
 		ruler = {
 			add = {
-				trigger = { allows_fem_portraits = yes }
+				trigger = { allows_fem_portraits_leader = yes }
 				portraits = {
 					avi14_f
 				}
 			}
 			add = {
-				trigger = { allows_masc_portraits = yes }
+				trigger = { allows_masc_portraits_leader = yes }
 				portraits = {
 					avi14_m
 				}
