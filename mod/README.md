@@ -34,7 +34,7 @@ As discussed above, a compatibility patch is necessary to fully support varying 
 
 If you would like me to implement a compatibility patch (to support feminine/masculine presentation from sexual dimorphism and/or to respect a custom species class as non-gendered), please leave a comment asking nicely, what you want, and with a link to the mod you want to be compatible.
 
-Built for Stellaris version 3.1.* "Lem."  Not compatible with achievements.
+Built for Stellaris version 3.2.* "Herbert."  Not compatible with achievements.
 
 ### When to Install
 
@@ -62,12 +62,15 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* Prepare code for submod
 	* More legible font for thumbnail
 * 1.2.0 Add `on_action` to flag mod as installed when loading a single-player game
-* 2.0.0 Update for Stellaris version 3.1.* "Lem"
+* 2.0.0 Update for compatibility with Stellaris version "Lem"
 	* Simplify leader re-creation code with new features from 3.1.1
 	* Simplify leader re-creation code to use `clone_leader` instead, eliminating redundant checks
 	* Origin: Clone Army species that are infertile will not randomize their gender presentation
 	* Unfortunately, currently not able to offer an event to choose your starting ruler's pronouns without the portrait changing
 * 2.1.0 Improve gender presentation swaps to also use cloned leaders - leaders who alter their gender presentation now reliably have the correct portrait
+* 3.0.0 Update for compatibility with Stellaris version 3.2 "Herbert"
+	* Add support for aquatic portraits with gender dimorphism
+	* Use new `species_gender` trigger to support for the species window and individual Pops belonging to species with a single gender presentation (Paradox only added support for Humans)
 
 ## Source Code
 
