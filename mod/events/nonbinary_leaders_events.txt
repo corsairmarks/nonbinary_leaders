@@ -56,42 +56,32 @@ country_event = {
 	immediate = {
 		FROM = { save_event_target_as = leader_to_clone }
 		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_clone.GetTitle] \\[leader_to_clone.GetName] of gendered species class \\[leader_to_clone.GetSpeciesClassOrCustom]...\"" }
+		log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] initially identif[leader_to_clone.GetIesY] as [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
+
 		random_list = {
-			80 = {
-				modifier = {
-					factor = 0
-					has_global_flag = nonbinary_leaders_force_all_spawned
-				}
-				log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] did not consider changing [leader_to_clone.GetPossPronoun] gender identity from [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
-				event_target:leader_to_clone = {
-					switch = {
-						trigger = gender
-						indeterminable = { PREV = { clone_leader_with_gender = { GENDER = indeterminable } } }
-						female = { PREV = { clone_leader_with_gender = { GENDER = female } } }
-						male = { PREV = { clone_leader_with_gender = { GENDER = male } } }
-					}
-				}
-			}
 			10 = {
 				modifier = {
-					factor = 0
-					event_target:leader_to_clone = { gender = indeterminable }
+					factor = 8
+					species_gender = indeterminable
+					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
 				clone_leader_with_gender = { GENDER = indeterminable }
 			}
 			10 = {
 				modifier = {
-					factor = 0
-					event_target:leader_to_clone = { gender = female }
+					factor = 8
+					species_gender = female
+					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
 				clone_leader_with_gender = { GENDER = female }
 			}
 			10 = {
 				modifier = {
-					factor = 0
-					event_target:leader_to_clone = { gender = male }
+					factor = 8
+					species_gender = male
+					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
 				clone_leader_with_gender = { GENDER = male }

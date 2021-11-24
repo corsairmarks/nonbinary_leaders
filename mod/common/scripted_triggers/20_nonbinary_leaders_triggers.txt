@@ -1,12 +1,15 @@
-# limitation: custom species classes will always return no for both uses_gender_species and not_uses_gender_species
+# limitation: custom species classes will always return no for both uses_gender_species_class and not_uses_gender_species_class
 
-# these are the species classes which explicitly use gender in the base game
-uses_gender_species = {
+# these are the species classes which explicitly or implicitly use gender in the base game
+uses_gender_species_class = {
 	species = {
+		species_gender = not_set
 		OR = {
 			is_species_class = HUM
 			is_species_class = MAM
 			is_species_class = PRE_MAM
+			is_species_class = FUN
+			is_species_class = PRE_FUN
 			is_species_class = REP
 			is_species_class = PRE_REP
 			is_species_class = AVI
@@ -16,18 +19,17 @@ uses_gender_species = {
 			is_species_class = MOL
 			is_species_class = PRE_MOL
 			is_species_class = NECROID
+			is_species_class = LITHOID
+			is_species_class = PLANT
+			is_species_class = AQUATIC
 		}
 	}
 }
 
-# not a direct opposite of uses_gender_species - these are the species classes which explicitly don't use gender in the base game
-not_uses_gender_species = {
+# not a direct opposite of uses_gender_species_class - these are the species classes which explicitly don't use gender in the base game
+not_uses_gender_species_class = {
 	species = {
 		OR = {
-			is_species_class = LITHOID
-			is_species_class = FUN
-			is_species_class = PRE_FUN
-			is_species_class = PLANT
 			is_species_class = MACHINE
 			is_species_class = ROBOT
 			is_species_class = AI # contingency
@@ -69,7 +71,7 @@ is_custom_species_class = {
 allows_fem_portraits_leader = {
 	allows_fem_portraits_pop = yes
 	OR = {
-		species_gender = female
+		species = { species_gender = female }
 		AND = {
 			gender = female
 			NOT = { has_leader_flag = presents_masc }
@@ -98,7 +100,7 @@ allows_fem_portraits_pop = {
 allows_masc_portraits_leader = {
 	allows_masc_portraits_pop = yes
 	OR = {
-		species_gender = male
+		species = { species_gender = male }
 		AND = {
 			gender = male
 			NOT = { has_leader_flag = presents_fem }
@@ -134,7 +136,7 @@ has_gender_presentation_flag = {
 # requires leader scope
 should_roll_to_reconsider_gender_identity = {
 	OR = {
-		uses_gender_species = yes
+		species = { NOT = { species_gender = indeterminable } } # TODO: unclear if I can now change indeterminables to other genders
 		is_custom_species_class = yes # custom species classes probably don't explicitly define "gender = no" and yes is the default, so assume yes
 	}
 	species = {
