@@ -57,13 +57,12 @@ country_event = {
 		FROM = { save_event_target_as = leader_to_clone }
 		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_clone.GetTitle] \\[leader_to_clone.GetName] of gendered species class \\[leader_to_clone.GetSpeciesClassOrCustom]...\"" }
 		log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] initially identif[leader_to_clone.GetIesY] as [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
-
 		random_list = {
 			10 = {
 				modifier = {
 					factor = 8
-					species_gender = indeterminable
 					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
+					event_target:leader_to_clone.species = { species_gender = indeterminable }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
 				clone_leader_with_gender = { GENDER = indeterminable }
@@ -71,7 +70,15 @@ country_event = {
 			10 = {
 				modifier = {
 					factor = 8
-					species_gender = female
+					event_target:leader_to_clone = {
+						OR = {
+							species = { species_gender = female }
+							AND = {
+								gender = female
+								species_gender = not_set
+							}
+						}
+					}
 					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
@@ -80,7 +87,15 @@ country_event = {
 			10 = {
 				modifier = {
 					factor = 8
-					species_gender = male
+					event_target:leader_to_clone = {
+						OR = {
+							species = { species_gender = male }
+							AND = {
+								gender = male
+								species_gender = not_set
+							}
+						}
+					}
 					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
