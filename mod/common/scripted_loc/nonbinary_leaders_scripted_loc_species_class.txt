@@ -81,6 +81,10 @@ defined_text = {
 		localization_key = LITHOID
 	}
 	text = {
+		trigger = { species = { is_species_class = AQUATIC } }
+		localization_key = AQUATIC
+	}
+	text = {
 		trigger = { species = { is_species_class = PLANT } }
 		localization_key = PLANT
 	}
@@ -105,8 +109,5 @@ defined_text = {
 		trigger = { species = { is_species_class = EXD } }
 		localization_key = EXD
 	}
-	text = {
-		trigger = { is_custom_species_class = yes }
-		localization_key = SPECIES_CLASS_CUSTOM
-	}
+	default = SPECIES_CLASS_CUSTOM
 }
