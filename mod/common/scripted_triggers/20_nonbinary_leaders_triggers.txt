@@ -77,11 +77,15 @@ allows_fem_portraits_leader = {
 			NOT = { has_leader_flag = presents_masc }
 		}
 		AND = {
-			OR = {
-				gender = male
-				gender = indeterminable
-			}
+			NOT = { gender = female }
 			has_leader_flag = presents_fem
+		}
+		AND = {
+			gender = indeterminable
+			NOT = {
+				has_leader_flag = presents_fem
+				has_leader_flag = presents_masc
+			}
 		}
 	}
 }
@@ -106,11 +110,15 @@ allows_masc_portraits_leader = {
 			NOT = { has_leader_flag = presents_fem }
 		}
 		AND = {
-			OR = {
-				gender = female
-				gender = indeterminable
-			}
+			NOT = { gender = male }
 			has_leader_flag = presents_masc
+		}
+		AND = {
+			gender = indeterminable
+			NOT = {
+				has_leader_flag = presents_fem
+				has_leader_flag = presents_masc
+			}
 		}
 	}
 }
