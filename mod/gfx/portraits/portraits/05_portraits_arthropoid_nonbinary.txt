@@ -1,0 +1,54 @@
+# this override removes the redundant/unnecessary dimorphism checks for a portrait that isn't actually dimorphic.
+portrait_groups = {
+	art18 = {
+		default = art18
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				portraits = {
+					art18
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				portraits = {
+					art18
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				portraits = {
+					art18_pop
+				}
+			}
+		}
+
+		#leader scope
+		leader = { #scientists, generals, admirals, governors, envoys
+			add = {
+				portraits = {
+					art18
+				}
+			}
+		}
+
+		#leader scope
+		ruler = {
+			add = {
+				portraits = {
+					art18
+				}
+			}
+		}
+	}
+}
