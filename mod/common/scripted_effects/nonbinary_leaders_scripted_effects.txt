@@ -153,6 +153,7 @@ clone_leader_with_gender = {
 					}
 				}
 				PREV = {
+					set_country_flag = disable_gender_clones_on_leader_spawned
 					clone_leader = {
 						target = PREV
 						effect = {
@@ -168,7 +169,6 @@ clone_leader_with_gender = {
 						}
 					}
 				}
-				fire_leader_via_class = yes
 			}
 			else = {
 				set_leader_flag = not_cloned
@@ -182,6 +182,7 @@ clone_leader_with_gender = {
 		}
 		else = {
 			PREV = {
+				set_country_flag = disable_gender_clones_on_leader_spawned
 				clone_leader = {
 					target = PREV
 					gender = $GENDER$
@@ -192,7 +193,6 @@ clone_leader_with_gender = {
 					}
 				}
 			}
-			fire_leader_via_class = yes
 		}
 	}
 }
@@ -200,141 +200,29 @@ clone_leader_with_gender = {
 # requires leader scope
 # requires event_target:leader_to_clone, which is the source for the clone's properties
 clone_leader_with_gender_post_process = {
+	# change_leader_portrait = event_target:leader_to_clone # TODO verify this will work
 	set_name = event_target:leader_to_clone
 	set_leader_flag_gender = yes
-	set_skill = event_target:leader_to_clone.trigger:has_skill
+	# set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
-	set_age = event_target:leader_to_clone.trigger:leader_age
-	recruitable = no
-	recruitable = yes
+	# set_age = event_target:leader_to_clone.trigger:leader_age
+	if = {
+		limit = { event_target:leader_to_clone = { has_leader_flag = clone_should_be_recruitable } }
+		recruitable = no
+		recruitable = yes
+	}
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 		print_leader_info = yes
 	}
-}
-
-# requires leader scope
-fire_leader_via_class = {
-	switch = {
-		trigger = leader_class
-		ruler = {
-			if = {
-				limit = { is_same_value = owner.heir }
-				kill_leader = {
-					type = ruler
-					heir = yes
-					fire = yes
-					show_notification = no
-				}
-			}
-			else = {
-				kill_leader = {
-					type = ruler
-					fire = yes
-					show_notification = no
-				}
-			}
-		}
-		governor = {
-			kill_leader = {
-				type = governor
-				fire = yes
-				show_notification = no
-			}
-		}
-		scientist = {
-			kill_leader = {
-				type = scientist
-				fire = yes
-				show_notification = no
-			}
-		}
-		admiral = {
-			kill_leader = {
-				type = admiral
-				fire = yes
-				show_notification = no
-			}
-		}
-		general = {
-			kill_leader = {
-				type = general
-				fire = yes
-				show_notification = no
-			}
-		}
-		envoy = {
-			kill_leader = {
-				type = envoy
-				fire = yes
-				show_notification = no
-			}
-		}
-		default = {
-			log_error = "unknown class \\[This.GetTitle], trying to fire without a class"
-			kill_leader = {
-				fire = yes
-				show_notification = no
-			}
+	event_target:leader_to_clone = {
+		set_leader_flag = leader_replaced_by_clone # other events may fire before the leader is removed - this is to prevent duplicate cloning
+		kill_leader = {
+			show_notification = no
+			fire = yes
 		}
 	}
-}
-
-# requires leader scope
-kill_leader_via_class = {
-	switch = {
-		trigger = leader_class
-		ruler = {
-			if = {
-				limit = { is_same_value = owner.heir }
-				kill_leader = {
-					type = ruler
-					heir = yes
-					show_notification = no
-				}
-			}
-			else = {
-				kill_leader = {
-					type = ruler
-					show_notification = no
-				}
-			}
-		}
-		governor = {
-			kill_leader = {
-				type = governor
-				show_notification = no
-			}
-		}
-		scientist = {
-			kill_leader = {
-				type = scientist
-				show_notification = no
-			}
-		}
-		admiral = {
-			kill_leader = {
-				type = admiral
-				show_notification = no
-			}
-		}
-		general = {
-			kill_leader = {
-				type = general
-				show_notification = no
-			}
-		}
-		envoy = {
-			kill_leader = {
-				type = envoy
-				show_notification = no
-			}
-		}
-		default = {
-			log_error = "unknown class \\[This.GetTitle], trying to kill without a class"
-			kill_leader = { show_notification = no }
-		}
-	}
+	owner = { remove_country_flag = disable_gender_clones_on_leader_spawned }
 }
 
 # requires leader scope

@@ -6,15 +6,17 @@ The effects are more noticeable for species portraits that have sexual dimorphis
 
 # Changes
 
-Stellaris supports 3 gender states in code (`male`, `female`, `indeterminable`), which correspond to the pronouns he, she, and they.  Whether a species uses binary male/female genders or the indeterminable gender is determined by its species class (e.g. molluscoid or fungoid).  This mod adds a chance for binary-gendered species classes to have leaders adopt a new gender identity when they are spawned by the game (20% chance to change from their assigned gender identity - 10% for each of the other two genders).
+Stellaris supports 3 gender states in code (`male`, `female`, `indeterminable`), which correspond to the pronouns he, she, and they.  Whether a species uses binary male/female genders or the indeterminable gender is determined by its species class (e.g. fungoid or robot).  This mod adds a chance for binary-gendered species classes to have leaders adopt a new gender identity when they are spawned by the game (20% chance to change from their assigned gender identity - 10% for each of the other two genders).
 
 With this mod, leaders of a binary-gendered species who become indeterminable have a 50/50 chance of presenting as feminine or masculine, and leaders who become female/male (or do not change from their starting gender identity) have a 10% chance to present as the opposite normative gender in their portrait.  In order to implement this effect, it was necessary to redefine the portrait groups associated with each species.
 
 What this means to you is that most leader portrait mods will need a compatibility patch in order to properly respect the leader's gender presentation flag.  Without a patch, males will always present as masculine, females will present as feminine, and indeterminables will present as the default for the species.  Fun fact: some built-in species use the female portrait as default, but most use male.
 
-Because Stellaris does not provide a scriptable way to check whether a species class is set to use binary genders or not, this mod uses a hard-coded list of the built-in species classes known to use binary genders.  In addition, `gender = yes` is the default for custom species classes, so this mod assumes any unrecognized species classes are binary-gendered.
+TODO: talk about being able to check species_gender
 
-What this means to you is that if you have a custom species class that is set to `gender = no` this mod will still think it is gendered and roll for a chance to change a leader's gender identity when they spawn.  It does not randomize the gender identity for the built-in species classes that are set to `gender = no`: fungoid, plantoid, lithoid, machine, robot, and all the crisis species.
+TODO: test how gender = no species return values for `species_gender`
+
+What this means to you is that if you have a custom species class that is set to `gender = no` this mod will still think it is gendered and roll for a chance to change a leader's gender identity when they spawn.  It does not randomize the gender identity for the built-in species classes that are set to `gender = no`: machine, robot, and all the crisis species.
 
 This mod optionally adds copious log entries to game.log file when running; use the in-game console to enable it with `event nonbinary_leaders.3`.  Here's where you can find the game.log file: `%USERPROFILE%\Documents\Paradox Interactive\Stellaris\logs` (Windows), `~/Documents/Paradox Interactive/Stellaris/logs` (MacOS), or `~/.local/share/Paradox Interactive/Stellaris/logs` (*nix).  To turn tracing off again, use the same command again.
 
@@ -24,13 +26,13 @@ Lastly, you can log detailed information about all of your leaders (owned and po
 
 This mod is implemented via an event attached to `on_leader_spawned` to add the % chance to reroll a leader's gender identity.  That part should be widely compatible with other mods, including my other mods that also affect leader spawning:
 
-* [Full Military Service for Battle Thralls](https://steamcommunity.com/sharedfiles/filedetails/?id=2496357447)
+* [Special Leadership Privileges for Battle Thralls and Bio-Trophies](https://steamcommunity.com/sharedfiles/filedetails/?id=2496357447)
 * [Leader Traits: All Eligible Species Traits](https://steamcommunity.com/sharedfiles/filedetails/?id=2499031295)
 * [Leader Traits: Enhanced Randomisation](https://steamcommunity.com/sharedfiles/filedetails/?id=2553806265)
 * [Leader Traits: Scientist AI Assistant Upgrader](https://steamcommunity.com/sharedfiles/filedetails/?id=2498166286)
 * [Retain Leaders from Integrated Subjects](https://steamcommunity.com/sharedfiles/filedetails/?id=2553818684)
 
-As discussed above, a compatibility patch is necessary to fully support varying gender presentation for other mods that add species portraits.  By default, this mod supports all the built-in, gendered species classes and any sexually dimorphic species in each class.
+As discussed above, a compatibility patch is necessary to fully support varying gender presentation for other mods that add species portraits.  By default, this mod supports all the built-in, gendered species classes and any sexually dimorphic portraits in each class.
 
 If you would like me to implement a compatibility patch (to support feminine/masculine presentation from sexual dimorphism and/or to respect a custom species class as non-gendered), please leave a comment asking nicely, what you want, and with a link to the mod you want to be compatible.
 
@@ -69,8 +71,9 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* Unfortunately, currently not able to offer an event to choose your starting ruler's pronouns without the portrait changing
 * 2.1.0 Improve gender presentation swaps to also use cloned leaders - leaders who alter their gender presentation now reliably have the correct portrait
 * 3.0.0 Update for compatibility with Stellaris version 3.2 "Herbert"
-	* Add support for aquatic portraits with gender dimorphism
-	* Use new `species_gender` trigger to support for the species window and individual Pops belonging to species with a single gender presentation (Paradox only added support for Humans)
+	* Add support for aquatic portraits with sexual dimorphism
+	* Use new `species_gender` trigger to support the new mono-gender species option for all base game for all portraits with sexual dimorphism (Paradox only added support for Humans)
+	* Substitute my nonbinary icon for the indeterminable one added in this patch
 
 ## Source Code
 

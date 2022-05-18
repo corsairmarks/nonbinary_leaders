@@ -40,6 +40,7 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
+		NOT = { has_country_flag = disable_gender_clones_on_leader_spawned } # not if
 		any_playable_country = { is_country = PREV } # only for playable country types
 		# only triggers in presence of the flag or after at least 1 day has passed in order to avoid changing the gender identity of starting rulers
 		OR = {
@@ -48,13 +49,19 @@ country_event = {
 		}
 		exists = FROM
 		FROM = {
-			NOT = { has_leader_flag = gender_reselected }
+			NOT = { has_leader_flag = leader_replaced_by_clone } # in case something else already cloned the leader
 			should_roll_to_reconsider_gender_identity = yes
 		}
 		any_pool_leader = { is_same_value = FROM }
 	}
 	immediate = {
-		FROM = { save_event_target_as = leader_to_clone }
+		FROM = {
+			save_event_target_as = leader_to_clone
+			set_timed_leader_flag = {
+				flag = clone_should_be_recruitable
+				days = 1
+			} 
+		}
 		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_clone.GetTitle] \\[leader_to_clone.GetName] of gendered species class \\[leader_to_clone.GetSpeciesClassOrCustom]...\"" }
 		log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] initially identif[leader_to_clone.GetIesY] as [leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].\"" }
 		random_list = {
@@ -75,7 +82,7 @@ country_event = {
 							species = { species_gender = female }
 							AND = {
 								gender = female
-								species_gender = not_set
+								species = { species_gender = not_set }
 							}
 						}
 					}
@@ -92,7 +99,7 @@ country_event = {
 							species = { species_gender = male }
 							AND = {
 								gender = male
-								species_gender = not_set
+								species = { species_gender = not_set }
 							}
 						}
 					}

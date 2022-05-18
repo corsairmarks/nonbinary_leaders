@@ -1,41 +1,14 @@
-# limitation: custom species classes will always return no for both uses_gender_species_class and not_uses_gender_species_class
-
-# these are the species classes which explicitly or implicitly use gender in the base game
-uses_gender_species_class = {
-	species = {
-		species_gender = not_set
-		OR = {
-			is_species_class = HUM
-			is_species_class = MAM
-			is_species_class = PRE_MAM
-			is_species_class = FUN
-			is_species_class = PRE_FUN
-			is_species_class = REP
-			is_species_class = PRE_REP
-			is_species_class = AVI
-			is_species_class = PRE_AVI
-			is_species_class = ART
-			is_species_class = PRE_ART
-			is_species_class = MOL
-			is_species_class = PRE_MOL
-			is_species_class = NECROID
-			is_species_class = LITHOID
-			is_species_class = PLANT
-			is_species_class = AQUATIC
-		}
-	}
-}
-
-# not a direct opposite of uses_gender_species_class - these are the species classes which explicitly don't use gender in the base game
-not_uses_gender_species_class = {
-	species = {
-		OR = {
-			is_species_class = MACHINE
-			is_species_class = ROBOT
-			is_species_class = AI # contingency
-			is_species_class = SWARM # praethoryn
-			is_species_class = EXD # extradimensionals: unbidden/aberrant/vehement
-		}
+# this = species
+species_class_uses_gender = {
+	# NOTE: this assumes custom species classes use gender (the default)
+	NOR = {
+		is_species_class = MACHINE
+		is_species_class = ROBOT
+		is_species_class = AI # contingency
+		is_species_class = SWARM # praethoryn
+		is_species_class = EXD # extradimensionals: unbidden/aberrant/vehement
+		is_species_class = SALVAGER # salvager enclave species
+		is_species_class = SHROUDWALKER # shroudwalker enclave species
 	}
 }
 
@@ -55,14 +28,21 @@ is_custom_species_class = {
 			is_species_class = PRE_FUN
 			is_species_class = MOL
 			is_species_class = PRE_MOL
+			is_species_class = AQUATIC
+			is_species_class = PRE_AQUATIC
 			is_species_class = NECROID
+			is_species_class = PRE_NECROID
 			is_species_class = LITHOID
+			is_species_class = PRE_LITHOID
 			is_species_class = PLANT
+			is_species_class = PRE_PLANT
 			is_species_class = MACHINE
 			is_species_class = ROBOT
 			is_species_class = AI # contingency
 			is_species_class = SWARM # praethoryn
 			is_species_class = EXD # extradimensionals: unbidden/aberrant/vehement
+			is_species_class = SALVAGER # salvager enclave species
+			is_species_class = SHROUDWALKER # shroudwalker enclave species
 		}
 	}
 }
@@ -71,7 +51,10 @@ is_custom_species_class = {
 allows_fem_portraits_leader = {
 	allows_fem_portraits_pop = yes
 	OR = {
-		species = { species_gender = female }
+		AND = {
+			exists = species
+			species = { species_gender = female }
+		}
 		AND = {
 			gender = female
 			NOT = { has_leader_flag = presents_masc }
@@ -97,6 +80,7 @@ allows_fem_portraits_species = {
 
 # pop/leader
 allows_fem_portraits_pop = {
+	exists = species
 	species = { allows_fem_portraits_species = yes }
 }
 
@@ -104,7 +88,10 @@ allows_fem_portraits_pop = {
 allows_masc_portraits_leader = {
 	allows_masc_portraits_pop = yes
 	OR = {
-		species = { species_gender = male }
+		AND = {
+			exists = species
+			species = { species_gender = male }
+		}
 		AND = {
 			gender = male
 			NOT = { has_leader_flag = presents_fem }
@@ -130,6 +117,7 @@ allows_masc_portraits_species = {
 
 # pop/leader
 allows_masc_portraits_pop = {
+	exists = species
 	species = { allows_masc_portraits_species = yes }
 }
 
@@ -143,14 +131,15 @@ has_gender_presentation_flag = {
 
 # requires leader scope
 should_roll_to_reconsider_gender_identity = {
-	OR = {
-		species = { NOT = { species_gender = indeterminable } } # TODO: unclear if I can now change indeterminables to other genders
-		is_custom_species_class = yes # custom species classes probably don't explicitly define "gender = no" and yes is the default, so assume yes
-	}
 	species = {
 		NOR = {
+			species_gender = indeterminable
 			has_trait = trait_clone_soldier_infertile
 			has_trait = trait_clone_soldier_infertile_full_potential
+			AND = {
+				species_gender = not_set
+				species_class_uses_gender = no
+			}
 		}
 	}
 }
