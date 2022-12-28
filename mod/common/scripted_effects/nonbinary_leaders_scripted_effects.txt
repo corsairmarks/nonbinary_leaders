@@ -203,7 +203,6 @@ clone_leader_with_gender_post_process = {
 	# change_leader_portrait = event_target:leader_to_clone # TODO verify this will work
 	set_name = event_target:leader_to_clone
 	set_leader_flag_gender = yes
-	# set_skill = event_target:leader_to_clone.trigger:has_skill
 	add_experience = event_target:leader_to_clone.trigger:has_experience
 	# set_age = event_target:leader_to_clone.trigger:leader_age
 	if = {
@@ -217,6 +216,7 @@ clone_leader_with_gender_post_process = {
 	}
 	event_target:leader_to_clone = {
 		set_leader_flag = leader_replaced_by_clone # other events may fire before the leader is removed - this is to prevent duplicate cloning
+		set_leader_flag = leader_replaced_by_clone@event_target:leader_to_clone
 		kill_leader = {
 			show_notification = no
 			fire = yes
@@ -232,6 +232,7 @@ set_leader_flag_gender = {
 		indeterminable = { set_leader_flag = gender_indeterminable }
 		female = { set_leader_flag = gender_female }
 		male = { set_leader_flag = gender_male }
+		unset = { set_leader_flag = gender_unset }
 		default = { set_leader_flag = gender_unknown }
 	}
 }
