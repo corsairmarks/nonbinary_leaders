@@ -36,6 +36,8 @@ is_custom_species_class = {
 			is_species_class = PRE_LITHOID
 			is_species_class = PLANT
 			is_species_class = PRE_PLANT
+			is_species_class = PRE_TOX
+			is_species_class = TOX
 			is_species_class = MACHINE
 			is_species_class = ROBOT
 			is_species_class = AI # contingency
@@ -65,7 +67,7 @@ allows_fem_portraits_leader = {
 		}
 		AND = {
 			gender = indeterminable
-			NOT = {
+			NOR = {
 				has_leader_flag = presents_fem
 				has_leader_flag = presents_masc
 			}
@@ -102,7 +104,7 @@ allows_masc_portraits_leader = {
 		}
 		AND = {
 			gender = indeterminable
-			NOT = {
+			NOR = {
 				has_leader_flag = presents_fem
 				has_leader_flag = presents_masc
 			}
