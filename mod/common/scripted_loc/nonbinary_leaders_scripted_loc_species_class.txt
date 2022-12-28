@@ -60,7 +60,6 @@ defined_text = {
 		}
 		localization_key = MOL
 	}
-	
 	text = {
 		trigger = {
 			species = {
@@ -73,20 +72,57 @@ defined_text = {
 		localization_key = FUN
 	}
 	text = {
-		trigger = { species = { is_species_class = NECROID } }
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = NECROID
+					is_species_class = PRE_NECROID
+				}
+			}
+		}
 		localization_key = NECROID
 	}
 	text = {
-		trigger = { species = { is_species_class = LITHOID } }
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = LITHOID
+					is_species_class = PRE_LITHOID
+				}
+			}
+		}
 		localization_key = LITHOID
 	}
 	text = {
-		trigger = { species = { is_species_class = AQUATIC } }
+		trigger = {
+			species = {
+				is_species_class = AQUATIC
+				is_species_class = PRE_AQUATIC
+			}
+		}
 		localization_key = AQUATIC
 	}
 	text = {
-		trigger = { species = { is_species_class = PLANT } }
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = PLANT
+					is_species_class = PRE_PLANT
+				}
+			}
+		}
 		localization_key = PLANT
+	}
+	text = {
+		trigger = {
+			species = {
+				OR = {
+					is_species_class = TOX
+					is_species_class = PRE_TOX
+				}
+			}
+		}
+		localization_key = TOX
 	}
 	text = {
 		trigger = { species = { is_species_class = MACHINE } }
