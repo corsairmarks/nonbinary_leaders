@@ -14,7 +14,7 @@ event = {
 }
 
 # log info about every owned and pool leader
-# ROOT = country
+# root = country
 country_event = {
 	id = nonbinary_leaders.1000
 	hide_window = yes
@@ -33,29 +33,29 @@ country_event = {
 }
 
 # triggered by on_leader_spawned
-# ROOT = country
-# FROM = leader
+# root = country
+# from = leader
 country_event = {
 	id = nonbinary_leaders.1
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
 		NOT = { has_country_flag = disable_gender_clones_on_leader_spawned } # not if
-		any_playable_country = { is_country = PREV } # only for playable country types
+		any_playable_country = { is_country = prev } # only for playable country types
 		# only triggers in presence of the flag or after at least 1 day has passed in order to avoid changing the gender identity of starting rulers
 		OR = {
 			has_country_flag = nonbinary_leaders_game_begun
 			days_passed > 0
 		}
-		exists = FROM
-		FROM = {
+		exists = from
+		from = {
 			NOT = { has_leader_flag = leader_replaced_by_clone } # in case something else already cloned the leader
 			should_roll_to_reconsider_gender_identity = yes
 		}
-		any_pool_leader = { is_same_value = FROM }
+		any_pool_leader = { is_same_value = from }
 	}
 	immediate = {
-		FROM = {
+		from = {
 			save_event_target_as = leader_to_clone
 			set_timed_leader_flag = {
 				flag = clone_should_be_recruitable
@@ -77,6 +77,7 @@ country_event = {
 			10 = {
 				modifier = {
 					factor = 8
+					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 					event_target:leader_to_clone = {
 						OR = {
 							species = { species_gender = female }
@@ -86,7 +87,6 @@ country_event = {
 							}
 						}
 					}
-					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
 				clone_leader_with_gender = { GENDER = female }
@@ -94,6 +94,7 @@ country_event = {
 			10 = {
 				modifier = {
 					factor = 8
+					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 					event_target:leader_to_clone = {
 						OR = {
 							species = { species_gender = male }
@@ -103,7 +104,6 @@ country_event = {
 							}
 						}
 					}
-					NOT = { has_global_flag = nonbinary_leaders_force_all_spawned }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
 				clone_leader_with_gender = { GENDER = male }
@@ -113,7 +113,7 @@ country_event = {
 }
 
 # triggered by on_press_begin
-# ROOT = country
+# root = country
 country_event = {
 	id = nonbinary_leaders.2
 	is_triggered_only = yes
