@@ -1,5 +1,6 @@
 # requires leader scope
 print_leader_info = {
+	optimize_memory
 	save_event_target_as = compare_target
 	log = "\\[This.GetTitle] \\[This.GetName], \\[This.Species.GetName], age \\[This.GetAge] (\\[This.GetSubjectPronoun]/\\[This.GetObjectPronoun]/\\[This.GetPossPronoun])"
 	switch = {
@@ -135,9 +136,11 @@ print_leader_info = {
 # requires 1 parameter:
 #	$GENDER$ as a gender
 clone_leader_with_gender = {
-	event_target:leader_to_clone = { 
+	optimize_memory
+	event_target:leader_to_clone = {
 		if = {
 			limit = { gender = $GENDER$ }
+			log = "...\\[This.GetName] is already $GENDER$ - randomizing gender presentation"
 			set_randomized_gender_presentation = yes
 			if = {
 				limit = {
@@ -152,17 +155,21 @@ clone_leader_with_gender = {
 						}
 					}
 				}
-				PREV = {
+				prev = {
 					set_country_flag = disable_gender_clones_on_leader_spawned
 					clone_leader = {
-						target = PREV
+						target = prev
 						effect = {
-							set_leader_flag = gender_retained
+							set_timed_leader_flag = {
+								flag = gender_retained
+								days = 1
+							}
 							if = {
 								limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
 								set_leader_flag = presents_fem
 							}
-							else = {
+							else_if = {
+								limit = { event_target:leader_to_clone = { has_leader_flag = presents_masc } }
 								set_leader_flag = presents_masc
 							}
 							clone_leader_with_gender_post_process = yes
@@ -171,7 +178,10 @@ clone_leader_with_gender = {
 				}
 			}
 			else = {
-				set_leader_flag = not_cloned
+				set_timed_leader_flag = {
+					flag = not_cloned
+					days = 1
+				}
 				set_leader_flag_gender = yes
 				if = {
 					limit = { has_global_flag = nonbinary_leaders_enable_tracing }
@@ -181,17 +191,48 @@ clone_leader_with_gender = {
 			}
 		}
 		else = {
-			PREV = {
+			log = "...\\[This.GetName] was not $GENDER$ - cloning in order to change"
+			prev = {
 				set_country_flag = disable_gender_clones_on_leader_spawned
 				clone_leader = {
-					target = PREV
-					gender = $GENDER$
+					target = prev
 					effect = {
-						set_leader_flag = gender_reselected
-						set_randomized_gender_presentation = yes
-						clone_leader_with_gender_post_process = yes
+						save_event_target_as = portrait_holder
 					}
 				}
+				clone_leader = {
+					target = prev
+					gender = $GENDER$
+					effect = {
+						set_timed_leader_flag = {
+							flag = gender_reselected
+							days = 1
+						}
+						set_randomized_gender_presentation = yes
+						clone_leader_with_gender_post_process = yes
+						save_event_target_as = gender_clone
+					}
+				}
+				event_target:gender_clone = {
+					change_leader_portrait = event_target:portrait_holder
+				}
+				event_target:portrait_holder = {
+					exile_leader_as = exiled_portrait_holder@this # TODO: check a save file to see if this is literal of allows the usage of @
+				}
+				event_target:leader_to_clone = {
+					kill_leader = {
+						show_notification = no
+						fire = yes
+					}
+					# or consider exiling this one, then killing it later
+				}
+
+				# TODO: consider if last_created_leader has_leader_flag = leader_replaced_by_clone@event_target:leader_to_clone,
+				# then try to copy the portrait and _then_ clean up the extra, instead of during the effect = { } block
+
+
+
+				# OR - make another clone to hold the portrait? or exile the existing leader (maybe kill after a day)?
 			}
 		}
 	}
@@ -200,11 +241,11 @@ clone_leader_with_gender = {
 # requires leader scope
 # requires event_target:leader_to_clone, which is the source for the clone's properties
 clone_leader_with_gender_post_process = {
+	optimize_memory
 	# change_leader_portrait = event_target:leader_to_clone # TODO verify this will work
 	set_name = event_target:leader_to_clone
 	set_leader_flag_gender = yes
-	add_experience = event_target:leader_to_clone.trigger:has_experience
-	# set_age = event_target:leader_to_clone.trigger:leader_age
+	add_experience = event_target:leader_to_clone.trigger:has_experience # doesn't get copied implicitly when cloned
 	if = {
 		limit = { event_target:leader_to_clone = { has_leader_flag = clone_should_be_recruitable } }
 		recruitable = no
@@ -217,28 +258,29 @@ clone_leader_with_gender_post_process = {
 	event_target:leader_to_clone = {
 		set_leader_flag = leader_replaced_by_clone # other events may fire before the leader is removed - this is to prevent duplicate cloning
 		set_leader_flag = leader_replaced_by_clone@event_target:leader_to_clone
-		kill_leader = {
-			show_notification = no
-			fire = yes
-		}
+		# kill_leader = {
+		# 	show_notification = no
+		# 	fire = yes
+		# }
 	}
 	owner = { remove_country_flag = disable_gender_clones_on_leader_spawned }
 }
 
 # requires leader scope
 set_leader_flag_gender = {
+	optimize_memory
 	switch = {
 		trigger = gender
 		indeterminable = { set_leader_flag = gender_indeterminable }
 		female = { set_leader_flag = gender_female }
 		male = { set_leader_flag = gender_male }
-		unset = { set_leader_flag = gender_unset }
 		default = { set_leader_flag = gender_unknown }
 	}
 }
 
 # requires leader scope
 set_randomized_gender_presentation = {
+	optimize_memory
 	random_list = {
 		10 = {
 			modifier = {
@@ -277,8 +319,84 @@ set_randomized_gender_presentation = {
 	}
 }
 
+# changes a gender's leader to match the norms for their species (possibly cloning and replacing them)
+# this = leader, with new species
+# from = species, previous
+leader_match_gender_to_species = {
+	optimize_memory
+	if = {
+		limit = { leader_species_gender_change_requires_clone = no }
+		species = {
+			switch = {
+				trigger = species_gender
+				# if indeterminable, then nothing should change
+				female = {
+					prev = {
+						if = {
+							limit = { NOT = { gender = female } }
+							set_is_female = yes
+						}
+					}
+				}
+				male = {
+					prev = {
+						if = {
+							limit = { NOT = { gender = male } }
+							set_is_female = no
+						}
+					}
+				}
+				not_set = {
+					prev = {
+						if = {
+							limit = {
+								species_class_uses_gender = yes
+								NOR = {
+									gender = female
+									gender = male
+								}
+							}
+							random_list = {
+								50 = { set_is_female = yes }
+								50 = { set_is_female = no }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	else = {
+		save_event_target_as = leader_to_clone
+		owner = { save_event_target_as = leader_owner } # must stay an event_target - the game dislikes prev.owner in the switch statement
+		species = {
+			switch = {
+				trigger = species_gender
+				indeterminable = { prev = { clone_leader_with_gender = { GENDER = indeterminable } } }
+				female = { prev = { clone_leader_with_gender = { GENDER = female } } }
+				male = { prev = { clone_leader_with_gender = { GENDER = male } } }
+				not_set = {
+					if = {
+						limit = { species_class_uses_gender = yes }
+						prev = {
+							random_list = {
+								50 = { clone_leader_with_gender = { GENDER = female } }
+								50 = { clone_leader_with_gender = { GENDER = male } }
+							}
+						}
+					}
+					else = {
+						prev = { clone_leader_with_gender = { GENDER = indeterminable } }
+					}
+				}
+			}
+		}
+	}
+}
+
 # any scope, but you need to escape strings with spaces "\"my string\"" of it will break here
 log_if_enabled = {
+	optimize_memory
 	if = {
 		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
 		log = $MESSAGE$
