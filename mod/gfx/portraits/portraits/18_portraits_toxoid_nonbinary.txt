@@ -1,0 +1,521 @@
+portraits = {
+	# toxoid 04 - the frog
+	tox4_1 = { entity = "toxoid_01_portrait_04_entity" clothes_selector = "no_texture" attachment_selector = "no_texture" greeting_sound = "tox_portrait_04"
+		character_textures = {
+			"gfx/models/portraits/toxoid/toxic_portrait_04_brown_01.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_orange_01.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_green_01.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_blue_01.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_red_01.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_violet_01.dds"
+		}
+
+		custom_close_up_position_offset = { x = 10 y = 100 }
+		custom_close_up_scale = 1.3
+	}
+	tox4_2 = { entity = "toxoid_01_portrait_04_entity" clothes_selector = "no_texture" attachment_selector = "no_texture" greeting_sound = "tox_portrait_04"
+		character_textures = {
+			"gfx/models/portraits/toxoid/toxic_portrait_04_brown_02.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_orange_02.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_green_02.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_blue_02.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_red_02.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_violet_02.dds"
+		}
+
+		custom_close_up_position_offset = { x = 10 y = 100 }
+		custom_close_up_scale = 1.3
+	}
+	tox4_3 = { entity = "toxoid_01_portrait_04_entity" clothes_selector = "no_texture" attachment_selector = "no_texture" greeting_sound = "tox_portrait_04"
+		character_textures = {
+			"gfx/models/portraits/toxoid/toxic_portrait_04_brown_03.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_orange_03.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_green_03.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_blue_03.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_red_03.dds"
+			"gfx/models/portraits/toxoid/toxic_portrait_04_violet_03.dds"
+		}
+
+		custom_close_up_position_offset = { x = 10 y = 100 }
+		custom_close_up_scale = 1.3
+	}
+}
+
+portrait_groups = {
+	tox9 = {
+		default = tox9_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					tox9_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					tox9_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					tox9_m
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					tox9_f
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					tox9_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					tox9_f
+				}
+			}
+		}
+
+		leader = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox9_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox9_f
+				}
+			}
+		}
+
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox9_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox9_f
+				}
+			}
+		}
+	}
+
+	tox12 = {
+		default = tox12_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					tox12_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					tox12_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					tox12_m
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					tox12_f
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					tox12_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					tox12_f
+				}
+			}
+		}
+
+		leader = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox12_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox12_f
+				}
+			}
+		}
+
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox12_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox12_f
+				}
+			}
+		}
+	}
+
+	tox5 = {
+		default = tox5_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					tox5_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					tox5_f
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					tox5_m
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					tox5_f
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					tox5_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					tox5_f
+				}
+			}
+		}
+
+		leader = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox5_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox5_f
+				}
+			}
+		}
+
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox5_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox5_f
+				}
+			}
+		}
+	}
+
+	# CM Notes: this is the first PDX species to feature its own specific indeterminable portraits.
+	# Tt was coded to offer specific m/f/i portraits based on leader gender, but Pops/species would
+	# include the indeterminant gender so long as the species wasn't mono-female or mono-male.
+	# My alterations apply the second approach to leaders as well.
+	tox7 = {
+		default = tox7_f
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { ruler = { allows_masc_portraits_leader = yes } }
+				portraits = {
+					tox7_m
+				}
+			}
+			add = {
+				trigger = { ruler = { allows_fem_portraits_leader = yes  } }
+				portraits = {
+					tox7_f
+				}
+			}
+			add = {
+				trigger = {
+					ruler = {
+						exists = species
+						species = {
+							NOR = {
+								species_gender = male
+								species_gender = female
+							}
+						}
+					}
+				}
+				portraits = {
+					tox7_i
+				}
+			}
+			#set = {
+			#	trigger = { ... }
+			#	portraits = { ... }
+			#	#using "set =" instead of "add" will first clear any portraits already added
+			#}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { allows_fem_portraits_species = yes }
+				portraits = {
+					tox7_m
+				}
+			}
+			add = {
+				trigger = { allows_masc_portraits_species = yes }
+				portraits = {
+					tox7_f
+				}
+			}
+			add = {
+				trigger = {
+					exists = species
+					species = {
+						NOR = {
+							species_gender = male
+							species_gender = female
+						}
+					}
+				}
+				portraits = {
+					tox7_i
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { allows_masc_portraits_pop = yes }
+				portraits = {
+					tox7_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_pop = yes }
+				portraits = {
+					tox7_f
+				}
+			}
+			add = {
+				trigger = {
+					exists = species
+					species = {
+						NOR = {
+							species_gender = male
+							species_gender = female
+						}
+					}
+				}
+				portraits = {
+					tox7_i
+				}
+			}
+		}
+
+		leader = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox7_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox7_f
+				}
+			}
+			add = {
+				trigger = {
+					exists = species
+					species = {
+						NOR = {
+							species_gender = male
+							species_gender = female
+						}
+					}
+				}
+				portraits = {
+					tox7_i
+				}
+			}
+		}
+
+		ruler = {
+			add = {
+				trigger = { allows_masc_portraits_leader = yes }
+				portraits = {
+					tox7_m
+				}
+			}
+			add = {
+				trigger = { allows_fem_portraits_leader = yes  }
+				portraits = {
+					tox7_f
+				}
+			}
+			add = {
+				trigger = {
+					exists = species
+					species = {
+						NOR = {
+							species_gender = male
+							species_gender = female
+						}
+					}
+				}
+				portraits = {
+					tox7_i
+				}
+			}
+		}
+	}
+
+	# CM Notes: despite having a phenotype and color, PDX coded it as only colors
+	tox4 = {
+		default = tox4_1
+		game_setup = { #will run with a limited country scope. species and government is set but the country does not actually exist
+			add = {
+				trigger = { always = yes }
+				portraits = {
+					tox4_1
+					tox4_2
+					tox4_3
+				}
+			}
+		}
+
+		#species scope
+		species = { #generic portrait for a species
+			add = {
+				trigger = { always = yes }
+				portraits = {
+					tox4_1
+					tox4_2
+					tox4_3
+				}
+			}
+		}
+
+		#pop scope
+		pop = { #for a specific pop
+			add = {
+				trigger = { always = yes }
+				portraits = {
+					tox4_1
+					tox4_2
+					tox4_3
+				}
+			}
+		}
+
+		leader = {
+			add = {
+				trigger = { always = yes }
+				portraits = {
+					tox4_1
+					tox4_2
+					tox4_3
+				}
+			}
+		}
+
+		ruler = {
+			add = {
+				trigger = { always = yes }
+				portraits = {
+					tox4_1
+					tox4_2
+					tox4_3
+				}
+			}
+		}
+	}
+}
