@@ -1,5 +1,6 @@
 # this = species
 species_class_uses_gender = {
+	optimize_memory
 	# NOTE: this assumes custom species classes use gender (the default)
 	NOR = {
 		is_species_class = MACHINE
@@ -13,6 +14,7 @@ species_class_uses_gender = {
 }
 
 is_custom_species_class = {
+	optimize_memory
 	species = {
 		NOR = {
 			is_species_class = HUM
@@ -51,6 +53,7 @@ is_custom_species_class = {
 
 # leader
 allows_fem_portraits_leader = {
+	optimize_memory
 	allows_fem_portraits_pop = yes
 	OR = {
 		AND = {
@@ -67,27 +70,27 @@ allows_fem_portraits_leader = {
 		}
 		AND = {
 			gender = indeterminable
-			NOR = {
-				has_leader_flag = presents_fem
-				has_leader_flag = presents_masc
-			}
+			has_gender_presentation_flag = no
 		}
 	}
 }
 
 # species
 allows_fem_portraits_species = {
+	optimize_memory
 	NOT = { species_gender = male }
 }
 
 # pop/leader
 allows_fem_portraits_pop = {
+	optimize_memory
 	exists = species
 	species = { allows_fem_portraits_species = yes }
 }
 
 # leader
 allows_masc_portraits_leader = {
+	optimize_memory
 	allows_masc_portraits_pop = yes
 	OR = {
 		AND = {
@@ -104,27 +107,27 @@ allows_masc_portraits_leader = {
 		}
 		AND = {
 			gender = indeterminable
-			NOR = {
-				has_leader_flag = presents_fem
-				has_leader_flag = presents_masc
-			}
+			has_gender_presentation_flag = no
 		}
 	}
 }
 
 # species
 allows_masc_portraits_species = {
+	optimize_memory
 	NOT = { species_gender = female }
 }
 
 # pop/leader
 allows_masc_portraits_pop = {
+	optimize_memory
 	exists = species
 	species = { allows_masc_portraits_species = yes }
 }
 
 # requires leader scope
 has_gender_presentation_flag = {
+	optimize_memory
 	OR = {
 		has_leader_flag = presents_fem
 		has_leader_flag = presents_masc
@@ -133,6 +136,7 @@ has_gender_presentation_flag = {
 
 # requires leader scope
 should_roll_to_reconsider_gender_identity = {
+	optimize_memory
 	species = {
 		NOR = {
 			species_gender = indeterminable
@@ -142,6 +146,34 @@ should_roll_to_reconsider_gender_identity = {
 				species_gender = not_set
 				species_class_uses_gender = no
 			}
+		}
+	}
+}
+
+# this = species
+species_can_set_is_female = {
+	optimize_memory
+	NOR = {
+		species_gender = indeterminable
+		AND = {
+			species_gender = not_set
+			species_class_uses_gender = no
+		}
+	}
+}
+
+# this = leader, with new species
+# from = species, previous
+leader_species_gender_change_requires_clone = {
+	optimize_memory
+	OR = {
+		AND = {
+			species = { species_can_set_is_female = no }
+			from = { species_can_set_is_female = yes }
+		}
+		AND = {
+			species = { species_can_set_is_female = yes }
+			from = { species_can_set_is_female = no }
 		}
 	}
 }
