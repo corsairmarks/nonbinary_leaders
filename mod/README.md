@@ -14,7 +14,7 @@ What this means to you is that most leader portrait mods will need a compatibili
 
 TODO: talk about being able to check species_gender
 
-TODO: test how gender = no species return values for `species_gender`
+TODO: test how gender = no species return values for `species_gender` (not_set)
 
 What this means to you is that if you have a custom species class that is set to `gender = no` this mod will still think it is gendered and roll for a chance to change a leader's gender identity when they spawn.  It does not randomize the gender identity for the built-in species classes that are set to `gender = no`: machine, robot, and all the crisis species.
 
@@ -36,7 +36,11 @@ As discussed above, a compatibility patch is necessary to fully support varying 
 
 If you would like me to implement a compatibility patch (to support feminine/masculine presentation from sexual dimorphism and/or to respect a custom species class as non-gendered), please leave a comment asking nicely, what you want, and with a link to the mod you want to be compatible.
 
-Built for Stellaris version 3.2.* "Herbert."  Not compatible with achievements.
+Built for Stellaris version 3.6 "Orion."  Not compatible with achievements.
+
+### Known Conflicts
+
+Any other mods that adjust the human portrait groups (not individual portraits), including my mod [Human Portraits: Unified](https://steamcommunity.com/sharedfiles/filedetails/?id=2820018928).
 
 ### When to Install
 
@@ -70,10 +74,12 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* Origin: Clone Army species that are infertile will not randomize their gender presentation
 	* Unfortunately, currently not able to offer an event to choose your starting ruler's pronouns without the portrait changing
 * 2.1.0 Improve gender presentation swaps to also use cloned leaders - leaders who alter their gender presentation now reliably have the correct portrait
-* 3.0.0 Update for compatibility with Stellaris version 3.2 "Herbert"
+* 3.0.0 Update for Stellaris version 3.6 "Orion" (also including changes from versions 3.5 "Fornax," 3.4 "Cepheus," 3.3 "Libra," and 3.2 "Herbert")
+	* Add support for legacy human portraits
 	* Add support for aquatic portraits with sexual dimorphism
+	* Add support for toxoid portraits with sexual dimorphism
 	* Use new `species_gender` trigger to support the new mono-gender species option for all base game for all portraits with sexual dimorphism (Paradox only added support for Humans)
-	* Substitute my nonbinary icon for the indeterminable one added in this patch
+	* Substitute my nonbinary icon for the indeterminable one added in Stellaris version 3.2 "Herbert"
 
 ## Source Code
 
@@ -93,4 +99,6 @@ Thanks to Paradox Development Studios (a subsidiary of Paradox Interactive) for 
 
 Thanks to Harebrained Studios (now owned by Paradox Interactive), the makers of [BattleTech](https://store.steampowered.com/app/637090/BATTLETECH/).  BattleTech supports gender nonbinary characters as part of the base game, and is part of the inspiration for this mod.
 
-Finally, thanks to the [Stellaris Modding Den](https://discord.gg/bHVez2C) for all the help with mod development.  Discussing Stellaris' built-in pronoun handling with another modder was my primary inspiration to create this mod.
+Finally, thanks to the [Stellaris Modding Den](https://discord.gg/2qjkAF8DY7) for all the help with mod development.  Discussing Stellaris' built-in pronoun handling with another modder was my primary inspiration to create this mod.
+
+TODO see if I can xfer the ruler portrait to a new leader now

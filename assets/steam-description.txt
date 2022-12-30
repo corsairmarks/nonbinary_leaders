@@ -62,4 +62,4 @@ Thanks to Paradox Development Studios (a subsidiary of Paradox Interactive) for 
 
 Thanks to Harebrained Studios (now owned by Paradox Interactive), the makers of [url=https://store.steampowered.com/app/637090/BATTLETECH/]BattleTech[/url]. BattleTech supports gender nonbinary characters as part of the base game, and is part of the inspiration for this mod.
 
-Finally, thanks to the [url=https://discord.gg/bHVez2C]Stellaris Modding Den[/url] for all the help with mod development. Discussing Stellaris' built-in pronoun handling with another modder was my primary inspiration to create this mod.
+Finally, thanks to the [url=https://discord.gg/2qjkAF8DY7]Stellaris Modding Den[/url] for all the help with mod development. Discussing Stellaris' built-in pronoun handling with another modder was my primary inspiration to create this mod.

@@ -2,6 +2,15 @@
 on_game_start = {
 	events = {
 		nonbinary_leaders.13 # flag mod as installed
+		nonbinary_leaders.3 # TODO: disable when done testing
+	}
+}
+
+# fired when the game starts
+# this = country
+on_game_start_country = {
+	events = {
+		# nonbinary_leaders.10 # disabled because portrait copying is not fully supported anymore
 	}
 }
 
