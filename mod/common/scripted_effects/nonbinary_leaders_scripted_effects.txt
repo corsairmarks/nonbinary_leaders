@@ -1,6 +1,7 @@
 # this = leader
 print_leader_info = {
 	# optimize_memory # specifically not optimized to get cleaner log text
+	log = "------------------------------"
 	save_event_target_as = compare_target
 	log = "\\[This.GetTitle] \\[This.GetName], \\[This.Species.GetName], age \\[This.GetAge], gender \\[This.GetGenderCap] (\\[This.GetSubjectPronoun]/\\[This.GetObjectPronoun]/\\[This.GetPossPronoun])"
 	switch = {
@@ -125,6 +126,7 @@ print_leader_info = {
 	else = {
 		log = "...is NOT an event leader"
 	}
+	log = "------------------------------"
 }
 
 # this = country
