@@ -6,51 +6,51 @@ print_leader_info = {
 	log = "\\[This.GetTitle] \\[This.GetName], \\[This.Species.GetName], age \\[This.GetAge], gender \\[This.GetGenderCap] (\\[This.GetSubjectPronoun]/\\[This.GetObjectPronoun]/\\[This.GetPossPronoun])"
 	switch = {
 		trigger = gender
-		indeterminable = { log = "...is nonbinary/neither female nor male (indeterminable)" }
-		female = { log = "...is female" }
-		male = { log = "...is male" }
-		default = { log = "...is an unknown gender" }
+		indeterminable = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] nonbinary/neither female nor male (indeterminable)" }
+		female = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] female" }
+		male = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] male" }
+		default = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an unknown gender" }
 	}
 	species = {
 		switch = {
 			trigger = species_gender
-			indeterminable = { log = "...belongs to a mono-indeterminable species" }
-			female = { log = "...belongs to a mono-female species" }
-			male = { log = "...belongs to a mono-male species" }
-			not_set = { log = "...belongs to a binary (not_set) species" }
-			default = { log = "...belongs to a species with an unknown species_gender" }
+			indeterminable = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a mono-indeterminable species" }
+			female = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a mono-female species" }
+			male = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a mono-male species" }
+			not_set = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a binary (not_set) species" }
+			default = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a species with an unknown species_gender" }
 		}
 	}
 	if = {
 		limit = { has_leader_flag = presents_fem }
-		log = "...presents feminine"
+		log = "...\\[This.GetSubjectPronoun] present\\[This.GetSXX] feminine"
 	}
 	else_if = {
 		limit = { has_leader_flag = presents_masc }
-		log = "...presents masculine"
+		log = "...\\[This.GetSubjectPronoun] present\\[This.GetSXX] masculine"
 	}
 	else = {
-		log = "...presents as the default for their gender (\\[This.GetGenderCap])"
+		log = "...\\[This.GetSubjectPronoun] present\\[This.GetSXX] as the default for their gender (\\[This.GetGenderCap])"
 	}
 	if = {
 		limit = { exists = owner }
-		owner = { log = "...belongs to country \\[This.Owner.GetRealName]" }
+		owner = { log = "...\\[This.GetSubjectPronoun] belong\\[This.GetSXX] to country \\[This.Owner.GetRealName]" }
 	}
 	switch = {
 		trigger = leader_class
 		ruler = {
-			log = "...is a ruler"
+			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a ruler"
 			switch = {
 				trigger = pre_ruler_leader_class
-				ruler = { log = "...was previously a ruler - how the heck did that happen?" }
-				governor = { log = "...was previously a governor" }
-				scientist = { log = "...was previously a scientist" }
-				admiral = { log = "...was previously an admiral" }
-				general = { log = "...was previously a general" }
-				envoy = { log = "...was previously an envoy" }
-				default = { log = "...was previously an unknown class" }
+				ruler = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a ruler - how the heck did that happen?" }
+				governor = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a governor" }
+				scientist = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a scientist" }
+				admiral = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously an admiral" }
+				general = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a general" }
+				envoy = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously an envoy" }
+				default = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously an unknown class" }
 			}
-			log = "...uses regnal name \\[This.GetRegnalName]"
+			log = "...use\\[This.GetSXX] regnal name \\[This.GetRegnalName]"
 			if = {
 				limit = {
 					owner = {
@@ -58,42 +58,42 @@ print_leader_info = {
 						heir = { is_same_value = event_target:compare_target }
 					}
 				}
-				log = "...is the heir in an imperial government"
+				log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] the heir in an imperial government"
 			}
 		}
 		governor = {
-			log = "...is a governor"
+			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a governor"
 			if = {
 				limit = { exists = sector }
-				sector = { log = "...and governs the \\[This.GetName] sector" }
+				sector = { log = "...and \\[This.GetSubjectPronoun] govern\\[This.GetSXX] the \\[This.GetName] sector" }
 			}
 		}
 		scientist = {
-			log = "...is a scientist"
+			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a scientist"
 			switch = {
 				trigger = is_researching_area
-				physics = { log = "...and is researching physics" }
-				society = { log = "...and is researching society"}
-				engineering = { log = "...and is researching engineering"}
-				default = { log = "...and is NOT researching" }
+				physics = { log = "...and \\[This.GetSubjectPronoun] \\[This.GetIsAre] researching physics" }
+				society = { log = "...and \\[This.GetSubjectPronoun] \\[This.GetIsAre] researching society"}
+				engineering = { log = "...and \\[This.GetSubjectPronoun] \\[This.GetIsAre] researching engineering"}
+				default = { log = "...and \\[This.GetSubjectPronoun] \\[This.GetIsAre] NOT researching" }
 			}
 			if = {
 				limit = { exists = fleet }
-				fleet = { log = "...and commands fleet \\[This.GetName]" }
+				fleet = { log = "...and \\[This.GetSubjectPronoun] commands fleet \\[This.GetName]" }
 			}
 		}
 		admiral = {
-			log = "...is an admiral"
+			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an admiral"
 			if = {
 				limit = { exists = fleet }
-				fleet = { log = "...and commands fleet \\[This.GetName]" }
+				fleet = { log = "...and \\[This.GetSubjectPronoun] command\\[This.GetSXX] fleet \\[This.GetName]" }
 			}
 		}
 		general = {
-			log = "...is a general"
+			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a general"
 			if = {
 				limit = { exists = fleet }
-				fleet = { log = "...and commands fleet \\[This.GetName]" }
+				fleet = { log = "...and \\[This.GetSubjectPronoun] command\\[This.GetSXX] fleet \\[This.GetName]" }
 			}
 			owner = {
 				random_owned_army = {
@@ -101,51 +101,51 @@ print_leader_info = {
 						exists = leader
 						leader = { is_same_value = event_target:compare_target }
 					}
-					log = "...and commands army \\[This.GetName]"
+					log = "...and \\[This.GetSubjectPronoun] command\\[This.GetSXX] army \\[This.GetName]"
 				}
 			}
 		}
-		envoy = { log = "...is an envoy" }
-		default = { log = "...is an unknown class" }
+		envoy = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an envoy" }
+		default = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an unknown class" }
 	}
 	if = {
 		limit = { owner = { any_pool_leader = { is_same_value = event_target:compare_target } } }
-		log = "...is available to hire (pool)"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] available to hire (pool)"
 	}
 	if = {
 		limit = { owner = { any_owned_leader = { is_same_value = event_target:compare_target } } }
-		log = "...is hired (owned)"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] hired (owned)"
 	}
 	if = {
 		limit = { is_idle = yes }
-		log = "...is idle"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] idle"
 	}
 	else = {
-		log = "...is assigned"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] assigned"
 	}
 	if = {
 		limit = { exists = fleet }
-		log = "...has a fleet scope"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] a fleet scope"
 	}
 	if = {
 		limit = { exists = sector }
-		log = "...has a sector scope"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] a sector scope"
 	}
 	if = {
 		limit = { leader_of_faction = yes }
-		log = "...is leader of the faction \\[This.GetPopFactionName]"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] leader of the faction \\[This.GetPopFactionName]"
 	}
 	if = {
 		limit = { exists = pop_faction }
-		log = "...has a pop_faction scope"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] a pop_faction scope"
 		pop_faction = { log = "...which is named \\[This.GetName]" }
 	}
 	if = {
 		limit = { is_event_leader = yes }
-		log = "...is an event leader"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an event leader"
 	}
 	else = {
-		log = "...is NOT an event leader"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] NOT an event leader"
 	}
 	log = "------------------------------"
 }
@@ -290,7 +290,6 @@ clone_leader_with_gender_post_process = {
 		flag = gender_clone_of@event_target:leader_to_clone
 		days = 1
 	}
-	# gender presentation disabled because the game does not consistently respect the portrait triggers based on flags (last tested 3.6 "Orion")
 	# if = {
 	# 	limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
 	# 	set_leader_flag = presents_fem
@@ -303,6 +302,8 @@ clone_leader_with_gender_post_process = {
 	# 	log_error = "\\[This.GetName] was not flagged as presenting female or male, presentation defaults to matching the gender"
 	# }
 	set_leader_flag_gender = yes
+	change_species = event_target:leader_to_clone
+	change_leader_portrait = event_target:leader_to_clone
 	set_name = event_target:leader_to_clone
 	add_experience = event_target:leader_to_clone.trigger:has_experience # doesn't get copied implicitly when cloned
 	if = {
