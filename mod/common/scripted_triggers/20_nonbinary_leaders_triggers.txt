@@ -57,19 +57,19 @@ allows_fem_portraits_leader = {
 	optimize_memory
 	allows_fem_portraits_pop = yes
 	OR = {
-		AND = {
-			exists = species
-			species = { species_gender = female }
-		}
-		AND = {
+		# has_leader_flag = presents_fem
+		# AND = {
+		# 	exists = species
+		# 	species = { species_gender = female }
+		# }
+		# AND = {
 			gender = female
-			NOT = { has_leader_flag = presents_masc }
-		}
-		has_leader_flag = presents_fem
-		AND = {
+		# 	NOT = { has_leader_flag = presents_masc }
+		# }
+		# AND = {
 			gender = indeterminable
-			has_gender_presentation_flag = no
-		}
+		# 	has_gender_presentation_flag = no
+		# }
 	}
 }
 
@@ -89,21 +89,21 @@ allows_fem_portraits_pop = {
 # this = leader
 allows_masc_portraits_leader = {
 	optimize_memory
-	allows_masc_portraits_pop = yes
+	# allows_masc_portraits_pop = yes
 	OR = {
-		AND = {
-			exists = species
-			species = { species_gender = male }
-		}
-		AND = {
+		# has_leader_flag = presents_masc
+		# AND = {
+		# 	exists = species
+		# 	species = { species_gender = male }
+		# }
+		# AND = {
 			gender = male
-			NOT = { has_leader_flag = presents_fem }
-		}
-		has_leader_flag = presents_masc
-		AND = {
+		# 	NOT = { has_leader_flag = presents_fem }
+		# }
+		# AND = {
 			gender = indeterminable
-			has_gender_presentation_flag = no
-		}
+		# 	has_gender_presentation_flag = no
+		# }
 	}
 }
 
