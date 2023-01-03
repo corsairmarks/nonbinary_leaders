@@ -6,10 +6,31 @@ print_leader_info = {
 	log = "\\[This.GetTitle] \\[This.GetName], \\[This.Species.GetName], age \\[This.GetAge], gender \\[This.GetGenderCap] (\\[This.GetSubjectPronoun]/\\[This.GetObjectPronoun]/\\[This.GetPossPronoun])"
 	switch = {
 		trigger = gender
-		male = { log = "...is male" }
-		female = { log = "...is female" }
 		indeterminable = { log = "...is nonbinary/neither female nor male (indeterminable)" }
+		female = { log = "...is female" }
+		male = { log = "...is male" }
 		default = { log = "...is an unknown gender" }
+	}
+	species = {
+		switch = {
+			trigger = species_gender
+			indeterminable = { log = "...belongs to a mono-indeterminable species" }
+			female = { log = "...belongs to a mono-female species" }
+			male = { log = "...belongs to a mono-male species" }
+			not_set = { log = "...belongs to a binary (not_set) species" }
+			default = { log = "...belongs to a species with an unknown species_gender" }
+		}
+	}
+	if = {
+		limit = { has_leader_flag = presents_fem }
+		log = "...presents feminine"
+	}
+	else_if = {
+		limit = { has_leader_flag = presents_masc }
+		log = "...presents masculine"
+	}
+	else = {
+		log = "...presents as the default for their gender (\\[This.GetGenderCap])"
 	}
 	if = {
 		limit = { exists = owner }
