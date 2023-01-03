@@ -13,6 +13,7 @@ species_class_uses_gender = {
 	}
 }
 
+# this = species
 is_custom_species_class = {
 	optimize_memory
 	species = {
@@ -51,7 +52,7 @@ is_custom_species_class = {
 	}
 }
 
-# leader
+# this = leader
 allows_fem_portraits_leader = {
 	optimize_memory
 	allows_fem_portraits_pop = yes
@@ -72,20 +73,20 @@ allows_fem_portraits_leader = {
 	}
 }
 
-# species
+# this = species
 allows_fem_portraits_species = {
 	optimize_memory
 	NOT = { species_gender = male }
 }
 
-# pop/leader
+# this = pop/leader
 allows_fem_portraits_pop = {
 	optimize_memory
 	exists = species
 	species = { allows_fem_portraits_species = yes }
 }
 
-# leader
+# this = leader
 allows_masc_portraits_leader = {
 	optimize_memory
 	allows_masc_portraits_pop = yes
@@ -106,20 +107,20 @@ allows_masc_portraits_leader = {
 	}
 }
 
-# species
+# this = species
 allows_masc_portraits_species = {
 	optimize_memory
 	NOT = { species_gender = female }
 }
 
-# pop/leader
+# this = pop/leader
 allows_masc_portraits_pop = {
 	optimize_memory
 	exists = species
 	species = { allows_masc_portraits_species = yes }
 }
 
-# requires leader scope
+# this = leader
 has_gender_presentation_flag = {
 	optimize_memory
 	OR = {
@@ -128,7 +129,7 @@ has_gender_presentation_flag = {
 	}
 }
 
-# requires leader scope
+# this = leader
 has_gender_identity_flag = {
 	OR = {
 		has_leader_flag = gender_indeterminable
@@ -137,7 +138,7 @@ has_gender_identity_flag = {
 	}
 }
 
-# requires leader scope
+# this = leader
 should_roll_to_reconsider_gender_identity = {
 	optimize_memory
 	species = {

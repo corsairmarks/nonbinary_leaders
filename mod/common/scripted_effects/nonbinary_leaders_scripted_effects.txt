@@ -1,4 +1,4 @@
-# requires leader scope
+# this = leader
 print_leader_info = {
 	# optimize_memory # specifically not optimized to get cleaner log text
 	save_event_target_as = compare_target
@@ -127,8 +127,8 @@ print_leader_info = {
 	}
 }
 
-# requires country scope
-# requires event_target:leader_to_clone, which is the source for the clone's properties
+# this = country
+# event_target:leader_to_clone = leader, source for the clone's properties
 # requires 1 parameter:
 #	$GENDER$ as a gender
 clone_leader_with_gender = {
@@ -273,10 +273,10 @@ clone_leader_with_gender = {
 	}
 }
 
-# requires leader scope
-# requires event_target:leader_to_clone, which is the source for the clone's properties
+# this = leader
+# event_target:leader_to_clone = leader, source for the clone's properties
 clone_leader_with_gender_post_process = {
-	# optimize_memory
+	optimize_memory
 	set_timed_leader_flag = {
 		flag = gender_clone_of@event_target:leader_to_clone
 		days = 1
@@ -317,7 +317,7 @@ clone_leader_with_gender_post_process = {
 	owner = { remove_country_flag = disable_gender_clones_on_leader_spawned }
 }
 
-# requires leader scope
+# this = leader
 set_leader_flag_gender = {
 	optimize_memory
 	switch = {
@@ -329,7 +329,7 @@ set_leader_flag_gender = {
 	}
 }
 
-# requires leader scope
+# this = leader
 randomize_gender_presentation_if_unset = {
 	optimize_memory
 	if = {
@@ -373,7 +373,7 @@ randomize_gender_presentation_if_unset = {
 	}
 }
 
-# requires leader scope
+# this = leader
 clear_mandate = {
 	if = {
 		limit = { has_mandate = yes }
@@ -483,7 +483,7 @@ leader_match_gender_to_species = {
 	}
 }
 
-# any scope, but you need to escape strings with spaces "\"my string\"" of it will break here
+# any scope, but you need to escape strings with spaces "\"my string\"" or it will break here
 log_if_enabled = {
 	optimize_memory
 	if = {
