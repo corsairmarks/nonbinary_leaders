@@ -146,15 +146,13 @@ clone_and_replace_leader_if_gender_not = {
 			flag = gender_target_$GENDER$
 			days = 1
 		}
-		# gender presentation disabled because the game does not consistently respect the portrait triggers based on flags (last tested 3.6 "Orion")
-		# randomize_gender_presentation_if_unset = yes
 		if = {
 			limit = { gender = $GENDER$ }
 			log = "...\\[This.GetName] is already $GENDER$"
 			# gender presentation disabled because the game does not consistently respect the portrait triggers based on flags (last tested 3.6 "Orion")
+			# randomize_gender_presentation_if_unset = yes
 			# if = {
 			# 	limit = {
-			# 		always = no
 			# 		OR = {
 			# 			AND = {
 			# 				gender = female
@@ -195,16 +193,45 @@ clone_and_replace_leader_if_gender_not = {
 		}
 		else = {
 			log = "...\\[This.GetName] is not already $GENDER$ - cloning to change gender"
+			# gender presentation disabled because the game does not consistently respect the portrait triggers based on flags (last tested 3.6 "Orion")
+			# if = {
+			# 	limit = {
+			# 		species = {
+			# 			species_gender = not_set
+			# 			species_class_uses_gender = yes
+			# 		}
+			# 	}
+			# 	randomize_gender_presentation_if_unset = yes
+			# 	if = {
+			# 		limit = {
+			# 			has_leader_flag = presents_fem
+			# 			gender = male
+			# 		}
+			# 		log = "...\\[This.GetName] is male but wants to present feminine"
+			# 		set_is_female = yes
+			# 	}
+			# 	else_if = {
+			# 		limit = {
+			# 			has_leader_flag = presents_masc
+			# 			gender = female
+			# 		}
+			# 		log = "...\\[This.GetName] is female but wants to present masculine"
+			# 		set_is_female = no
+			# 	}
+			# }
 			prev = {
 				set_country_flag = disable_gender_clones_on_leader_spawned
 				clone_leader = {
 					target = event_target:leader_to_clone
 					gender = $GENDER$
-					species = event_target:leader_to_clone
 					effect = {
 						set_timed_leader_flag = {
 							flag = gender_reselected_clone
 							days = 1
+						}
+						if = {
+							limit = { event_target:leader_to_clone = { has_leader_flag = gender_target_indeterminable } }
+							randomize_gender_presentation_if_unset = yes
 						}
 						clone_leader_with_gender_post_process = yes
 					}
@@ -214,40 +241,11 @@ clone_and_replace_leader_if_gender_not = {
 		last_created_leader = {
 			if = {
 				limit = { has_leader_flag = gender_clone_of@event_target:leader_to_clone }
-				# if = {
-				# 	limit = { event_target:leader_to_clone = { gender = male } }
-				# 	log = "original was male"
-				# }
-				# if = {
-				# 	limit = { event_target:leader_to_clone = { gender = female } }
-				# 	log = "original was female"
-				# }
-				# if = {
-				# 	limit = {
-				# 		OR = {
-				# 			AND = {
-				# 				has_leader_flag = presents_masc
-				# 				event_target:leader_to_clone = { gender = male }
-				# 			}
-				# 			AND = {
-				# 				has_leader_flag = presents_fem
-				# 				event_target:leader_to_clone = { gender = female }
-				# 			}
-				# 		}
-				# 	}
-				# 	change_leader_portrait = event_target:leader_to_clone
-				# 	set_timed_leader_flag = {
-				# 		flag = portrait_copied_from_leader@event_target:leader_to_clone
-				# 		days = 1
-				# 	}
-				# }
-				# else = {
-					# change_leader_portrait = species
-					# set_timed_leader_flag = {
-					# 	flag = portrait_set_from_species@species
-					# 	days = 1
-					# }
-				# }
+				change_leader_portrait = event_target:leader_to_clone
+				set_timed_leader_flag = {
+					flag = portrait_copied_from_leader@event_target:leader_to_clone
+					days = 1
+				}
 				event_target:leader_to_clone = {
 					if = {
 						limit = { owner.ruler = { is_same_value = prev } }
@@ -272,20 +270,18 @@ clone_leader_with_gender_post_process = {
 		flag = gender_clone_of@event_target:leader_to_clone
 		days = 1
 	}
-	# if = {
-	# 	limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
-	# 	set_leader_flag = presents_fem
-	# }
-	# else_if = {
-	# 	limit = { event_target:leader_to_clone = { has_leader_flag = presents_masc } }
-	# 	set_leader_flag = presents_masc
-	# }
-	# else = {
-	# 	log_error = "\\[This.GetName] was not flagged as presenting female or male, presentation defaults to matching the gender"
-	# }
+	if = {
+		limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
+		set_leader_flag = presents_fem
+	}
+	else_if = {
+		limit = { event_target:leader_to_clone = { has_leader_flag = presents_masc } }
+		set_leader_flag = presents_masc
+	}
+	else = {
+		log_error = "\\[This.GetName] was not flagged as presenting female or male, presentation defaults to matching the gender"
+	}
 	set_leader_flag_gender = yes
-	change_species = event_target:leader_to_clone
-	change_leader_portrait = event_target:leader_to_clone
 	set_name = event_target:leader_to_clone
 	add_experience = event_target:leader_to_clone.trigger:has_experience # doesn't get copied implicitly when cloned
 	if = {
