@@ -2,7 +2,6 @@
 on_game_start = {
 	events = {
 		nonbinary_leaders.13 # flag mod as installed
-		nonbinary_leaders.3 # TODO: disable when done testing
 	}
 }
 
