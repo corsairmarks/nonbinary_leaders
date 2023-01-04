@@ -12,7 +12,7 @@ print_leader_info = {
 		log = "...\\[This.GetSubjectPronoun] present\\[This.GetSXX] masculine"
 	}
 	else = {
-		log = "...\\[This.GetSubjectPronoun] present\\[This.GetSXX] as the default for their gender (\\[This.GetGenderCap])"
+		log = "...\\[This.GetSubjectPronoun] present\\[This.GetSXX] as the default for \\[This.GetPossPronoun] gender (\\[This.GetGender])"
 	}
 	if = {
 		limit = { exists = owner }
