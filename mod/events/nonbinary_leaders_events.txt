@@ -40,7 +40,7 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
-		NOT = { has_country_flag = disable_gender_clones_on_leader_spawned } # not if
+		NOT = { has_country_flag = disable_gender_clones_on_leader_spawned } # not if disabled for this country
 		any_playable_country = { is_country = prev } # only for playable country types
 		# only triggers in presence of the flag or after at least 1 day has passed in order to avoid changing the gender identity of starting rulers
 		OR = {
