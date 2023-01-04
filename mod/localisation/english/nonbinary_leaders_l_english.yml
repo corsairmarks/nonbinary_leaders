@@ -5,7 +5,11 @@
  gender_unknown: "Unknown gender"
  gender_unknown_lowercase: "unknown gender"
  SPECIES_CLASS_CUSTOM: "Custom"
-
+ species_gender_indeterminable: "indeterminable"
+ species_gender_female: "mono-$female_lowercase$"
+ species_gender_male: "mono-$male_lowercase$"
+ species_gender_not_set: "binary-gendered/not_set"
+ species_gender_unknown: "unknown species gender"
  gender_identity_titlecase: "Gender Identity"
  gender_identity_uppercase: "Gender identity"
  gender_identity_lowercase: "gender identity"
