@@ -2,25 +2,7 @@
 print_leader_info = {
 	# optimize_memory # specifically not optimized to get cleaner log text
 	log = "------------------------------"
-	save_event_target_as = compare_target
-	log = "\\[This.GetTitle] \\[This.GetName], \\[This.Species.GetName], age \\[This.GetAge], gender \\[This.GetGenderCap] (\\[This.GetSubjectPronoun]/\\[This.GetObjectPronoun]/\\[This.GetPossPronoun])"
-	switch = {
-		trigger = gender
-		indeterminable = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] nonbinary/neither female nor male (indeterminable)" }
-		female = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] female" }
-		male = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] male" }
-		default = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an unknown gender" }
-	}
-	species = {
-		switch = {
-			trigger = species_gender
-			indeterminable = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a mono-indeterminable species" }
-			female = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a mono-female species" }
-			male = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a mono-male species" }
-			not_set = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a binary (not_set) species" }
-			default = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to a species with an unknown species_gender" }
-		}
-	}
+	log = "\\[This.GetTitle] \\[This.GetName], \\[This.GetAge]-year old \\[This.Species.GetName] (\\[This.Species.GetSpeciesGender]) \\[This.GetGender]"
 	if = {
 		limit = { has_leader_flag = presents_fem }
 		log = "...\\[This.GetSubjectPronoun] present\\[This.GetSXX] feminine"
@@ -34,7 +16,7 @@ print_leader_info = {
 	}
 	if = {
 		limit = { exists = owner }
-		owner = { log = "...\\[This.GetSubjectPronoun] belong\\[This.GetSXX] to country \\[This.Owner.GetRealName]" }
+		owner = { log = "...\\[Prev.GetSubjectPronoun] belong\\[Prev.GetSXX] to country \\[This.GetRealName]" }
 	}
 	switch = {
 		trigger = leader_class
@@ -55,7 +37,7 @@ print_leader_info = {
 				limit = {
 					owner = {
 						exists = heir
-						heir = { is_same_value = event_target:compare_target }
+						heir = { is_same_value = prevprev }
 					}
 				}
 				log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] the heir in an imperial government"
@@ -65,7 +47,7 @@ print_leader_info = {
 			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a governor"
 			if = {
 				limit = { exists = sector }
-				sector = { log = "...and \\[This.GetSubjectPronoun] govern\\[This.GetSXX] the \\[This.GetName] sector" }
+				sector = { log = "...and \\[Prev.GetSubjectPronoun] govern\\[Prev.GetSXX] the \\[This.GetName] sector" }
 			}
 		}
 		scientist = {
@@ -79,29 +61,29 @@ print_leader_info = {
 			}
 			if = {
 				limit = { exists = fleet }
-				fleet = { log = "...and \\[This.GetSubjectPronoun] commands fleet \\[This.GetName]" }
+				fleet = { log = "...and \\[Prev.GetSubjectPronoun] command\\[Prev.GetSXX] fleet \\[This.GetName]" }
 			}
 		}
 		admiral = {
 			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an admiral"
 			if = {
 				limit = { exists = fleet }
-				fleet = { log = "...and \\[This.GetSubjectPronoun] command\\[This.GetSXX] fleet \\[This.GetName]" }
+				fleet = { log = "...and \\[Prev.GetSubjectPronoun] command\\[Prev.GetSXX] fleet \\[This.GetName]" }
 			}
 		}
 		general = {
 			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a general"
 			if = {
 				limit = { exists = fleet }
-				fleet = { log = "...and \\[This.GetSubjectPronoun] command\\[This.GetSXX] fleet \\[This.GetName]" }
+				fleet = { log = "...and \\[Prev.GetSubjectPronoun] command\\[Prev.GetSXX] fleet \\[This.GetName]" }
 			}
 			owner = {
 				random_owned_army = {
 					limit = {
 						exists = leader
-						leader = { is_same_value = event_target:compare_target }
+						leader = { is_same_value = prevprevprev }
 					}
-					log = "...and \\[This.GetSubjectPronoun] command\\[This.GetSXX] army \\[This.GetName]"
+					log = "...and \\[PrevPrev.GetSubjectPronoun] command\\[PrevPrev.GetSXX] army \\[This.GetName]"
 				}
 			}
 		}
@@ -109,11 +91,11 @@ print_leader_info = {
 		default = { log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] an unknown class" }
 	}
 	if = {
-		limit = { owner = { any_pool_leader = { is_same_value = event_target:compare_target } } }
+		limit = { owner = { any_pool_leader = { is_same_value = prevprev } } }
 		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] available to hire (pool)"
 	}
 	if = {
-		limit = { owner = { any_owned_leader = { is_same_value = event_target:compare_target } } }
+		limit = { owner = { any_owned_leader = { is_same_value = prevprev } } }
 		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] hired (owned)"
 	}
 	if = {
