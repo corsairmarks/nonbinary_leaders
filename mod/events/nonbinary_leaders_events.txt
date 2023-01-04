@@ -70,6 +70,11 @@ country_event = {
 					factor = 8
 					event_target:leader_to_clone.species = { species_gender = indeterminable }
 				}
+				modifier = {
+					factor = 0
+					has_global_flag = nonbinary_leaders_force_all_spawned
+					event_target:leader_to_clone.species = { species_gender = indeterminable }
+				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
 				clone_and_replace_leader_if_gender_not = { GENDER = indeterminable }
 			}
@@ -89,6 +94,7 @@ country_event = {
 				modifier = {
 					factor = 0
 					has_global_flag = nonbinary_leaders_force_all_spawned
+					event_target:leader_to_clone.species = { species_gender = female }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
 				clone_and_replace_leader_if_gender_not = { GENDER = female }
@@ -109,6 +115,7 @@ country_event = {
 				modifier = {
 					factor = 0
 					has_global_flag = nonbinary_leaders_force_all_spawned
+					event_target:leader_to_clone.species = { species_gender = male }
 				}
 				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
 				clone_and_replace_leader_if_gender_not = { GENDER = male }
