@@ -37,7 +37,6 @@ Leaders which select to identify as nonbinary ([b]indeterminable[/b]) will not s
 
 Finally, it is not possible to allow for selecting gender-nonbinary rulers during species creation. The logic for the species customization screens is part of the core Stellaris game and is not alterable by modders.
 
-
 [h2]Changelog[/h2]
 See [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2528614880]Change Notes[/url]
 
