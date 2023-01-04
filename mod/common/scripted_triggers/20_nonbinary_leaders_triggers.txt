@@ -54,22 +54,17 @@ is_custom_species_class = {
 
 # this = leader
 allows_fem_portraits_leader = {
-	optimize_memory
-	allows_fem_portraits_pop = yes
+	# optimize_memory
+	# log_leader_info_short = yes
 	OR = {
-		# has_leader_flag = presents_fem
-		# AND = {
-		# 	exists = species
-		# 	species = { species_gender = female }
-		# }
-		# AND = {
-			gender = female
-		# 	NOT = { has_leader_flag = presents_masc }
-		# }
-		# AND = {
-			gender = indeterminable
-		# 	has_gender_presentation_flag = no
-		# }
+		has_leader_flag = presents_fem
+		AND = {
+			NOT = { has_leader_flag = presents_masc }
+			OR = {
+				gender = indeterminable
+				gender = female
+			}
+		}
 	}
 }
 
@@ -88,22 +83,17 @@ allows_fem_portraits_pop = {
 
 # this = leader
 allows_masc_portraits_leader = {
-	optimize_memory
-	# allows_masc_portraits_pop = yes
+	# optimize_memory
+	# log_leader_info_short = yes
 	OR = {
-		# has_leader_flag = presents_masc
-		# AND = {
-		# 	exists = species
-		# 	species = { species_gender = male }
-		# }
-		# AND = {
-			gender = male
-		# 	NOT = { has_leader_flag = presents_fem }
-		# }
-		# AND = {
-			gender = indeterminable
-		# 	has_gender_presentation_flag = no
-		# }
+		has_leader_flag = presents_masc
+		AND = {
+			NOT = { has_leader_flag = presents_fem }
+			OR = {
+				gender = indeterminable
+				gender = male
+			}
+		}
 	}
 }
 
@@ -180,4 +170,9 @@ leader_species_gender_change_requires_clone = {
 			from = { species_can_set_is_female = no }
 		}
 	}
+}
+
+# this = leader
+log_leader_info_short = {
+	log = "\\[This.GetTitle] \\[This.GetName], \\[This.GetAge]-year old \\[This.Species.GetName] (\\[This.Species.GetSpeciesGender]) \\[This.GetGender]"
 }
