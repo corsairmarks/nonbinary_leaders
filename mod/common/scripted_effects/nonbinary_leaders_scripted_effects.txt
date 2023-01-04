@@ -279,7 +279,7 @@ clone_leader_with_gender_post_process = {
 		set_leader_flag = presents_masc
 	}
 	else = {
-		log_error = "\\[This.GetName] was not flagged as presenting female or male, presentation defaults to matching the gender"
+		log = "\\[This.GetName] was not flagged as presenting female or male, presentation defaults to matching the gender"
 	}
 	set_leader_flag_gender = yes
 	set_name = event_target:leader_to_clone
