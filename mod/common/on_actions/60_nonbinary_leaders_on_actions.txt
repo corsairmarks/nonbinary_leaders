@@ -1,11 +1,4 @@
 # fired when the game starts
-on_game_start = {
-	events = {
-		nonbinary_leaders.13 # flag mod as installed
-	}
-}
-
-# fired when the game starts
 # this = country
 on_game_start_country = {
 	events = {
@@ -13,15 +6,8 @@ on_game_start_country = {
 	}
 }
 
-# fired when loading a single-player game
-on_single_player_save_game_load = {
-	events = {
-		nonbinary_leaders.13 # flag mod as installed
-	}
-}
-
 # fired when pressing begin in the intro window
-# THIS = country to press begin
+# this = country to press begin
 on_press_begin = {
 	events = {
 		nonbinary_leaders.2
@@ -29,8 +15,8 @@ on_press_begin = {
 }
 
 # fired when a new leader is generated for an empire, to be available for recruitment
-# THIS = country
-# FROM = leader
+# this = country
+# from = leader
 on_leader_spawned = {
 	events = {
 		nonbinary_leaders.1

@@ -1,18 +1,5 @@
 namespace = nonbinary_leaders
 
-# flag mod as active
-event = {
-	id = nonbinary_leaders.13
-	hide_window = yes
-	is_triggered_only = yes
-	trigger = {
-		NOT = { has_global_flag = nonbinary_leaders_installed }
-	}
-	immediate = {
-		set_global_flag = nonbinary_leaders_installed
-	}
-}
-
 # log info about every owned and pool leader
 # root = country
 country_event = {
