@@ -66,6 +66,7 @@ Finally, it is not possible to allow for selecting gender-nonbinary rulers durin
 	* Add support for toxoid portraits with sexual dimorphism
 	* Use new `species_gender` trigger to support the new mono-gender species option for all base game for all portraits with sexual dimorphism (Paradox only added support for Humans)
 	* Substitute my nonbinary icon for the indeterminable one added in Stellaris version 3.2 "Herbert"
+* 4.0.0 Add a compatibility trigger for other mods to check whether this one is active, remove old compatibility global flag
 
 ## Source Code
 
