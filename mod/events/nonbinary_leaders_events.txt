@@ -127,7 +127,6 @@ country_event = {
 	id = nonbinary_leaders.2
 	is_triggered_only = yes
 	hide_window = yes
-	fire_only_once = yes
 	trigger = { NOT = { has_country_flag = nonbinary_leaders_game_begun } }
 	immediate = {
 		set_country_flag = nonbinary_leaders_game_begun
