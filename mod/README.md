@@ -30,13 +30,13 @@ If you would like me to implement a compatibility patch (to support feminine/mas
 
 Built for Stellaris version 3.6 "Orion."  Not compatible with achievements.
 
-### Known Conflicts
-
-Any other mods that adjust the human portrait groups (not individual portraits), including my mod [Human Portraits: Unified](https://steamcommunity.com/sharedfiles/filedetails/?id=2820018928).
-
 ### When to Install
 
 This mod can be added to or removed from your savegame safely without issue.  If you remove this mod, any leaders which already have had their gender identities set will remain as-is but new leaders will only spawn to match the gender usage of their species class.  Leader portraits will revert to the default selection criteria.  Although leaders retain any custom flags set on them, this doesn't affect gameplay.
+
+### Known Conflicts
+
+Any other mods that adjust the human portrait groups (not individual portraits), including my mod [Human Portraits: Unified](https://steamcommunity.com/sharedfiles/filedetails/?id=2820018928).
 
 ## Known Issues
 

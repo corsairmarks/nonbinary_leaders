@@ -30,6 +30,9 @@ Built for Stellaris version 3.6 "Orion." Not compatible with achievements.
 [h3]When to Install[/h3]
 This mod can be added to or removed from your savegame safely without issue. If you remove this mod, existing leaders will remain as-is but new leaders will only spawn to match the gender usage of their species class and portraits will revert to the default selection criteria. Leaders retain custom flags set on them, but this doesn't affect gameplay.
 
+[h3]Known Conflicts[/h3]
+Any other mods that adjust the human portrait groups (not individual portraits), including my mod [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2820018928]Human Portraits: Unified[/url].
+
 [h2]Known Issues[/h2]
 Only leaders that are spawned into the leader pool (whether the pool is for a player or an AI) will have a chance to randomize their gender identity. Leaders created through other means (for example, the [b]create_leader[/b] and [b]clone_leader[/b] effects) are unaffected. Generally those are special event leaders and are intended to have a particular gender.
 
