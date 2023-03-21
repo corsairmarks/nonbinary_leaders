@@ -76,7 +76,7 @@ defined_text = {
 			species = {
 				OR = {
 					is_species_class = NECROID
-					is_species_class = PRE_NECROID
+					# is_species_class = PRE_NECROID
 				}
 			}
 		}
