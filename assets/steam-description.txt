@@ -19,7 +19,7 @@ This mod is implemented via an event attached to [b]on_leader_spawned[/b] to add
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2499031295]Leader Traits: All Eligible Species Traits[/url]
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2553806265]Leader Traits: Enhanced Randomisation[/url]
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2498166286]Leader Traits: Scientist AI Assistant Upgrader[/url]
-[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2553818684]Retain Leaders from Integrated Subjects[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2553818684]Retain Leaders from Integrated Subjects & Pre-FTL Civilizations[/url]
 [/list]
 As discussed above, a compatibility patch is necessary to fully support varying gender presentation for other mods that add species portraits. By default, this mod supports all the built-in, gendered species classes and any sexually dimorphic portraits in each of those classes.
 
