@@ -4,7 +4,7 @@ Would you like your leaders to have a chance to have gender identities that vary
 The effects are more noticeable for species portraits that have sexual dimorphism, but that is not a requirement.
 
 [h1]Changes[/h1]
-Stellaris supports 3 gender states in code ([b]male[/b], [b]female[/b], [b]indeterminable[/b]), which correspond to the pronouns he, she, and they. Whether a species uses binary male/female genders (the default) or consists solely of a single gender identity is configurable during empire creation in the Species Name tab. This mod adds a chance for leaders adopt a new gender identity when they are spawned by the game (20% chance to change from their assigned gender identity - 10% for each of the other two genders).
+Stellaris supports 3 gender states in code ([b]male[/b], [b]female[/b], [b]indeterminable[/b]), which correspond to the pronouns he, she, and they. Whether a species uses binary female/male genders (the default) or consists solely of a single gender identity is configurable during empire creation in the Species Name tab. This mod adds a chance for leaders adopt a new gender identity when they are spawned by the game (20% chance to change from their assigned gender identity - 10% for each of the other two genders).
 
 With this mod, leaders of a binary-gendered species who become indeterminable have a 50/50 chance of presenting as feminine or masculine. Unfortunately due to underlying game changes, it is no longer possible to influence which portrait a leader uses via in-game flags. Although possible in the past, that means leaders will no longer be able to have portraits where their gender presentation is different than their gender identity. Females will always present as feminine, males will always present as masculine, and indeterminables will randomly present as either feminine or masculine.
 
@@ -15,9 +15,8 @@ Lastly, you can log detailed information about all of your leaders (owned and po
 [h2]Compatibility[/h2]
 This mod is implemented via an event attached to [b]on_leader_spawned[/b] to add the % chance to reroll a leader's gender identity. That part should be widely compatible with other mods, including my other mods that also affect leader spawning:
 [list]
-[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2496357447]Special Leadership Privileges for Battle Thralls and Bio-Trophies[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2496357447]Special Leadership Privileges for Battle Thralls & Bio-Trophies[/url]
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2499031295]Leader Traits: All Eligible Species Traits[/url]
-[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2553806265]Leader Traits: Enhanced Randomisation[/url]
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2498166286]Leader Traits: Scientist AI Assistant Upgrader[/url]
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2553818684]Retain Leaders from Integrated Subjects & Pre-FTL Civilizations[/url]
 [/list]
@@ -25,7 +24,7 @@ As discussed above, a compatibility patch is necessary to fully support varying 
 
 If you would like me to implement a compatibility patch (to support feminine/masculine presentation from sexual dimorphism), please leave a comment asking nicely, what you want, and with a link to the mod you want to be compatible.
 
-Built for Stellaris version 3.6 "Orion." Not compatible with achievements.
+Built for Stellaris version 3.8 "Gemini." Not compatible with achievements.
 
 [h3]When to Install[/h3]
 This mod can be added to or removed from your savegame safely without issue. If you remove this mod, existing leaders will remain as-is but new leaders will only spawn to match the gender usage of their species class and portraits will revert to the default selection criteria. Leaders retain custom flags set on them, but this doesn't affect gameplay.
@@ -38,7 +37,7 @@ Only leaders that are spawned into the leader pool (whether the pool is for a pl
 
 Leaders which select to identify as nonbinary ([b]indeterminable[/b]) will not show a gender in their tooltip. This is as-designed by Paradox, because the original purpose of the third gender is for non-gendered species (i.e. has no concept of gender at all). Showing the line "Gender: Indeterminable" for every one of their leaders would be redundant.
 
-Finally, it is not possible to allow for selecting gender-nonbinary rulers during species creation. The logic for the species customization screens is part of the core Stellaris game and is not alterable by modders.
+Finally, it is not possible to allow for selecting rulers that do not follow the gender norms of their species during empire creation. The logic for the species customization screens is part of the core Stellaris game and is not alterable by modders.
 
 [h2]Changelog[/h2]
 See [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2528614880]Change Notes[/url]
