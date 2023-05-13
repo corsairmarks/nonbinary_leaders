@@ -27,48 +27,45 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
-		NOT = { has_country_flag = disable_gender_clones_on_leader_spawned } # not if disabled for this country
 		any_playable_country = { is_country = prev } # only for playable country types
+		NOT = { has_country_flag = spawning_renowned_leader } # renowned leaders are intended to be specific genders
 		# only triggers in presence of the flag or after at least 1 day has passed in order to avoid changing the gender identity of starting rulers
 		OR = {
-			has_country_flag = nonbinary_leaders_game_begun
+			has_country_flag = game_started
 			days_passed > 0
 		}
 		exists = from
-		from = {
-			NOT = { has_leader_flag = leader_replaced_by_clone } # in case something else already cloned the leader
-			should_roll_to_reconsider_gender_identity = yes
-		}
+		from = { should_roll_to_reconsider_gender_identity = yes }
 		any_pool_leader = { is_same_value = from }
 	}
 	immediate = {
-		from = {
-			save_event_target_as = leader_to_clone
-			set_timed_leader_flag = {
-				flag = clone_should_be_recruitable
-				days = 1
-			} 
-		}
-		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader \\[leader_to_clone.GetTitle] \\[leader_to_clone.GetName] of gendered species class \\[leader_to_clone.GetSpeciesClassOrCustom]...\"" }
-		log_if_enabled = { MESSAGE = "\"...and [leader_to_clone.GetSubjectPronoun] initially identif[leader_to_clone.GetIesY] as \\[leader_to_clone.GetGender] ([leader_to_clone.GetSubjectPronoun]/[leader_to_clone.GetObjectPronoun]/[leader_to_clone.GetPossPronoun].)\"" }
+		log_if_enabled = { MESSAGE = "\"nonbinary_leaders.1 detected spawned leader [From.GetTitle] [From.GetName] of gendered species class [From.GetSpeciesClassOrCustom]...\"" }
+		log_if_enabled = { MESSAGE = "\"...and [From.GetSubjectPronoun] initially identif[From.GetIesY] as [From.GetGender] ([From.GetSubjectPronoun]/[From.GetObjectPronoun]/[From.GetPossPronoun].)\"" }
 		random_list = {
 			10 = {
 				modifier = {
 					factor = 8
-					event_target:leader_to_clone.species = { species_gender = indeterminable }
+					from.species = { species_gender = indeterminable }
 				}
 				modifier = {
 					factor = 0
 					has_global_flag = nonbinary_leaders_force_all_spawned
-					event_target:leader_to_clone.species = { species_gender = indeterminable }
+					from.species = { species_gender = indeterminable }
 				}
-				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as nonbinary.\"" }
-				clone_and_replace_leader_if_gender_not = { GENDER = indeterminable }
+				log_if_enabled = { MESSAGE = "\"...[From.GetName] chose to identify as nonbinary.\"" }
+				from = {
+					set_gender = indeterminable
+					randomize_gender_presentation_if_unset = yes
+					if = {
+						limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+						print_leader_info = yes
+					}
+				}
 			}
 			10 = {
 				modifier = {
 					factor = 8
-					event_target:leader_to_clone = {
+					from = {
 						OR = {
 							species = { species_gender = female }
 							AND = {
@@ -81,20 +78,27 @@ country_event = {
 				modifier = {
 					factor = 0
 					has_global_flag = nonbinary_leaders_force_all_spawned
-					event_target:leader_to_clone.species = {
+					from.species = {
 						OR = {
 							species_gender = not_set
 							species_gender = female
 						}
 					}
 				}
-				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as female.\"" }
-				clone_and_replace_leader_if_gender_not = { GENDER = female }
+				log_if_enabled = { MESSAGE = "\"...[From.GetName] chose to identify as female.\"" }
+				from = {
+					set_gender = female
+					randomize_gender_presentation_if_unset = yes
+					if = {
+						limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+						print_leader_info = yes
+					}
+				}
 			}
 			10 = {
 				modifier = {
 					factor = 8
-					event_target:leader_to_clone = {
+					from = {
 						OR = {
 							species = { species_gender = male }
 							AND = {
@@ -107,29 +111,24 @@ country_event = {
 				modifier = {
 					factor = 0
 					has_global_flag = nonbinary_leaders_force_all_spawned
-					event_target:leader_to_clone.species = {
+					from.species = {
 						OR = {
 							species_gender = not_set
 							species_gender = male
 						}
 					}
 				}
-				log_if_enabled = { MESSAGE = "\"...[leader_to_clone.GetName] chose to identify as male.\"" }
-				clone_and_replace_leader_if_gender_not = { GENDER = male }
+				log_if_enabled = { MESSAGE = "\"...[From.GetName] chose to identify as male.\"" }
+				from = {
+					set_gender = male
+					randomize_gender_presentation_if_unset = yes
+					if = {
+						limit = { has_global_flag = nonbinary_leaders_enable_tracing }
+						print_leader_info = yes
+					}
+				}
 			}
 		}
-	}
-}
-
-# triggered by on_press_begin
-# root = country
-country_event = {
-	id = nonbinary_leaders.2
-	is_triggered_only = yes
-	hide_window = yes
-	trigger = { NOT = { has_country_flag = nonbinary_leaders_game_begun } }
-	immediate = {
-		set_country_flag = nonbinary_leaders_game_begun
 	}
 }
 
@@ -164,7 +163,6 @@ event = {
 		}
 	}
 }
-
 
 # triggered by on_game_start_country
 # root = country
@@ -350,46 +348,22 @@ leader_event = {
 	is_triggered_only = yes
 	hide_window = yes
 	immediate = {
-		save_event_target_as = leader_to_clone
-		set_leader_flag = no_change_portrait
 		owner = {
-			if = {
-				limit = { event_target:leader_to_clone = { has_leader_flag = gender_indeterminable } }
-				clone_and_replace_leader_if_gender_not = { GENDER = indeterminable }
-			}
-			else_if = {
-				limit = { event_target:leader_to_clone = { has_leader_flag = gender_female } }
-				clone_and_replace_leader_if_gender_not = { GENDER = female }
-			}
-			else_if = {
-				limit = { event_target:leader_to_clone = { has_leader_flag = gender_male } }
-				clone_and_replace_leader_if_gender_not = { GENDER = male }
-			}
-			else = {
-				event_target:leader_to_clone = {
-					switch = {
-						trigger = gender
-						indeterminable = { owner = { clone_and_replace_leader_if_gender_not = { GENDER = indeterminable } } }
-						female = { owner = { clone_and_replace_leader_if_gender_not = { GENDER = female } } }
-						male = { owner = { clone_and_replace_leader_if_gender_not = { GENDER = male } } }
-						default = {
-							log_error = "somehow ruler [This.GetTitle] [This.GetName] ([This.Owner.GetRealName]) had no gender flag and no gender"
-						}
-					}
-				}
-			}
-			if = {
-				limit = { event_target:leader_to_clone = { has_leader_flag = leader_replaced_by_clone } }
-				event_target:leader_to_clone = { clear_mandate = yes }
-				event_target:gender_clone = { change_leader_portrait = event_target:leader_to_clone }
-				assign_leader = event_target:gender_clone
-				event_target:leader_to_clone = {
-					kill_leader = {
-						fire = yes
-						show_notification = no
-					}
-				}
+			clone_leader = {
+				target = prev
+				effect = { save_event_target_as = cloned_leader }
 			}
 		}
+		switch = {
+			trigger = has_leader_flag
+			gender_indeterminable = { set_gender = indeterminable }
+			gender_female = { set_gender = female }
+			gender_male = { set_gender = male }
+			default = {
+				log_error = "somehow ruler [This.GetTitle] [This.GetName] ([This.Owner.GetRealName]) had no gender flag - gender was NOT changed"
+			}
+		}
+		change_leader_portrait = event_target:cloned_leader
+		event_target:cloned_leader = { kill_leader = { show_notification = no } }
 	}
 }

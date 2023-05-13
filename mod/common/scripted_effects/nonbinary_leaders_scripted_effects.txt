@@ -20,29 +20,6 @@ print_leader_info = {
 	}
 	switch = {
 		trigger = leader_class
-		ruler = {
-			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a ruler"
-			switch = {
-				trigger = pre_ruler_leader_class
-				ruler = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a ruler - how the heck did that happen?" }
-				governor = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a governor" }
-				scientist = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a scientist" }
-				admiral = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously an admiral" }
-				general = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously a general" }
-				envoy = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously an envoy" }
-				default = { log = "...\\[This.GetSubjectPronoun] \\[This.GetWasWere] previously an unknown class" }
-			}
-			log = "...use\\[This.GetSXX] regnal name \\[This.GetRegnalName]"
-			if = {
-				limit = {
-					owner = {
-						exists = heir
-						heir = { is_same_value = prevprev }
-					}
-				}
-				log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] the heir in an imperial government"
-			}
-		}
 		governor = {
 			log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] a governor"
 			if = {
@@ -107,15 +84,43 @@ print_leader_info = {
 	}
 	if = {
 		limit = { exists = fleet }
-		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] a fleet scope"
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] a fleet scope (\\[This.Fleet.GetName])"
 	}
 	if = {
-		limit = { exists = sector }
-		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] a sector scope"
+		limit = { exists = planet }
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] a planet scope (\\[This.Planet.GetName])"
 	}
 	if = {
-		limit = { leader_of_faction = yes }
-		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] leader of the faction \\[This.GetPopFactionName]"
+		limit = { is_gestalt = yes }
+		log = "...\\[This.GetSubjectPronoun] \\[This.GetHasHave] gestalt ethos"
+	}
+	else_if = {
+		limit = { is_militarist = yes }
+		log = "...\\[This.GetSubjectPronoun] follow\\[This.GetSXX] militarist ethos"
+	}
+	else_if = {
+		limit = { is_egalitarian = yes }
+		log = "...\\[This.GetSubjectPronoun] follow\\[This.GetSXX] egalitarian ethos"
+	}
+	else_if = {
+		limit = { is_materialist = yes }
+		log = "...\\[This.GetSubjectPronoun] follow\\[This.GetSXX] materialist ethos"
+	}
+	else_if = {
+		limit = { is_pacifist = yes }
+		log = "...\\[This.GetSubjectPronoun] follow\\[This.GetSXX] pacifist ethos"
+	}
+	else_if = {
+		limit = { is_xenophile = yes }
+		log = "...\\[This.GetSubjectPronoun] follow\\[This.GetSXX] xenophile ethos"
+	}
+	else_if = {
+		limit = { is_authoritarian = yes }
+		log = "...\\[This.GetSubjectPronoun] follow\\[This.GetSXX] authoritarian ethos"
+	}
+	else_if = {
+		limit = { is_spiritualist = yes }
+		log = "...\\[This.GetSubjectPronoun] follow\\[This.GetSXX] spiritualist ethos"
 	}
 	if = {
 		limit = { exists = pop_faction }
@@ -130,175 +135,6 @@ print_leader_info = {
 		log = "...\\[This.GetSubjectPronoun] \\[This.GetIsAre] NOT an event leader"
 	}
 	log = "------------------------------"
-}
-
-# this = country
-# event_target:leader_to_clone = leader, source for the clone's properties
-# requires 1 parameter:
-#	$GENDER$ as a gender
-clone_and_replace_leader_if_gender_not = {
-	optimize_memory
-	# notes: the presentation flags do not work reliably on male/female gendered leadewr, even with cloning
-	# can I try just plain randomizing m/f portraits when a leader spawns? Seems my trigger doesn't read the flags
-	# also need to try putting some log statements in the triggers (might need scripted_loc to output gender)
-	event_target:leader_to_clone = {
-		set_timed_leader_flag = {
-			flag = gender_target_$GENDER$
-			days = 1
-		}
-		if = {
-			limit = { gender = $GENDER$ }
-			log = "...\\[This.GetName] is already $GENDER$"
-			# gender presentation disabled because the game does not consistently respect the portrait triggers based on flags (last tested 3.6 "Orion")
-			# randomize_gender_presentation_if_unset = yes
-			# if = {
-			# 	limit = {
-			# 		OR = {
-			# 			AND = {
-			# 				gender = female
-			# 				has_leader_flag = presents_masc
-			# 			}
-			# 			AND = {
-			# 				gender = male
-			# 				has_leader_flag = presents_fem
-			# 			}
-			# 		}
-			# 	}
-			# 	prev = {
-			# 		set_country_flag = disable_gender_clones_on_leader_spawned
-			# 		clone_leader = {
-			# 			target = event_target:leader_to_clone
-			# 			effect = {
-			# 				set_timed_leader_flag = {
-			# 					flag = gender_retained_clone
-			# 					days = 1
-			# 				}
-			# 				clone_leader_with_gender_post_process = yes
-			# 			}
-			# 		}
-			# 	}
-			# }
-			# else = {
-				set_timed_leader_flag = {
-					flag = not_cloned
-					days = 1
-				}
-				set_leader_flag_gender = yes
-				if = {
-					limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-					log = "...\\[This.GetName] did not change gender identity or gender presentation, and therefore was not cloned"
-					print_leader_info = yes
-				}
-			# }
-		}
-		else = {
-			log = "...\\[This.GetName] is not already $GENDER$ - cloning to change gender"
-			# gender presentation disabled because the game does not consistently respect the portrait triggers based on flags (last tested 3.6 "Orion")
-			# if = {
-			# 	limit = {
-			# 		species = {
-			# 			species_gender = not_set
-			# 			species_class_uses_gender = yes
-			# 		}
-			# 	}
-			# 	randomize_gender_presentation_if_unset = yes
-			# 	if = {
-			# 		limit = {
-			# 			has_leader_flag = presents_fem
-			# 			gender = male
-			# 		}
-			# 		log = "...\\[This.GetName] is male but wants to present feminine"
-			# 		set_is_female = yes
-			# 	}
-			# 	else_if = {
-			# 		limit = {
-			# 			has_leader_flag = presents_masc
-			# 			gender = female
-			# 		}
-			# 		log = "...\\[This.GetName] is female but wants to present masculine"
-			# 		set_is_female = no
-			# 	}
-			# }
-			prev = {
-				set_country_flag = disable_gender_clones_on_leader_spawned
-				clone_leader = {
-					target = event_target:leader_to_clone
-					gender = $GENDER$
-					effect = {
-						set_timed_leader_flag = {
-							flag = gender_reselected_clone
-							days = 1
-						}
-						if = {
-							limit = { event_target:leader_to_clone = { has_leader_flag = gender_target_indeterminable } }
-							randomize_gender_presentation_if_unset = yes
-						}
-						clone_leader_with_gender_post_process = yes
-					}
-				}
-			}
-		}
-		last_created_leader = {
-			if = {
-				limit = { has_leader_flag = gender_clone_of@event_target:leader_to_clone }
-				change_leader_portrait = event_target:leader_to_clone
-				set_timed_leader_flag = {
-					flag = portrait_copied_from_leader@event_target:leader_to_clone
-					days = 1
-				}
-				event_target:leader_to_clone = {
-					if = {
-						limit = { owner.ruler = { is_same_value = prev } }
-						clear_mandate = yes
-						unassign_leader = this
-					}
-					kill_leader = {
-						fire = yes
-						show_notification = no
-					}
-				}
-			}
-		}
-	}
-}
-
-# this = leader
-# event_target:leader_to_clone = leader, source for the clone's properties
-clone_leader_with_gender_post_process = {
-	optimize_memory
-	set_timed_leader_flag = {
-		flag = gender_clone_of@event_target:leader_to_clone
-		days = 1
-	}
-	if = {
-		limit = { event_target:leader_to_clone = { has_leader_flag = presents_fem } }
-		set_leader_flag = presents_fem
-	}
-	else_if = {
-		limit = { event_target:leader_to_clone = { has_leader_flag = presents_masc } }
-		set_leader_flag = presents_masc
-	}
-	else = {
-		log = "\\[This.GetName] was not flagged as presenting female or male, presentation defaults to matching the gender"
-	}
-	set_leader_flag_gender = yes
-	set_name = event_target:leader_to_clone
-	add_experience = event_target:leader_to_clone.trigger:has_experience # doesn't get copied implicitly when cloned
-	if = {
-		limit = { event_target:leader_to_clone = { has_leader_flag = clone_should_be_recruitable } }
-		recruitable = no
-		recruitable = yes
-	}
-	if = {
-		limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-		print_leader_info = yes
-	}
-	event_target:leader_to_clone = {
-		set_leader_flag = leader_replaced_by_clone # other events may fire before the leader is removed - this is to prevent duplicate cloning
-		set_leader_flag = leader_replaced_by_clone@event_target:leader_to_clone
-	}
-	save_event_target_as = gender_clone
-	owner = { remove_country_flag = disable_gender_clones_on_leader_spawned }
 }
 
 # this = leader
@@ -357,109 +193,53 @@ randomize_gender_presentation_if_unset = {
 	}
 }
 
-# this = leader
-clear_mandate = {
-	if = {
-		limit = { has_mandate = yes }
-		if = {
-			limit = { has_global_flag = nonbinary_leaders_enable_tracing }
-			log = "\\[This.GetName] has a mandate, attempting to end the event chain..."
-		}
-		switch = {
-			trigger = has_mandate
-			# from common/mandates/00_mandates.txt
-			mandate_orbital_researcher = { owner = { end_event_chain = mandate_orbresearch_chain } }
-			mandate_miner = { owner = { end_event_chain = mandate_miner_chain } }
-			mandate_peacemaker = { owner = { end_event_chain = mandate_peacemaker_chain } }
-			mandate_shipwright = { owner = { end_event_chain = mandate_shipwright_chain } }
-			mandate_monthly_energy = { owner = { end_event_chain = mandate_monthly_energy_chain } }
-			mandate_monthly_minerals = { owner = { end_event_chain = mandate_monthly_minerals_chain } }
-			mandate_monthly_food = { owner = { end_event_chain = mandate_monthly_food_chain } }
-			mandate_monthly_alloys = { owner = { end_event_chain = mandate_monthly_alloys_chain } }
-			mandate_monthly_consumer_goods = { owner = { end_event_chain = mandate_monthly_consumer_goods_chain } }
-			mandate_district_city = { owner = { end_event_chain = mandate_district_city_chain } }
-			mandate_district_generator = { owner = { end_event_chain = mandate_district_generator_chain } }
-			mandate_district_mining = { owner = { end_event_chain = mandate_district_mining_chain } }
-			mandate_district_farming = { owner = { end_event_chain = mandate_district_farming_chain } }
-			# from common/event_chains/00_mandate_chains.txt (seem to be deleted mandates, but the chains still checked in events/mandate_events.txt)
-			# mandate_separatist = { owner = { end_event_chain = mandate_separatist_chain } }
-			# mandate_emancipation = { owner = { end_event_chain = mandate_emancipation_chain } }
-			# mandate_emancipation2 = { owner = { end_event_chain = mandate_emancipation2_chain } }
-			# mandate_slaver = { owner = { end_event_chain = mandate_slaver_chain } }
-			# mandate_xenopurge = { owner = { end_event_chain = mandate_xenopurge_chain } }
-			# mandate_nationalist = { owner = { end_event_chain = mandate_nationalist_chain } }
-		}
-	}
-}
-
 # changes a gender's leader to match the norms for their species (possibly cloning and replacing them)
 # this = leader, with new species
 # from = species, previous
 leader_match_gender_to_species = {
 	optimize_memory
-	if = {
-		limit = { leader_species_gender_change_requires_clone = no }
-		species = {
-			switch = {
-				trigger = species_gender
-				# if indeterminable, then nothing should change
-				female = {
-					prev = {
-						if = {
-							limit = { NOT = { gender = female } }
-							set_is_female = yes
-						}
-					}
-				}
-				male = {
-					prev = {
-						if = {
-							limit = { NOT = { gender = male } }
-							set_is_female = no
-						}
-					}
-				}
-				not_set = {
-					prev = {
-						if = {
-							limit = {
-								species_class_uses_gender = yes
-								NOR = {
-									gender = female
-									gender = male
-								}
-							}
-							random_list = {
-								50 = { set_is_female = yes }
-								50 = { set_is_female = no }
-							}
-						}
+	species = {
+		switch = {
+			trigger = species_gender
+			# if indeterminable, then nothing should change
+			female = {
+				prev = {
+					if = {
+						limit = { NOT = { gender = female } }
+						set_gender = female
 					}
 				}
 			}
-		}
-	}
-	else = {
-		save_event_target_as = leader_to_clone
-		owner = { save_event_target_as = leader_owner } # must stay an event_target - the game dislikes prev.owner in the switch statement
-		species = {
-			switch = {
-				trigger = species_gender
-				indeterminable = { prev = { clone_and_replace_leader_if_gender_not = { GENDER = indeterminable } } }
-				female = { prev = { clone_and_replace_leader_if_gender_not = { GENDER = female } } }
-				male = { prev = { clone_and_replace_leader_if_gender_not = { GENDER = male } } }
-				not_set = {
+			male = {
+				prev = {
 					if = {
-						limit = { species_class_uses_gender = yes }
-						prev = {
-							random_list = {
-								50 = { clone_and_replace_leader_if_gender_not = { GENDER = female } }
-								50 = { clone_and_replace_leader_if_gender_not = { GENDER = male } }
+						limit = { NOT = { gender = male } }
+						set_gender = male
+					}
+				}
+			}
+			indeterminable = {
+				prev = {
+					if = {
+						limit = { NOT = { gender = indeterminable } }
+						set_gender = indeterminable
+					}
+				}
+			}
+			not_set = {
+				prev = {
+					if = {
+						limit = {
+							species_class_uses_gender = yes
+							NOR = {
+								gender = female
+								gender = male
 							}
 						}
-					}
-					else = {
-						prev = { clone_and_replace_leader_if_gender_not = { GENDER = indeterminable } }
+						random_list = {
+							50 = { set_gender = female }
+							50 = { set_gender = male }
+						}
 					}
 				}
 			}

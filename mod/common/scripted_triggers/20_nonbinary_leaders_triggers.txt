@@ -10,52 +10,13 @@ species_class_uses_gender = {
 		is_species_class = EXD # extradimensionals: unbidden/aberrant/vehement
 		is_species_class = SALVAGER # salvager enclave species
 		is_species_class = SHROUDWALKER # shroudwalker enclave species
-	}
-}
-
-# this = species
-is_custom_species_class = {
-	optimize_memory
-	species = {
-		NOR = {
-			is_species_class = HUM
-			is_species_class = MAM
-			is_species_class = PRE_MAM
-			is_species_class = REP
-			is_species_class = PRE_REP
-			is_species_class = AVI
-			is_species_class = PRE_AVI
-			is_species_class = ART
-			is_species_class = PRE_ART
-			is_species_class = FUN
-			is_species_class = PRE_FUN
-			is_species_class = MOL
-			is_species_class = PRE_MOL
-			is_species_class = AQUATIC
-			is_species_class = PRE_AQUATIC
-			is_species_class = NECROID
-			# is_species_class = PRE_NECROID
-			is_species_class = LITHOID
-			is_species_class = PRE_LITHOID
-			is_species_class = PLANT
-			is_species_class = PRE_PLANT
-			is_species_class = PRE_TOX
-			is_species_class = TOX
-			is_species_class = MACHINE
-			is_species_class = ROBOT
-			is_species_class = AI # contingency
-			is_species_class = SWARM # praethoryn
-			is_species_class = EXD # extradimensionals: unbidden/aberrant/vehement
-			is_species_class = SALVAGER # salvager enclave species
-			is_species_class = SHROUDWALKER # shroudwalker enclave species
-		}
+		is_species_class = PARAGON # legendary galactic paragons
 	}
 }
 
 # this = leader
 allows_fem_portraits_leader = {
-	# optimize_memory
-	# log_leader_info_short = yes
+	optimize_memory
 	OR = {
 		has_leader_flag = presents_fem
 		AND = {
@@ -83,8 +44,7 @@ allows_fem_portraits_pop = {
 
 # this = leader
 allows_masc_portraits_leader = {
-	# optimize_memory
-	# log_leader_info_short = yes
+	optimize_memory
 	OR = {
 		has_leader_flag = presents_masc
 		AND = {
@@ -133,7 +93,6 @@ should_roll_to_reconsider_gender_identity = {
 	optimize_memory
 	species = {
 		NOR = {
-			species_gender = indeterminable
 			has_trait = trait_clone_soldier_infertile
 			has_trait = trait_clone_soldier_infertile_full_potential
 			AND = {
@@ -142,37 +101,4 @@ should_roll_to_reconsider_gender_identity = {
 			}
 		}
 	}
-}
-
-# this = species
-species_can_set_is_female = {
-	optimize_memory
-	NOR = {
-		species_gender = indeterminable
-		AND = {
-			species_gender = not_set
-			species_class_uses_gender = no
-		}
-	}
-}
-
-# this = leader, with new species
-# from = species, previous
-leader_species_gender_change_requires_clone = {
-	optimize_memory
-	OR = {
-		AND = {
-			species = { species_can_set_is_female = no }
-			from = { species_can_set_is_female = yes }
-		}
-		AND = {
-			species = { species_can_set_is_female = yes }
-			from = { species_can_set_is_female = no }
-		}
-	}
-}
-
-# this = leader
-log_leader_info_short = {
-	log = "\\[This.GetTitle] \\[This.GetName], \\[This.GetAge]-year old \\[This.Species.GetName] (\\[This.Species.GetSpeciesGender]) \\[This.GetGender]"
 }
