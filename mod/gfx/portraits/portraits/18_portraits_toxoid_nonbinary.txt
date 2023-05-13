@@ -298,7 +298,7 @@ portrait_groups = {
 	}
 
 	# CM Notes: this is the first PDX species to feature its own specific indeterminable portraits.
-	# Tt was coded to offer specific m/f/i portraits based on leader gender, but Pops/species would
+	# It was coded to offer specific m/f/i portraits based on leader gender, but Pops/species would
 	# include the indeterminant gender so long as the species wasn't mono-female or mono-male.
 	# My alterations apply the second approach to leaders as well.
 	tox7 = {
