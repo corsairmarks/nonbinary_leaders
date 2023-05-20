@@ -201,7 +201,6 @@ leader_match_gender_to_species = {
 	species = {
 		switch = {
 			trigger = species_gender
-			# if indeterminable, then nothing should change
 			female = {
 				prev = {
 					if = {
